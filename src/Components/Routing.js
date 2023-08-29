@@ -18,7 +18,6 @@ const Routing = () => {
         <Route exact path="/signup" element={< Signup />} />
         <Route exact path='/forget_password' element={< ForgetPassword />} />
         <Route exact path='/reset_password' element={< Resetpassword />} />
-        
       </Routes>
     </Router>
   )

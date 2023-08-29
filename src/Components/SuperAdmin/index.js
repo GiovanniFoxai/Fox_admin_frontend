@@ -1,30 +1,13 @@
-import React, { useState } from 'react';
-import AdminSidebar from './AdminSidebar';
-import DashboardTopBar from './DashboardTopBar';
+import React from "react";
 
 const SupAdmin = () => {
-
-
-  return (
-    <>
-
-      <section className='dashbord-section'>
-        
-        <AdminSidebar />
-
-        <div className="content--section">
-          <DashboardTopBar/>
-
-          <div className='dash-bar'>
+    return (
+        <div className="dash-bar">
             <div>
-              <h3>Dashboard</h3>
+                <h3>Dashboard</h3>
             </div>
-          </div>
         </div>
-      </section>
-    </>
-
-  )
-}
+    );
+};
 
 export default SupAdmin;

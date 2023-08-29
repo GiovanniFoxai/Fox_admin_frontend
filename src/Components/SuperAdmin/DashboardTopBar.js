@@ -1,7 +1,5 @@
-import React, { useState, useEffect } from 'react';
+import React, {  } from 'react';
 import AdminLogo from '../../assets/image/logo.png';
-import DropDwonIcon from '../../assets/image/down-arrow.png';
-import AdminSidebar from './AdminSidebar';
 
 const DashboardTopBar = () => {
   

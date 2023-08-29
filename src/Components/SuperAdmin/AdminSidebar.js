@@ -1,132 +1,214 @@
-import React, { useEffect, useState } from 'react';
-import DashboardIcon from '../../assets/image/dashboard.png';
-import DropDwonIcon from '../../assets/image/down-arrow.png';
-import Createcompany from '../../assets/image/create.png';
-import Logo from '../../assets/image/dashbordlogo.png';
-import { BrowserRouter as Router, Link, Route, Routes } from 'react-router-dom';
+import React, { useEffect, useState } from "react";
+import DashboardIcon from "../../assets/image/dashboard.png";
+import DropDwonIcon from "../../assets/image/down-arrow.png";
+import Createcompany from "../../assets/image/create.png";
+import Logo from "../../assets/image/dashbordlogo.png";
+import { Link } from "react-router-dom";
 
-import Home from './index';
-import CareteCompany from './CareteCompany';
-import ViewCompany from './ViewCompany'
 
 const AdminSidebar = () => {
-
     const [toggleSidebar, setToggleSidebar] = useState(false);
     const toggleBar = () => {
         setToggleSidebar(!toggleSidebar);
-    }
+    };
 
-    const [activeItem, setActiveItem] = useState('home');
+    const [activeItem, setActiveItem] = useState("home");
 
     const handleItemClick = (item) => {
         setActiveItem(item);
     };
 
-    const [windowScreenWidth, setWindowScreenWidth] = useState(window.screen.width);
+    const [windowScreenWidth, setWindowScreenWidth] = useState(
+        window.screen.width
+    );
 
     const actualWidth = () => {
-        setWindowScreenWidth(window.innerWidth)
-    }
+        setWindowScreenWidth(window.innerWidth);
+    };
 
     useEffect(() => {
-        window.addEventListener('resize', actualWidth);
+        window.addEventListener("resize", actualWidth);
 
         return () => {
-            window.removeEventListener('resize', actualWidth);
-        }
+            window.removeEventListener("resize", actualWidth);
+        };
     });
 
     useEffect(() => {
         if (windowScreenWidth < 767) {
             setToggleSidebar(false);
-        }else{
+        } else {
             setToggleSidebar(true);
         }
     }, [windowScreenWidth]);
 
-
-
     return (
         <>
-            <div className={`sidebar--section ${toggleSidebar ? 'toggle--sidebar' : 'toggle--sidebar--slide'}`}>
+            <div
+                className={`sidebar--section ${
+                    toggleSidebar ? "toggle--sidebar" : "toggle--sidebar--slide"
+                }`}
+            >
                 <div className="side-menu">
-                    <div className="image-box" >
-                        <a href='/'>
-                            <img src={Logo} alt="dashbord-logo" className='active--logo' />
+                    <div className="image-box">
+                        <a href="/">
+                            <img
+                                src={Logo}
+                                alt="dashbord-logo"
+                                className="active--logo"
+                            />
                         </a>
                     </div>
-                    <div className='toggle-menu' onClick={toggleBar}>
+                    <div className="toggle-menu" onClick={toggleBar}>
                         <img src={DropDwonIcon} alt="dashbord-logo" />
                     </div>
                 </div>
-                <Router>
-                    <div className='nav-bar-section' >
-                        <ul>
-                            <li>
-                                <Link to="/"
-                                    className={activeItem === 'home' ? 'active--nav' : ''}
-                                    onClick={() => handleItemClick('home')}
-                                >
-                                    <img src={DashboardIcon} alt="Hamburger" className='icon--nav' />  <span className='hide--toggle--slide'>Dashboard</span>
-
-                                </Link>
-                                {/* <a href="/" className={activeItem === 'home' ? 'active--nav' : ''} onClick={() => handleItemClick('home')}><img src={DashboardIcon} alt="Hamburger" className='icon--nav' />  <span className='hide--toggle--slide'>Dashboard</span></a> */}
-                            </li>
-                            <li className='dropdown--item--dashborad'>
-                                <span className={`drop--link ${activeItem === 'createcompany' ? 'active--nav' : ''}`} onClick={() => handleItemClick('createcompany')}>
-                                    <span className='drop--list'>
-                                        <img src={Createcompany} alt="careate company logo" className='icon--nav' />
-                                        <span className='hide--toggle--slide'>Create Company</span>
-                                    </span>
-                                    <span className='nav-section-arrow hide--toggle--slide'><img src={DropDwonIcon} alt="DropDwonIcon" /></span>
+                <div className="nav-bar-section">
+                    <ul>
+                        <li>
+                            <Link
+                                to="/"
+                                className={
+                                    activeItem === "home" ? "active--nav" : ""
+                                }
+                                onClick={() => handleItemClick("home")}
+                            >
+                                <img
+                                    src={DashboardIcon}
+                                    alt="Hamburger"
+                                    className="icon--nav"
+                                />{" "}
+                                <span className="hide--toggle--slide">
+                                    Dashboard
                                 </span>
-                                <ul className='sub-menu'>
-                                    <li>
-                                        <Link
-                                            to="/add-company">
-                                            Add Company
-                                        </Link>
-                                    </li>
-                                    <li>
-                                        <Link
-                                            to="/view-companies">
-                                            View Companies
-                                        </Link>
-                                    </li>
-                                </ul>
-                            </li>
-
-                            <li className='dropdown--item--dashborad'>
-                                <span className={`drop--link ${activeItem === 'createadmin' ? 'active--nav' : ''}`} onClick={() => handleItemClick('createadmin')}>
-                                    <span className='drop--list'>
-                                        <img src={Createcompany} alt="careate company logo" className='icon--nav' />
-                                        <span className='hide--toggle--slide'>Create Admin</span>
+                            </Link>
+                            {/* <a href="/" className={activeItem === 'home' ? 'active--nav' : ''} onClick={() => handleItemClick('home')}><img src={DashboardIcon} alt="Hamburger" className='icon--nav' />  <span className='hide--toggle--slide'>Dashboard</span></a> */}
+                        </li>
+                        <li className="dropdown--item--dashborad">
+                            <span
+                                className={`drop--link ${
+                                    activeItem === "createcompany"
+                                        ? "active--nav"
+                                        : ""
+                                }`}
+                                onClick={() => handleItemClick("createcompany")}
+                            >
+                                <span className="drop--list">
+                                    <img
+                                        src={Createcompany}
+                                        alt="careate company logo"
+                                        className="icon--nav"
+                                    />
+                                    <span className="hide--toggle--slide">
+                                        Create Company
                                     </span>
-                                    <span className='nav-section-arrow hide--toggle--slide'><img src={DropDwonIcon} alt="DropDwonIcon" /></span>
                                 </span>
-                                <ul className='sub-menu'>
-                                    <li><a href="./createcompany" >Add Admin</a></li>
-                                    <li><a href="#" >View Admins</a></li>
-                                </ul>
-                            </li>
-                            <li>
-                                <a href="#" className={activeItem === 'viewmodals' ? 'active--nav' : ''} onClick={() => handleItemClick('viewmodals')}><img src={DashboardIcon} alt="Hamburger" className='icon--nav' />  <span className='hide--toggle--slide'>Modals</span></a>
-                            </li>
+                                <span className="nav-section-arrow hide--toggle--slide">
+                                    <img
+                                        src={DropDwonIcon}
+                                        alt="DropDwonIcon"
+                                    />
+                                </span>
+                            </span>
+                            <ul className="sub-menu">
+                                <li>
+                                    <Link to="/compaies/create">
+                                        Add Company
+                                    </Link>
+                                </li>
+                                <li>
+                                    <Link to="/compaies">View Companies</Link>
+                                </li>
+                            </ul>
+                        </li>
 
-
-
-                        </ul>
-                    </div>
-                    <Routes>
+                        <li className="dropdown--item--dashborad">
+                            <span
+                                className={`drop--link ${
+                                    activeItem === "createadmin"
+                                        ? "active--nav"
+                                        : ""
+                                }`}
+                                onClick={() => handleItemClick("createadmin")}
+                            >
+                                <span className="drop--list">
+                                    <img
+                                        src={Createcompany}
+                                        alt="careate company logo"
+                                        className="icon--nav"
+                                    />
+                                    <span className="hide--toggle--slide">
+                                        Admin
+                                    </span>
+                                </span>
+                                <span className="nav-section-arrow hide--toggle--slide">
+                                    <img
+                                        src={DropDwonIcon}
+                                        alt="DropDwonIcon"
+                                    />
+                                </span>
+                            </span>
+                            <ul className="sub-menu">
+                                <li>
+                                    <Link to="/admin/add">Add Admin</Link>
+                                </li>
+                                <li>
+                                    <Link to="/admin">View Admins</Link>
+                                </li>
+                                <li>
+                                    <Link to="/admin/assign">Assign Admin</Link>
+                                </li>
+                                <li>
+                                    <Link to="/admin/user">Admin User</Link>
+                                </li>
+                                <li>
+                                    <Link to="/admin/view-user">Admin User list</Link>
+                                </li>
+                            </ul>
+                        </li>
+                        <li className="dropdown--item--dashborad">
+                            <Link
+                                to="/modals"
+                                className={`drop--link ${
+                                    activeItem === "viewmodals"
+                                        ? "active--nav"
+                                        : ""
+                                }`}
+                                onClick={() => handleItemClick("viewmodals")}
+                            >
+                                <span className="drop--list">
+                                    <img
+                                        src={DashboardIcon}
+                                        alt="Hamburger"
+                                        className="icon--nav"
+                                    />{" "}
+                                    <span className="hide--toggle--slide">
+                                        Modals
+                                    </span>
+                                </span>
+                                <span className="nav-section-arrow hide--toggle--slide">
+                                    <img
+                                        src={DropDwonIcon}
+                                        alt="DropDwonIcon"
+                                    />
+                                </span>
+                            </Link>
+                            <ul className="sub-menu">
+                                <li>
+                                    <Link to="/modals/user-modals">User Modal</Link>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+                {/* <Routes>
                         <Route path="/" exact component={<Home />} />
                         <Route path="/add-company" component={<CareteCompany />} />
                         <Route path="/view-companies" component={<ViewCompany />} />
-                    </Routes>
-
-                </Router>
+                    </Routes> */}
             </div>
         </>
-    )
-}
+    );
+};
 
-export default AdminSidebar
+export default AdminSidebar;

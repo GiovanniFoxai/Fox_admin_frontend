@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { withoutAuthAxios } from '../config/config'
 import { toast } from 'react-toastify'
@@ -6,7 +6,7 @@ import IsLoadingHOC from './IsLoadingHOC'
 import { minUserPasswordLength } from '../Helper/constants'
 
 const Signup = (props) => {
-  const { setLoading, isLoading } = props
+  const { setLoading } = props
 
   const navigate = useNavigate()
 

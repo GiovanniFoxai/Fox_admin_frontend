@@ -1,115 +1,111 @@
-import AdminSidebar from './AdminSidebar';
-import DashboardTopBar from './DashboardTopBar';
+import { Fragment } from "react";
 const ViewCompany = () => {
-
-
-
-  return (
-    <>
-
-      <section className='dashbord-section'>
-        <AdminSidebar />
-
-        <div className="content--section">
-          <DashboardTopBar />
-
-          <div className='dash-bar'>
-            <div>
-              <h3>View Company</h3>
+    return (
+        <Fragment>
+            <div className="dash-bar">
+                <div>
+                    <h3>View Company</h3>
+                </div>
             </div>
-          </div>
-
-          <div className='view-company-section'>
-
-            <div className='view-company-table'>
-
-              <table className='view-table'>
-                <thead className='table-head' >
-                  <tr>
-                    <th className='table-heading sr-number'>SR NO</th>
-                    <th className='table-heading'>Company Name</th>
-                    <th className='table-heading'>Number Of User</th>
-                    <th className='table-heading'>Number Of Admin</th>
-                    <th className='table-heading' colspan="2">Creare At Date </th>
-                  </tr>
-                </thead>
-
-                <tbody className='table-body'>
-                  <tr>
-                    <td className='table-data'>001</td>
-                    <td className='table-data'>Maria Anders</td>
-                    <td className='table-data'>Germany</td>
-                    <td className='table-data'>Germany</td>
-                    <td className='table-data'>Germany</td>
-                    <td className='close-btn-sec'><button className='close-btn' >Delete</button></td>
-                  </tr>
-
-                  <tr>
-                    <td className='table-data'>001</td>
-                    <td className='table-data'>Maria Anders</td>
-                    <td className='table-data'>Germany</td>
-                    <td className='table-data'>Germany</td>
-                    <td className='table-data'>Germany</td>
-                    <td className='close-btn-sec'><button className='close-btn' >Delete</button></td>
-                  </tr>
-
-                  <tr>
-                    <td className='table-data'>001</td>
-                    <td className='table-data'>Maria Anders</td>
-                    <td className='table-data'>Germany</td>
-                    <td className='table-data'>Germany</td>
-                    <td className='table-data'>Germany</td>
-                    <td className='close-btn-sec'><button className='close-btn' >Delete</button></td>
-                  </tr>
-
-                  <tr>
-                    <td className='table-data'>001</td>
-                    <td className='table-data'>Maria Anders</td>
-                    <td className='table-data'>Germany</td>
-                    <td className='table-data'>Germany</td>
-                    <td className='table-data'>Germany</td>
-                    <td className='close-btn-sec'><button className='close-btn' >Delete</button></td>
-                  </tr>
-
-                  <tr>
-                    <td className='table-data'>001</td>
-                    <td className='table-data'>Maria Anders</td>
-                    <td className='table-data'>Germany</td>
-                    <td className='table-data'>Germany</td>
-                    <td className='table-data'>Germany</td>
-                    <td className='close-btn-sec'><button className='close-btn' >Delete</button></td>
-                  </tr>
-
-                  <tr>
-                    <td className='table-data'>001</td>
-                    <td className='table-data'>Maria Anders</td>
-                    <td className='table-data'>Germany</td>
-                    <td className='table-data'>Germany</td>
-                    <td className='table-data'>Germany</td>
-                    <td className='close-btn-sec'><button className='close-btn' >Delete</button></td>
-                  </tr>
-
-
-                </tbody>
-
-              </table>
+            <div className="view-company-section">
+                <div className="view-company-table">
+                    <table className="view-table">
+                        <thead className="table-head">
+                            <tr>
+                                <th className="table-heading sr-number">
+                                    SR NO
+                                </th>
+                                <th className="table-heading">Company Name</th>
+                                <th className="table-heading">
+                                    Number Of User
+                                </th>
+                                <th className="table-heading">
+                                    Number Of Admin
+                                </th>
+                                <th className="table-heading" colspan="2">
+                                    Creare At Date{" "}
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody className="table-body">
+                            <tr>
+                                <td className="table-data">001</td>
+                                <td className="table-data">Maria Anders</td>
+                                <td className="table-data">Germany</td>
+                                <td className="table-data">Germany</td>
+                                <td className="table-data">Germany</td>
+                                <td className="close-btn-sec">
+                                    <button className="close-btn">
+                                        Delete
+                                    </button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td className="table-data">001</td>
+                                <td className="table-data">Maria Anders</td>
+                                <td className="table-data">Germany</td>
+                                <td className="table-data">Germany</td>
+                                <td className="table-data">Germany</td>
+                                <td className="close-btn-sec">
+                                    <button className="close-btn">
+                                        Delete
+                                    </button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td className="table-data">001</td>
+                                <td className="table-data">Maria Anders</td>
+                                <td className="table-data">Germany</td>
+                                <td className="table-data">Germany</td>
+                                <td className="table-data">Germany</td>
+                                <td className="close-btn-sec">
+                                    <button className="close-btn">
+                                        Delete
+                                    </button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td className="table-data">001</td>
+                                <td className="table-data">Maria Anders</td>
+                                <td className="table-data">Germany</td>
+                                <td className="table-data">Germany</td>
+                                <td className="table-data">Germany</td>
+                                <td className="close-btn-sec">
+                                    <button className="close-btn">
+                                        Delete
+                                    </button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td className="table-data">001</td>
+                                <td className="table-data">Maria Anders</td>
+                                <td className="table-data">Germany</td>
+                                <td className="table-data">Germany</td>
+                                <td className="table-data">Germany</td>
+                                <td className="close-btn-sec">
+                                    <button className="close-btn">
+                                        Delete
+                                    </button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td className="table-data">001</td>
+                                <td className="table-data">Maria Anders</td>
+                                <td className="table-data">Germany</td>
+                                <td className="table-data">Germany</td>
+                                <td className="table-data">Germany</td>
+                                <td className="close-btn-sec">
+                                    <button className="close-btn">
+                                        Delete
+                                    </button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
             </div>
-
-          </div>
-
-
-
-
-
-        </div>
-
-
-      </section>
-
-
-    </>
-
-  )
-}
+        </Fragment>
+    );
+};
 
 export default ViewCompany;

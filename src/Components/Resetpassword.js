@@ -7,7 +7,7 @@ import { minUserPasswordLength } from '../Helper/constants';
 import { useSelector } from 'react-redux';
 
 const Resetpassword = (props) => {
-  const { setLoading, isLoading } = props
+  const { setLoading } = props
   const navigate = useNavigate()
   const { forgotPassEmail } = useSelector(state => state.auth)
 

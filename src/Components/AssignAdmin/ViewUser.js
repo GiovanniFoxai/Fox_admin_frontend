@@ -1,91 +1,73 @@
-import DashboardTopBar from './DashboardTopBar';
-import AdminSidebar from './AdminSidebar';
+import { Fragment } from "react";
 const ViewAdmins = () => {
-
-
-
-  return (
-    <>
-
-      <section className='dashbord-section'>
-        <AdminSidebar />
-
-        <div className="content--section">
-          <DashboardTopBar />
-
-          <div className='dash-bar'>
-            <div>
-              <h3>View User</h3>
-            </div>
-            <div className='bradcrum-section'>
-              <ul>
-                <li><a href="#" > Dashboard</a>  </li>
-                <li><a href="#" >Users</a>  </li>
-              </ul>
-
-            </div>
-          </div>
-
-          <div className='view-company-section'>
-
-            <div className='view-company-table'>
-
-              <table className='view-table'>
-                <thead className='table-head' >
-                  <tr>
-                    <th className='table-heading sr-number'>ID</th>
-                    <th className='table-heading'>User Name</th>
-                    <th className='table-heading'>Email</th>
-                    <th className='table-heading'>Company ID</th>
-                    <th className='table-heading'>Created At</th>
-                    <th className='table-heading' colspan="2">Updated At</th>
-
-                  </tr>
-                </thead>
-
-                <tbody className='table-body'>
-                  <tr>
-                    <td className='table-data'>001</td>
-                    <td className='table-data'>Maria Anders</td>
-                    <td className='table-data'>Germany</td>
-                    <td className='table-data'>Germany</td>
-                    <td className='table-data'>Germany</td>
-                    <td className='table-data'>Germany</td>
-                    <td className='close-btn-sec'><button className='close-btn' >Delete</button></td>
-                  </tr>
-
-                  <tr>
-                    <td className='table-data'>001</td>
-                    <td className='table-data'>Maria Anders</td>
-                    <td className='table-data'>Germany</td>
-                    <td className='table-data'>Germany</td>
-                    <td className='table-data'>Germany</td>
-                    <td className='table-data'>Germany</td>
-                    <td className='close-btn-sec' colspan="2"><button className='close-btn' >Delete</button></td>
-                  </tr>
-
-
-
-                </tbody>
-
-              </table>
+    return (
+        <Fragment>
+            <div className="dash-bar">
+                <div>
+                    <h3>View User</h3>
+                </div>
+                <div className="bradcrum-section">
+                    <ul>
+                        <li>
+                            <a href="#"> Dashboard</a>{" "}
+                        </li>
+                        <li>
+                            <a href="#">Users</a>{" "}
+                        </li>
+                    </ul>
+                </div>
             </div>
 
-          </div>
+            <div className="view-company-section">
+                <div className="view-company-table">
+                    <table className="view-table">
+                        <thead className="table-head">
+                            <tr>
+                                <th className="table-heading sr-number">ID</th>
+                                <th className="table-heading">User Name</th>
+                                <th className="table-heading">Email</th>
+                                <th className="table-heading">Company ID</th>
+                                <th className="table-heading">Created At</th>
+                                <th className="table-heading" colspan="2">
+                                    Updated At
+                                </th>
+                            </tr>
+                        </thead>
 
+                        <tbody className="table-body">
+                            <tr>
+                                <td className="table-data">001</td>
+                                <td className="table-data">Maria Anders</td>
+                                <td className="table-data">Germany</td>
+                                <td className="table-data">Germany</td>
+                                <td className="table-data">Germany</td>
+                                <td className="table-data">Germany</td>
+                                <td className="close-btn-sec">
+                                    <button className="close-btn">
+                                        Delete
+                                    </button>
+                                </td>
+                            </tr>
 
-
-
-
-        </div>
-
-
-      </section>
-
-
-    </>
-
-  )
-}
+                            <tr>
+                                <td className="table-data">001</td>
+                                <td className="table-data">Maria Anders</td>
+                                <td className="table-data">Germany</td>
+                                <td className="table-data">Germany</td>
+                                <td className="table-data">Germany</td>
+                                <td className="table-data">Germany</td>
+                                <td className="close-btn-sec" colspan="2">
+                                    <button className="close-btn">
+                                        Delete
+                                    </button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </Fragment>
+    );
+};
 
 export default ViewAdmins;
