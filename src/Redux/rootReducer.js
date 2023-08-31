@@ -1,11 +1,12 @@
 import { combineReducers } from '@reduxjs/toolkit';
 import auth from './Reducers/authSlice';
 import app from './Reducers/appSlice';
+import company from './Reducers/companySlice';
 
 const appReducer = combineReducers({
     auth,
     app,
-
+    company
 })
 
 

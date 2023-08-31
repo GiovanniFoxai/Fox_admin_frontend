@@ -1,6 +1,4 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { persistor } from '../store';
-
 
 const initialState = {
     token: '',
@@ -26,7 +24,7 @@ export const authSlice = createSlice({
             state.forgotPassEmail = action.payload;
         },
         logout: () => {
-            return initialState
+            return {...initialState}
         }
     },
 });

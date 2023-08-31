@@ -10,7 +10,7 @@ import {
   PAUSE,
   PERSIST,
   PURGE,
-  REGISTER,
+  REGISTER
 } from 'redux-persist';
 
 const persistConfig = {
@@ -36,7 +36,6 @@ const store = configureStore({
 //     store.replaceReducer(newRootReducer)
 //   })
 // }
-
 export default store
 
 export const persistor = persistStore(store);
