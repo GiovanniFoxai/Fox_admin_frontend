@@ -9,7 +9,7 @@ import AssignAdmin from "./Components/AssignAdmin";
 import UserAdmin from "./Components/AssignAdmin/UserAdmin";
 import ViewUser from "./Components/AssignAdmin/ViewUser";
 import USerModals from "./Components/AssignAdmin/USerModals";
-import { RouterProvider, createBrowserRouter } from "react-router-dom";
+import { Outlet, RouterProvider, createBrowserRouter } from "react-router-dom";
 import { Error404 } from "./pages/error-404";
 import CreateAdmin from "./Components/SuperAdmin/CareteAdmin";
 import Login from "./Components/Login";
@@ -89,7 +89,7 @@ function App() {
             case "ADMIN":
                 return <AdminLayout />;
             case "USER":
-                return <></>;
+                return <Fragment><Outlet /></Fragment>
         }
     }
 
