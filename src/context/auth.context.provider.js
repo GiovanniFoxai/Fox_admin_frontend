@@ -8,11 +8,11 @@ export const AuthContext = createContext({});
 
 export const AuthProvide = ({children}) => {
   const accessToken = useSelector(getAccessToken);
-  const dispatch = useDispatch();
-  const user = useSelector(getUser);
+  console.log("Debugger", accessToken);
 
   const value = useMemo(() => ({}), []);
   if (!accessToken) {
+    console.log(accessToken);
     return <Navigate to="/auth/login" replace />;
   }
 

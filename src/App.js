@@ -6,7 +6,7 @@ import ViewCompany from "./Components/SuperAdmin/ViewCompany";
 import ViewAdmins from "./Components/SuperAdmin/ViewAdmins";
 import Modals from "./Components/SuperAdmin/Modals";
 import ViewUser from "./Components/AssignAdmin/ViewUser";
-import { Outlet, RouterProvider, createBrowserRouter } from "react-router-dom";
+import { Navigate, Outlet, RouterProvider, createBrowserRouter } from "react-router-dom";
 import { Error404 } from "./pages/error-404";
 import CreateAdmin from "./Components/SuperAdmin/CareteAdmin";
 import Login from "./Components/Login";
@@ -21,9 +21,11 @@ import { getUser } from "./Redux/Reducers/authSlice";
 import { AdminLayout } from "./Layouts/adminLayput";
 import Home from "./Components/Home";
 import AdminCreateUser from "./Components/SuperAdmin/AdminCreateUser";
+import { AuthProvide } from "./context/auth.context.provider";
 
 function App() {
     const user = useSelector(getUser);
+    
     const superAdminRoute = [
         {
             path: "/",
@@ -77,7 +79,9 @@ function App() {
             case "ADMIN":
                 return <AdminLayout />;
             case "USER":
-                return <Fragment><Outlet /></Fragment>
+                return <AuthProvide><Outlet /></AuthProvide>
+            default:
+                return <Navigate to="/auth/login" replace />;
         }
     }
 
