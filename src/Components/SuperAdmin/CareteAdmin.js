@@ -255,7 +255,7 @@ const CreateAdmin = (props) => {
                             <option value="" label="Select a comnany">
                                 Select a Company{" "}
                             </option>
-                            {companies.data.map((item, index) => (
+                            {companies.map((item, index) => (
                                 <option
                                     value={item._id}
                                     key={"company_dropdown_" + index}

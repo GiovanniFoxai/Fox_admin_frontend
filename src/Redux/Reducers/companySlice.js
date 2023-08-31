@@ -4,8 +4,12 @@ export const companySlice = createSlice({
     name: "company",
     initialState: {
         isCompanyCreated: false,
-        companies: {
-            data: []
+        companies: [],
+        pagination: {
+            "totalCompanies": 0,
+            "totalPages": 0,
+            "currentPage": 1,
+            "perPage": 10
         }
     },
     reducers: {
@@ -18,7 +22,8 @@ export const companySlice = createSlice({
             state.isCompanyCreated = action.payload;
         },
         ['company/fetchCompanyList/fulfilled']: (state, action) => {
-            state.companies = action.payload;
+            state.companies = action.payload.data.companies;
+            state.pagination = action.payload.data.pagination;
         }
     }
 });

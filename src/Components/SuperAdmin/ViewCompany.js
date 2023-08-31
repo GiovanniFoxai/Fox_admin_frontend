@@ -56,7 +56,7 @@ const ViewCompany = (props) => {
                             </tr>
                         </thead>
                         <tbody className="table-body">
-                            {companies.data.map((item, index) => (
+                            {companies.map((item, index) => (
                                 <tr key={"compnay_" + index}>
                                     <td className="table-data">{item._id}</td>
                                     <td className="table-data">{item.name}</td>
