@@ -4,6 +4,8 @@ import { fetchCompanyList } from "../../Redux/Actions/companyAction";
 import { companiesList } from "../../Redux/Reducers/companySlice";
 import { toast } from "react-toastify";
 import IsLoadingHOC from "../IsLoadingHOC";
+import { format, toDate } from 'date-fns'
+
 
 const ViewCompany = (props) => {
     const { setLoading } = props;
@@ -63,8 +65,8 @@ const ViewCompany = (props) => {
                                     <td className="table-data">
                                         {item.userCount}
                                     </td>
-                                    <td className="table-data">0</td>
-                                    <td className="table-data">N/A</td>
+                                    <td className="table-data">{item.adminCount}</td>
+                                    <td className="table-data">{format(new Date(item.createdAt), 'MM/dd/yyyy hh:mm:ss aaa')}</td>
                                     <td className="close-btn-sec">
                                         <button className="close-btn">
                                             Delete
