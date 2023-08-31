@@ -19,8 +19,80 @@ import Signup from "./Components/Signup";
 import ForgetPassword from "./Components/ForgetPassword";
 import { Fragment } from "react";
 import { ToastContainer } from "react-toastify";
+import { useSelector } from "react-redux";
+import { getUser } from "./Redux/Reducers/authSlice";
+import { AdminLayout } from "./Layouts/adminLayput";
+import Home from "./Components/Home";
+import AdminCreateUser from "./Components/SuperAdmin/AdminCreateUser";
 
 function App() {
+    const user = useSelector(getUser);
+
+    const superAdminRoute = [
+        {
+            path: "/",
+            element: <SupAdmin />,
+        },
+        {
+            path: "/compaies",
+            element: <ViewCompany />,
+        },
+        {
+            path: "/compaies/create",
+            element: <CareteCompany />,
+        },
+        { path: "/admin", element: <ViewAdmins /> },
+        { path: "/admin/add", element: <CreateAdmin /> },
+        { path: "/modals", element: <Modals /> },
+    ];
+
+    const adminRoute = [
+        {
+            path: "/",
+            element: <SupAdmin />,
+        },
+        {
+            path: "/compaies",
+            element: <ViewCompany />,
+        },
+        {
+            path: "/compaies/create",
+            element: <CareteCompany />,
+        },
+        { path: "/view-users", element: <ViewUser /> },
+        { path: "/add-user", element: <AdminCreateUser /> },
+        { path: "/modals", element: <Modals /> },
+    ];
+    const normalUserRoute = [
+        {
+            path: "/",
+            element: <Home />,
+        },
+    ];
+
+    const getUserRoute = (userType) => {
+        switch (userType) {
+            case "SUPERADMIN":
+                return superAdminRoute;
+            case "ADMIN":
+                return adminRoute;
+            case "USER":
+                return normalUserRoute;
+        }
+    };
+
+
+    const getLayout = (userType) => {
+        switch (userType) {
+            case "SUPERADMIN":
+                return <DashboardLayout />;
+            case "ADMIN":
+                return <AdminLayout />;
+            case "USER":
+                return <></>;
+        }
+    }
+
     const router = createBrowserRouter([
         {
             path: "/auth",
@@ -42,28 +114,8 @@ function App() {
         },
         {
             path: "/",
-            element: <DashboardLayout />,
-            children: [
-                {
-                    path: "/",
-                    element: <SupAdmin />,
-                },
-                {
-                    path: "/compaies",
-                    element: <ViewCompany />,
-                },
-                {
-                    path: "/compaies/create",
-                    element: <CareteCompany />,
-                },
-                { path: "/admin", element: <ViewAdmins /> },
-                { path: "/admin/add", element: <CreateAdmin /> },
-                { path: "/admin/assign", element: <AssignAdmin /> },
-                { path: "/admin/user", element: <UserAdmin /> },
-                { path: "/admin/view-user", element: <ViewUser /> },
-                { path: "/modals", element: <Modals /> },
-                { path: "/modals/user-modals", element: <USerModals /> },
-            ],
+            element: getLayout(user.user_type),
+            children: getUserRoute(user.user_type),
         },
         {
             path: "*",

@@ -1,27 +1,37 @@
-import React, { useState, useEffect } from 'react';
-import AdminLogo from '../../assets/image/logo.png';
-import DropDwonIcon from '../../assets/image/down-arrow.png';
-import AdminSidebar from './AdminSidebar';
+import React from "react";
+import AdminLogo from "../../assets/image/logo.png";
+import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import { logout } from "../../Redux/Reducers/authSlice";
+import { toast } from "react-toastify";
 
 const DashboardTopBar = () => {
-  
-  return (
-    <>
+    const dispatch = useDispatch();
+    const navigate = useNavigate();
 
-      <div className='content-top-bar'>
+    const logoutHandler = () => {
+        dispatch({ type: "auth/logout" });
+        dispatch(logout());
+        navigate("/auth/login");
+        toast.success("Logout successfully");
+    };
+    return (
+        <>
+            <div className="content-top-bar">
+                <div className="top-bar-admin">
+                    <button onClick={logoutHandler}>Logout</button>
 
-        <div className='top-bar-admin'>
-          <h2>Other Developer <span>( Admin )</span></h2>
+                    <h2>
+                        Other Developer <span>( Admin )</span>
+                    </h2>
 
-          <div className='top-bar-admin-logo'>
-            <img src={AdminLogo} alt="  Admin logo" />
-          </div>
-        </div>
-      </div>
+                    <div className="top-bar-admin-logo">
+                        <img src={AdminLogo} alt="  Admin logo" />
+                    </div>
+                </div>
+            </div>
+        </>
+    );
+};
 
-
-    </>
-  )
-}
-
-export default DashboardTopBar
+export default DashboardTopBar;

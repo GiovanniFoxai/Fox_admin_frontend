@@ -2,7 +2,9 @@ import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
     token: '',
-    user: {},
+    user: {
+        user_type: ''
+    },
     isResetPassword: false,
     forgotPassEmail : ''
 };

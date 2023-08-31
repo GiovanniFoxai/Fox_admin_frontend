@@ -155,15 +155,6 @@ const AdminSidebar = () => {
                                 <li>
                                     <Link to="/admin">View Admins</Link>
                                 </li>
-                                <li>
-                                    <Link to="/admin/assign">Assign Admin</Link>
-                                </li>
-                                <li>
-                                    <Link to="/admin/user">Admin User</Link>
-                                </li>
-                                <li>
-                                    <Link to="/admin/view-user">Admin User list</Link>
-                                </li>
                             </ul>
                         </li>
                         <li className="dropdown--item--dashborad">
@@ -186,18 +177,7 @@ const AdminSidebar = () => {
                                         Modals
                                     </span>
                                 </span>
-                                <span className="nav-section-arrow hide--toggle--slide">
-                                    <img
-                                        src={DropDwonIcon}
-                                        alt="DropDwonIcon"
-                                    />
-                                </span>
                             </Link>
-                            <ul className="sub-menu">
-                                <li>
-                                    <Link to="/modals/user-modals">User Modal</Link>
-                                </li>
-                            </ul>
                         </li>
                     </ul>
                 </div>

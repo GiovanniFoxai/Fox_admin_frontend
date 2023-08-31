@@ -15,11 +15,6 @@ export const AuthProvide = ({children}) => {
   if (!accessToken) {
     return <Navigate to="/auth/login" replace />;
   }
-  if( user.user_type !== 'SUPERADMIN' ) {
-    toast.error('Access Denind!! Please check user role');
-    dispatch(logout())
-    return <Navigate to="/auth/login" replace />;
-  }
 
   return (
     <AuthContext.Provider value={value}>
