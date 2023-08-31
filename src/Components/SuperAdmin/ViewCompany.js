@@ -1,5 +1,33 @@
-import { Fragment } from "react";
-const ViewCompany = () => {
+import { Fragment, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchCompanyList } from "../../Redux/Actions/companyAction";
+import { companiesList } from "../../Redux/Reducers/companySlice";
+import { toast } from "react-toastify";
+import IsLoadingHOC from "../IsLoadingHOC";
+
+const ViewCompany = (props) => {
+    const { setLoading } = props;
+    const dispatch = useDispatch();
+    useEffect(() => {
+        const getCompanyData = async () => {
+            setLoading(true);
+            try {
+                await dispatch(fetchCompanyList());
+            } catch (error) {
+                toast.error(error.message);
+                setLoading(false);
+            } finally {
+                setLoading(false);
+            }
+        };
+        getCompanyData();
+        return () => {
+            setLoading(false);
+        };
+    }, []);
+
+    const companies = useSelector(companiesList);
+
     return (
         <Fragment>
             <div className="dash-bar">
@@ -22,84 +50,28 @@ const ViewCompany = () => {
                                 <th className="table-heading">
                                     Number Of Admin
                                 </th>
-                                <th className="table-heading" colspan="2">
+                                <th className="table-heading" colSpan="2">
                                     Creare At Date{" "}
                                 </th>
                             </tr>
                         </thead>
                         <tbody className="table-body">
-                            <tr>
-                                <td className="table-data">001</td>
-                                <td className="table-data">Maria Anders</td>
-                                <td className="table-data">Germany</td>
-                                <td className="table-data">Germany</td>
-                                <td className="table-data">Germany</td>
-                                <td className="close-btn-sec">
-                                    <button className="close-btn">
-                                        Delete
-                                    </button>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td className="table-data">001</td>
-                                <td className="table-data">Maria Anders</td>
-                                <td className="table-data">Germany</td>
-                                <td className="table-data">Germany</td>
-                                <td className="table-data">Germany</td>
-                                <td className="close-btn-sec">
-                                    <button className="close-btn">
-                                        Delete
-                                    </button>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td className="table-data">001</td>
-                                <td className="table-data">Maria Anders</td>
-                                <td className="table-data">Germany</td>
-                                <td className="table-data">Germany</td>
-                                <td className="table-data">Germany</td>
-                                <td className="close-btn-sec">
-                                    <button className="close-btn">
-                                        Delete
-                                    </button>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td className="table-data">001</td>
-                                <td className="table-data">Maria Anders</td>
-                                <td className="table-data">Germany</td>
-                                <td className="table-data">Germany</td>
-                                <td className="table-data">Germany</td>
-                                <td className="close-btn-sec">
-                                    <button className="close-btn">
-                                        Delete
-                                    </button>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td className="table-data">001</td>
-                                <td className="table-data">Maria Anders</td>
-                                <td className="table-data">Germany</td>
-                                <td className="table-data">Germany</td>
-                                <td className="table-data">Germany</td>
-                                <td className="close-btn-sec">
-                                    <button className="close-btn">
-                                        Delete
-                                    </button>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td className="table-data">001</td>
-                                <td className="table-data">Maria Anders</td>
-                                <td className="table-data">Germany</td>
-                                <td className="table-data">Germany</td>
-                                <td className="table-data">Germany</td>
-                                <td className="close-btn-sec">
-                                    <button className="close-btn">
-                                        Delete
-                                    </button>
-                                </td>
-                            </tr>
+                            {companies.data.map((item, index) => (
+                                <tr key={"compnay_" + index}>
+                                    <td className="table-data">{item._id}</td>
+                                    <td className="table-data">{item.name}</td>
+                                    <td className="table-data">
+                                        {item.userCount}
+                                    </td>
+                                    <td className="table-data">0</td>
+                                    <td className="table-data">N/A</td>
+                                    <td className="close-btn-sec">
+                                        <button className="close-btn">
+                                            Delete
+                                        </button>
+                                    </td>
+                                </tr>
+                            ))}
                         </tbody>
                     </table>
                 </div>
@@ -108,4 +80,4 @@ const ViewCompany = () => {
     );
 };
 
-export default ViewCompany;
+export default IsLoadingHOC(ViewCompany);

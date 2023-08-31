@@ -8,3 +8,12 @@ export const createCompanyApi = createAsyncThunk(
         return true;
     }
 );
+
+
+export const fetchCompanyList = createAsyncThunk(
+    "company/fetchCompanyList",
+    async () => {
+        let res = await authAxios().get("/company/list");
+        return await res.data;
+    }
+)

@@ -3,6 +3,7 @@ import AdminLogo from '../../assets/image/logo.png';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { logout } from '../../Redux/Reducers/authSlice';
+import { toast } from 'react-toastify';
 
 const DashboardTopBar = () => {
 
@@ -13,12 +14,15 @@ const DashboardTopBar = () => {
     dispatch({ type: "auth/logout" });
     dispatch(logout())
     navigate('/auth/login')
+    toast.success("Logout successfully")
   };
   
   return (
     <>
       <div className='content-top-bar'>
-        <div className='top-bar-admin' onClick={logoutHandler}>
+        <div className='top-bar-admin'>
+        <button onClick={logoutHandler}>Logout</button>
+
           <h2>Other Developer <span>( Admin )</span></h2>
           <div className='top-bar-admin-logo'>
             <img src={AdminLogo} alt="  Admin logo" />
