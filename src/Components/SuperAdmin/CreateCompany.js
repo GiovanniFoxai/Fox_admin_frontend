@@ -5,24 +5,24 @@ import IsLoadingHOC from "../IsLoadingHOC";
 import { useDispatch, useSelector } from "react-redux";
 import { toast } from "react-toastify";
 import { createCompanyApi } from "../../Redux/Actions/companyAction";
-import { companyCreated, companyCreatedSuccessfully } from "../../Redux/Reducers/companySlice";
+import {
+    companyCreated,
+    companyCreatedSuccessfully,
+} from "../../Redux/Reducers/companySlice";
 
-const CareteCompany = (props) => {
+const CreatCompany = (props) => {
+    const { setLoading } = props;
 
-    const { setLoading } = props
-
-    const dispatch = useDispatch()
+    const dispatch = useDispatch();
 
     const isCompanyCreated = useSelector(companyCreatedSuccessfully);
 
     useEffect(() => {
-        console.log("Debugger", isCompanyCreated);
-        if(!!isCompanyCreated) {
+        if (!!isCompanyCreated) {
             toast.success("Company added successfully!");
-            dispatch(companyCreated(false))
+            dispatch(companyCreated(false));
         }
-    }, [isCompanyCreated])
-
+    }, [isCompanyCreated]);
 
     const validateSchema = Yup.object().shape({
         name: Yup.string().required("Company name  is required"),
@@ -31,24 +31,22 @@ const CareteCompany = (props) => {
 
     const formik = useFormik({
         initialValues: {
-            name:'',
-            address: ''
+            name: "",
+            address: "",
         },
         validationSchema: validateSchema,
-        onSubmit: async (value, {resetForm}) => {
-            console.log("Debugeer", value);
+        onSubmit: async (value, { resetForm }) => {
             setLoading(true);
             try {
-                await dispatch(createCompanyApi({...value}));
+                await dispatch(createCompanyApi({ ...value }));
                 resetForm();
             } catch (error) {
                 toast.error(error.message);
             } finally {
                 setLoading(false);
             }
-            
-        }
-    })
+        },
+    });
     return (
         <Fragment>
             <div className="dash-bar">
@@ -58,7 +56,10 @@ const CareteCompany = (props) => {
             </div>
             <div className="create-company-section">
                 <div className="create-company-form">
-                    <form className="form-create" onSubmit={formik.handleSubmit}>
+                    <form
+                        className="form-create"
+                        onSubmit={formik.handleSubmit}
+                    >
                         <label className="form-lable" htmlFor="name">
                             Company Name
                         </label>
@@ -98,4 +99,4 @@ const CareteCompany = (props) => {
     );
 };
 
-export default IsLoadingHOC(CareteCompany);
+export default IsLoadingHOC(CreatCompany);

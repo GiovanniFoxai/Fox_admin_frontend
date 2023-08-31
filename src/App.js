@@ -1,14 +1,11 @@
 import "./assets/css/styles.css";
 import "react-toastify/dist/ReactToastify.css";
 import SupAdmin from "./Components/SuperAdmin";
-import CareteCompany from "./Components/SuperAdmin/CareteCompany";
+import CreatCompany from "./Components/SuperAdmin/CreateCompany";
 import ViewCompany from "./Components/SuperAdmin/ViewCompany";
 import ViewAdmins from "./Components/SuperAdmin/ViewAdmins";
 import Modals from "./Components/SuperAdmin/Modals";
-import AssignAdmin from "./Components/AssignAdmin";
-import UserAdmin from "./Components/AssignAdmin/UserAdmin";
 import ViewUser from "./Components/AssignAdmin/ViewUser";
-import USerModals from "./Components/AssignAdmin/USerModals";
 import { Outlet, RouterProvider, createBrowserRouter } from "react-router-dom";
 import { Error404 } from "./pages/error-404";
 import CreateAdmin from "./Components/SuperAdmin/CareteAdmin";
@@ -27,7 +24,6 @@ import AdminCreateUser from "./Components/SuperAdmin/AdminCreateUser";
 
 function App() {
     const user = useSelector(getUser);
-
     const superAdminRoute = [
         {
             path: "/",
@@ -39,7 +35,7 @@ function App() {
         },
         {
             path: "/compaies/create",
-            element: <CareteCompany />,
+            element: <CreatCompany />,
         },
         { path: "/admin", element: <ViewAdmins /> },
         { path: "/admin/add", element: <CreateAdmin /> },
@@ -50,14 +46,6 @@ function App() {
         {
             path: "/",
             element: <SupAdmin />,
-        },
-        {
-            path: "/compaies",
-            element: <ViewCompany />,
-        },
-        {
-            path: "/compaies/create",
-            element: <CareteCompany />,
         },
         { path: "/view-users", element: <ViewUser /> },
         { path: "/add-user", element: <AdminCreateUser /> },
