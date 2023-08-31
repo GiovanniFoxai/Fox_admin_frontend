@@ -101,7 +101,7 @@ const Signup = (props) => {
               <button aria-label="Sign in" type="submit">Continue</button>
             </div>
           </form>
-          <p className="sign-up"> Already have an account?  <Link to="/login">Login</Link></p>
+          <p className="sign-up"> Already have an account?  <Link to="/auth/login">Login</Link></p>
         </div>
       </section>
     </div>

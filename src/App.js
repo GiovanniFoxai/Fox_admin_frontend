@@ -9,33 +9,73 @@ import AssignAdmin from "./Components/AssignAdmin";
 import UserAdmin from "./Components/AssignAdmin/UserAdmin";
 import ViewUser from "./Components/AssignAdmin/ViewUser";
 import USerModals from "./Components/AssignAdmin/USerModals";
-import { Route, Routes } from "react-router-dom";
+import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import { Error404 } from "./pages/error-404";
-import AdminSidebar from "./Components/SuperAdmin/AdminSidebar";
-import DashboardTopBar from "./Components/SuperAdmin/DashboardTopBar";
 import CreateAdmin from "./Components/SuperAdmin/CareteAdmin";
+import Login from "./Components/Login";
+import { LoginLayout } from "./Layouts/loginLayout";
+import { DashboardLayout } from "./Layouts/dashboardLayout";
+import Signup from "./Components/Signup";
+import ForgetPassword from "./Components/ForgetPassword";
+import { Fragment } from "react";
+import { ToastContainer } from "react-toastify";
 
 function App() {
+    const router = createBrowserRouter([
+        {
+            path: "/auth",
+            element: <LoginLayout />,
+            children: [
+                {
+                    path: "login",
+                    element: <Login />,
+                },
+                {
+                    path: "signup",
+                    element: <Signup />,
+                },
+                {
+                    path: "forget_password",
+                    element: <ForgetPassword />,
+                },
+            ],
+        },
+        {
+            path: "/",
+            element: <DashboardLayout />,
+            children: [
+                {
+                    path: "/",
+                    element: <SupAdmin />,
+                },
+                {
+                    path: "/compaies",
+                    element: <ViewCompany />,
+                },
+                {
+                    path: "/compaies/create",
+                    element: <CareteCompany />,
+                },
+                { path: "/admin", element: <ViewAdmins /> },
+                { path: "/admin/add", element: <CreateAdmin /> },
+                { path: "/admin/assign", element: <AssignAdmin /> },
+                { path: "/admin/user", element: <UserAdmin /> },
+                { path: "/admin/view-user", element: <ViewUser /> },
+                { path: "/modals", element: <Modals /> },
+                { path: "/modals/user-modals", element: <USerModals /> },
+            ],
+        },
+        {
+            path: "*",
+            element: <Error404 />,
+        },
+    ]);
+
     return (
-        <section className="dashbord-section">
-            <AdminSidebar />
-            <div className="content--section">
-                <DashboardTopBar />
-                <Routes>
-                    <Route path="/" element={<SupAdmin />} />
-                    <Route path="compaies" element={<ViewCompany />} />
-                    <Route path="compaies/create" element={<CareteCompany />} />
-                    <Route path="admin" element={<ViewAdmins />} />
-                    <Route path="admin/add" element={<CreateAdmin />} />
-                    <Route path="admin/assign" element={<AssignAdmin />} />
-                    <Route path="admin/user" element={<UserAdmin />} />
-                    <Route path="admin/view-user" element={<ViewUser />} />
-                    <Route path="modals" element={<Modals />} />
-                    <Route path="modals/user-modals" element={<USerModals />} />
-                    <Route path="*" element={<Error404 />} />
-                </Routes>
-            </div>
-        </section>
+        <Fragment>
+            <ToastContainer />
+            <RouterProvider router={router} />
+        </Fragment>
     );
 }
 

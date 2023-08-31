@@ -82,13 +82,13 @@ const Login = (props) => {
                   {/* <label for="password" className=" ">Password</label> */}
                 </div>
               </div>
-              <Link to="/forget_password" className="forget-s"> Forgot Password?</Link>
+              <Link to="/auth/forget_password" className="forget-s"> Forgot Password?</Link>
               <div className="continue-next">
                 <button aria-label="Sign in" type="submit" className=" " fdprocessedid="r4dvcy">Continue</button>
               </div>
             </div>
           </form>
-          <p className="sign-up"> Don't have an account?<Link to="/signup">Signup</Link></p>
+          <p className="sign-up"> Don't have an account?<Link to="/auth/signup">Signup</Link></p>
         </div>
       </section>
     </>
