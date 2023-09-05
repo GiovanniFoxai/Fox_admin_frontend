@@ -10,6 +10,7 @@ export const withoutAuthAxios = () => {
 
 export const authAxios = () => {
   let token = store.getState().auth.token;
+ 
   return axios.create({
     baseURL: process.env.REACT_APP_BASEURL,
     headers: {

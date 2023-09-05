@@ -1,3 +1,4 @@
+import moment from "moment";
 export function generateRandomId(length) {
     const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
     let id = '';
@@ -27,4 +28,57 @@ export function generateRandomId(length) {
 //     };
     
 //     generateId()
+
+
+
+
+export function getFormatedDate(date) {
+    if(date){
+      let formatedDateTime = moment(date).format('MMM Do YYYY');
+      return formatedDateTime;
+    }
+    else {
+      return "NA"
+    }   
+}
+
+export function getDateWithDay(date) {
+  if(date){
+    let formatedDateTime = moment(date).format('ddd, DD MMMM YYYY hh:mm A');
+    return formatedDateTime;
+  }
+  else {
+    return "NA"
+  }
+}
+
+export function setFormatDate(date) {
+  if(date){
+    let formatedDateTime = moment(date).format('DD/MM/YYYY');
+    return formatedDateTime;
+  }
+   else {
+    return "NA"
+   }
+}
+export function setReportFormatDate(date) {
+  if(date){
+    let formatedDateTime = moment(date).format('YYYY-MM-DD');
+    return formatedDateTime;
+  }
+   else {
+    return ""
+   }
+}
+
+
+export function phoneNumberAutoFormat(data){
+  const number = data.trim().replace(/[^0-9]/g, "");
+
+  if (number.length < 3) return number;
+  if (number.length < 7) return number.replace(/(\d{3})(\d{1})/, "$1-$2");
+  if (number.length < 11) return number.replace(/(\d{3})(\d{3})(\d{1})/, "$1-$2-$3");
+  return number.replace(/(\d{3})(\d{4})(\d{4})/, "$1-$2-$3");
+}
+
   

@@ -1,7 +1,6 @@
-import { Fragment } from "react";
 const CareteAdmin = () => {
     return (
-        <Fragment>
+        <>
             <div className="dash-bar">
                 <div>
                     <h3>Add User</h3>
@@ -42,7 +41,7 @@ const CareteAdmin = () => {
                     </form>
                 </div>
             </div>
-        </Fragment>
+       </>
     );
 };
 

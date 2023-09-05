@@ -4,7 +4,7 @@ import { fetchCompanyList } from "../../Redux/Actions/companyAction";
 import { companiesList } from "../../Redux/Reducers/companySlice";
 import { toast } from "react-toastify";
 import IsLoadingHOC from "../IsLoadingHOC";
-import { format, toDate } from 'date-fns'
+import { authAxios } from "../../config/config";
 
 
 const ViewCompany = (props) => {
@@ -28,13 +28,17 @@ const ViewCompany = (props) => {
         };
     }, []);
 
+   
+
     const companies = useSelector(companiesList);
+    console.log(companies)
 
     return (
         <Fragment>
             <div className="dash-bar">
                 <div>
                     <h3>View Company</h3>
+                  
                 </div>
             </div>
             <div className="view-company-section">
@@ -58,7 +62,7 @@ const ViewCompany = (props) => {
                             </tr>
                         </thead>
                         <tbody className="table-body">
-                            {companies.map((item, index) => (
+                            {companies&&companies.length>0 && companies.map((item, index) => (
                                 <tr key={"compnay_" + index}>
                                     <td className="table-data">{item._id}</td>
                                     <td className="table-data">{item.name}</td>
@@ -66,7 +70,7 @@ const ViewCompany = (props) => {
                                         {item.userCount}
                                     </td>
                                     <td className="table-data">{item.adminCount}</td>
-                                    <td className="table-data">{format(new Date(item.createdAt), 'MM/dd/yyyy hh:mm:ss aaa')}</td>
+                                       <td className="table-data">{item.name}</td>
                                     <td className="close-btn-sec">
                                         <button className="close-btn">
                                             Delete

@@ -20,8 +20,8 @@ import { useSelector } from "react-redux";
 import { getUser } from "./Redux/Reducers/authSlice";
 import { AdminLayout } from "./Layouts/adminLayput";
 import Home from "./Components/Home";
-import AdminCreateUser from "./Components/SuperAdmin/AdminCreateUser";
 import { AuthProvide } from "./context/auth.context.provider";
+import AdminCareteUser from "./Components/AssignAdmin/AdminCareteUser";
 
 function App() {
     const user = useSelector(getUser);
@@ -50,9 +50,10 @@ function App() {
             element: <SupAdmin />,
         },
         { path: "/view-users", element: <ViewUser /> },
-        { path: "/add-user", element: <AdminCreateUser /> },
+        { path: "/add-user", element: <AdminCareteUser /> },
         { path: "/modals", element: <Modals /> },
     ];
+    
     const normalUserRoute = [
         {
             path: "/",
