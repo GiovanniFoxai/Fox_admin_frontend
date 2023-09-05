@@ -4,7 +4,7 @@ import SupAdmin from "./Components/SuperAdmin";
 import CreatCompany from "./Components/SuperAdmin/CreateCompany";
 import ViewCompany from "./Components/SuperAdmin/ViewCompany";
 import ViewAdmins from "./Components/SuperAdmin/ViewAdmins";
-import Modals from "./Components/SuperAdmin/Modals";
+import Modals from "./Components/AssignAdmin/USerModals";
 import ViewUser from "./Components/AssignAdmin/ViewUser";
 import { Navigate, Outlet, RouterProvider, createBrowserRouter } from "react-router-dom";
 import { Error404 } from "./pages/error-404";

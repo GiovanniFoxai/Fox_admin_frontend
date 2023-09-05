@@ -4,7 +4,7 @@ const Modals = () => {
         <Fragment>
             <div className="dash-bar">
                 <div>
-                    <h3>Models</h3>
+                    <h3>Modeqwqls</h3>
                 </div>
             </div>
 

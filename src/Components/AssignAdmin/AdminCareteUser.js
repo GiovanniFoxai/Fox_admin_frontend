@@ -8,7 +8,7 @@ import { useSelector } from "react-redux";
 
 const AdminCareteUser = (props) => {
   const { setLoading, isLoading } = props;
-  const Companyid = useSelector((state) => state.auth.user.company._id);
+  const Companyid = useSelector((state) => state.auth.user?.company?._id);
   const [data, setdata] = useState({
     user_type: "USER",
     username: "",
@@ -18,6 +18,7 @@ const AdminCareteUser = (props) => {
     company: `${Companyid}`,
   });
 
+  console.log(Companyid);
   const handleChange = (e) => {
     const { name, value } = e.target;
     setdata((prev) => ({
@@ -50,14 +51,13 @@ const AdminCareteUser = (props) => {
           setLoading(false);
           if (response.data.status === 1) {
             toast.success("User Created SucessFully");
-
+            console.log("sds", response.data);
             setdata({
               user_type: "USER",
               username: "",
               email: "",
               password: "",
               mobile: "",
-              
             });
           } else {
             toast.error(response.data.message);
@@ -65,8 +65,13 @@ const AdminCareteUser = (props) => {
         },
         (error) => {
           setLoading(false);
-          console.log(error);
-          toast.error(error.response.data.message);
+          
+          
+          if (error.response.data.message==="ValidationError") {
+            toast.error("Company is Deleted You cannot Assign to the user ");
+          } else {
+           toast.error(error.response.data.message);
+          }
         }
       )
       .catch((error) => {
@@ -144,8 +149,6 @@ const AdminCareteUser = (props) => {
             <button className="form-submit" type="submit" value="Submit">
               Submit
             </button>
-
-            
           </form>
         </div>
       </div>

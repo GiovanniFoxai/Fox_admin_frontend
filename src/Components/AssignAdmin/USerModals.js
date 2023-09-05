@@ -4,7 +4,7 @@ const Modals = () => {
         <Fragment>
             <div className="dash-bar">
                 <div>
-                    <h3>Models</h3>
+                    <h3>Modxzxzels</h3>
                 </div>
             </div>
 
@@ -120,6 +120,7 @@ const Modals = () => {
                     </table>
                 </div>
             </div>
+            
         </Fragment>
     );
 };

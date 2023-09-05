@@ -21,7 +21,7 @@ const ViewAdmins = (props) => {
   const FetchAdmin = async () => {
     setLoading(true);
     await authAxios()
-      .get(`/auth/get-all-users?page=${currentPage}&limit=${postsPerPage}`)
+      .get(`/auth/get-all-users?page=${currentPage}&limit=${postsPerPage}&user_type=admin`)
       .then((response) => {
         setLoading(false);
         setTotalPages(response.data.data.totalPages);

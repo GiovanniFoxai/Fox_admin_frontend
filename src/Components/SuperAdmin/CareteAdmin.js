@@ -52,7 +52,7 @@ const CreateAdmin = (props) => {
     }, [userCreatedError]);
 
     const companies = useSelector(companiesList);
-
+console.log(companies,'helloo')
     const validateSchema = Yup.object().shape({
         first_name: Yup.string()
             .required("First name is required")
@@ -137,6 +137,7 @@ const CreateAdmin = (props) => {
             }
         },
     });
+
 
     return (
         <Fragment>
@@ -252,8 +253,8 @@ const CreateAdmin = (props) => {
                             onBlur={formik.handleBlur}
                             value={formik.values.company}
                         >
-                            <option value="" label="Select a comnany">
-                                Select a Company{" "}
+                            <option value="" label="Select a company">
+                                Select a company
                             </option>
                             {companies&&companies.length>0&&companies.map((item, index) => (
                                 <option

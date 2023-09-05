@@ -23,6 +23,7 @@ const ViewAdmins = (props) => {
     await authAxios()
       .get(`/auth/get-all-users?page=${currentPage}&limit=${postsPerPage}`)
       .then((response) => {
+        console.log(response)
         setLoading(false);
         setTotalPost(response.data.data.total);
         if (response.data.status === 1) {
@@ -97,15 +98,15 @@ const ViewAdmins = (props) => {
                 UserList.length > 0 &&
                 UserList.map((item, index) => (
                   <tr key={index}>
-                    <td className="table-data">{item._id.slice(0, 9)}</td>
-                    <td className="table-data">{item.username}</td>
-                    <td className="table-data">{item.email}</td>
-                    <td className="table-data">{item.company}</td>
+                    <td className="table-data">{item?._id.slice(0, 9)}</td>
+                    <td className="table-data">{item?.username}</td>
+                    <td className="table-data">{item?.email}</td>
+                    <td className="table-data">{item?.company?.name}</td>
                     <td className="table-data">
-                      {setFormatDate(item.createdAt)}
+                      {setFormatDate(item?.createdAt)}
                     </td>
                     <td className="table-data">
-                      {setFormatDate(item.updatedAt)}
+                      {setFormatDate(item?.updatedAt)}
                     </td>
                   </tr>
                 ))}
