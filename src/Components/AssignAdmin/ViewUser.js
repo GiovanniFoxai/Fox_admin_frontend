@@ -143,6 +143,8 @@ const ViewAdmins = (props) => {
                 </li>
               </ul>
             </nav>
+
+            
           </table>
         </div>
       </div>
