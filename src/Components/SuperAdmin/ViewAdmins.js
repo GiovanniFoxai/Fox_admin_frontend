@@ -45,6 +45,25 @@ const ViewAdmins = (props) => {
     setCurrentPage(1);
   };
 
+  const handleDelete=async(e)=>{
+  console.log(e)
+  /*
+  const adminid=e
+  setLoading(true);
+  await authAxios()
+  .delete(`/user/delete/${adminid}`)
+  .then((response)=>{
+    setLoading(false)
+    console.log(response)
+
+  }).catch((error)=>{
+    
+    console.log(error)
+  })
+  */
+
+  }
+
   return (
     <Fragment>
       <div className="dash-bar">
@@ -110,7 +129,7 @@ const ViewAdmins = (props) => {
                     </td>
                     <td>
                       {" "}
-                      <button type="button" className="btn btn-danger">
+                      <button onClick={()=>handleDelete(item._id)}  type="button" className="btn btn-danger">
                         Delete
                       </button>
                     </td>

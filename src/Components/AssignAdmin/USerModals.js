@@ -1,128 +1,158 @@
-import { Fragment } from "react";
-const Modals = () => {
-    return (
-        <Fragment>
-            <div className="dash-bar">
-                <div>
-                    <h3>Modxzxzels</h3>
-                </div>
-            </div>
+import { Fragment, useState, useEffect } from "react";
+import { authAxios } from "../../config/config";
+import IsLoadingHOC from "../IsLoadingHOC";
+import { toast } from "react-toastify";
+import Pagination from "../../Common/Pagination";
 
-            <div className="view-company-section">
-                <div className="view-company-table">
-                    <table className="view-table">
-                        <thead className="table-head">
-                            <tr>
-                                <th className="table-heading sr-number">ID</th>
-                                <th className="table-heading">Name</th>
-                                <th className="table-heading">Cateogary</th>
-                                <th className="table-heading">Company Id</th>
-                                <th className="table-heading">Created At</th>
-                                <th className="table-heading">Updated At</th>
-                                <th className="table-heading" colspan="2">
-                                    Created By
-                                </th>
-                                <th></th>
-                            </tr>
-                        </thead>
+const Modals = (props) => {
+  const { setLoading, isLoading } = props;
+  const [ModelList, setModelList] = useState([]);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [postsPerPage, setPostsPerPage] = useState(5);
+  const [TotalPost, setTotalPost] = useState(0);
+  const [TotalPages, setTotalPages] = useState(0);
 
-                        <tbody className="table-body">
-                            <tr>
-                                <td className="table-data">001</td>
-                                <td className="table-data">Maria Anders</td>
-                                <td className="table-data">Germany</td>
-                                <td className="table-data">Germany</td>
-                                <td className="table-data">Germany</td>
-                                <td className="table-data">Germany</td>
-                                <td className="table-data">Germany</td>
-                                <td className="close-btn-sec">
-                                    <button className="close-btn">
-                                        Delete
-                                    </button>
-                                </td>
-                            </tr>
+  useEffect(() => {
+    fetchMoalList();
+  }, [currentPage, postsPerPage]);
 
-                            <tr>
-                                <td className="table-data">001</td>
-                                <td className="table-data">Maria Anders</td>
-                                <td className="table-data">Germany</td>
-                                <td className="table-data">Germany</td>
-                                <td className="table-data">Germany</td>
-                                <td className="table-data">Germany</td>
-                                <td className="table-data">Germany</td>
-                                <td className="close-btn-sec">
-                                    <button className="close-btn">
-                                        Delete
-                                    </button>
-                                </td>
-                            </tr>
+  const fetchMoalList = async () => {
 
-                            <tr>
-                                <td className="table-data">001</td>
-                                <td className="table-data">Maria Anders</td>
-                                <td className="table-data">Germany</td>
-                                <td className="table-data">Germany</td>
-                                <td className="table-data">Germany</td>
-                                <td className="table-data">Germany</td>
-                                <td className="table-data">Germany</td>
-                                <td className="close-btn-sec">
-                                    <button className="close-btn">
-                                        Delete
-                                    </button>
-                                </td>
-                            </tr>
+    setLoading(true)
+    await authAxios()
+      .get(`/model/list?page=${currentPage}&limit=${postsPerPage}`)
+      .then(
+        (response) => { 
+           
+            setTotalPages(response.data.data.totalPages)
+            setTotalPost(response.data.data.totalCount)
+          if (response.data.status === 1) {
+            setLoading(false);
 
-                            <tr>
-                                <td className="table-data">001</td>
-                                <td className="table-data">Maria Anders</td>
-                                <td className="table-data">Germany</td>
-                                <td className="table-data">Germany</td>
-                                <td className="table-data">Germany</td>
-                                <td className="table-data">Germany</td>
-                                <td className="table-data">Germany</td>
-                                <td className="close-btn-sec">
-                                    <button className="close-btn">
-                                        Delete
-                                    </button>
-                                </td>
-                            </tr>
+            setModelList(response.data.data.models);
+            // toast.success(response.data.message);
+          } else {
+            toast.error(response.data.message);
+          }
+        },
+        (error) => {
+          setLoading(true);
+          toast.error(error.response.data.message);
+          console.log(error.response.data.message);
+        }
+      )
+      .catch((error) => {
+        setLoading(true);
+        console.log("errorr", error);
+      });
+  };
 
-                            <tr>
-                                <td className="table-data">001</td>
-                                <td className="table-data">Maria Anders</td>
-                                <td className="table-data">Germany</td>
-                                <td className="table-data">Germany</td>
-                                <td className="table-data">Germany</td>
-                                <td className="table-data">Germany</td>
-                                <td className="table-data">Germany</td>
-                                <td className="close-btn-sec">
-                                    <button className="close-btn">
-                                        Delete
-                                    </button>
-                                </td>
-                            </tr>
 
-                            <tr>
-                                <td className="table-data">001</td>
-                                <td className="table-data">Maria Anders</td>
-                                <td className="table-data">Germany</td>
-                                <td className="table-data">Germany</td>
-                                <td className="table-data">Germany</td>
-                                <td className="table-data">Germany</td>
-                                <td className="table-data">Germany</td>
-                                <td className="close-btn-sec">
-                                    <button className="close-btn">
-                                        Delete
-                                    </button>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-            
-        </Fragment>
-    );
+  const handleDelete = (e) => {
+    console.log(e);
+  };
+
+  const paginate = (pageNumber) => setCurrentPage(pageNumber);
+
+  const handleRowChange=(e)=>{ 
+    setPostsPerPage(e.target.value)
+    setCurrentPage(1)
+  }
+
+  return (
+    <Fragment>
+      <div className="dash-bar">
+        <div>
+          <h3>Models</h3>
+        </div>
+      </div>
+
+      <select onChange={handleRowChange} >
+        <option value="5" >5</option>
+        <option value="2" >2</option>
+        <option value="3" >3</option>
+        <option value="4" >4</option>
+        
+      </select>
+
+      <div className="view-company-section">
+        <div className="view-company-table">
+          <table className="view-table">
+            <thead className="table-head">
+              <tr>
+                <th className="table-heading sr-number">ID</th>
+                <th className="table-heading">Name</th>
+                <th className="table-heading">Cateogary</th>
+                <th className="table-heading">Company Id</th>
+                <th className="table-heading">Created At</th>
+                <th className="table-heading">Updated At</th>
+                <th className="table-heading" colspan="2">
+                  Created By
+                </th>
+                <th></th>
+              </tr>
+            </thead>
+
+            <tbody className="table-body">
+              {ModelList &&
+                ModelList.length > 0 &&
+                ModelList.map((item) => (
+                  <tr>
+                    <td className="table-data">{item._id.slice(0, 9)}</td>
+                    <td className="table-data">{item.name}</td>
+                    <td className="table-data">{item.category}</td>
+                    <td className="table-data">---</td>
+                    <td className="table-data">{item.createdAt}</td>
+                    <td className="table-data">{item.updatedAt}</td>
+                    <td className="table-data">--</td>
+                    <td className="close-btn-sec">
+                      <button
+                        onClick={() => handleDelete(item._id)}
+                        className="close-btn"
+                      >
+                        Delete
+                      </button>
+                    </td>
+                  </tr>
+                ))}
+            </tbody>
+          </table>
+
+          <nav aria-label="Page navigation example">
+              <ul class="pagination">
+                <li class="page-item">
+                  <button
+                    class="page-link"
+                    disabled={currentPage === 1 ? true : false}
+                    onClick={()=> setCurrentPage(currentPage - 1)}
+                  >
+                    Previous
+                  </button>
+                </li>
+                <li class="page-item">
+                  <Pagination
+                    currentPage={currentPage}
+                    postsPerPage={postsPerPage}
+                    totalPosts={TotalPost}
+                    paginate={paginate}
+                  />{" "}
+                </li>
+
+                <li class="page-item">
+                  <button
+                    class="page-link"
+                    disabled={currentPage === TotalPages ? true : false}
+                    onClick={()=> setCurrentPage(currentPage + 1)}
+                  >
+                    NEXT
+                  </button>
+                </li>
+              </ul>
+            </nav>
+        </div>
+      </div>
+    </Fragment>
+  );
 };
 
-export default Modals;
+export default IsLoadingHOC(Modals);

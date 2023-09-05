@@ -19,6 +19,7 @@ const AdminCareteUser = (props) => {
   });
 
   console.log(Companyid);
+  
   const handleChange = (e) => {
     const { name, value } = e.target;
     setdata((prev) => ({

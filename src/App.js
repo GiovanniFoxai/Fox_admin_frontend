@@ -22,6 +22,7 @@ import { AdminLayout } from "./Layouts/adminLayput";
 import Home from "./Components/Home";
 import { AuthProvide } from "./context/auth.context.provider";
 import AdminCareteUser from "./Components/AssignAdmin/AdminCareteUser";
+import AddModal from "./Components/AssignAdmin/AddModal";
 
 function App() {
     const user = useSelector(getUser);
@@ -51,7 +52,8 @@ function App() {
         },
         { path: "/view-users", element: <ViewUser /> },
         { path: "/add-user", element: <AdminCareteUser /> },
-        { path: "/modals", element: <Modals /> },
+        { path: "/add-modal", element: <AddModal /> },
+        { path: "/view-modal", element: <Modals /> },
     ];
     
     const normalUserRoute = [
