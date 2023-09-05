@@ -57,6 +57,7 @@ const AdminCareteUser = (props) => {
               email: "",
               password: "",
               mobile: "",
+              
             });
           } else {
             toast.error(response.data.message);

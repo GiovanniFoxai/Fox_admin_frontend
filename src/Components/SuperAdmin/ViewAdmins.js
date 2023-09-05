@@ -5,23 +5,29 @@ import { authAxios } from "../../config/config";
 import { toast } from "react-toastify";
 import IsLoadingHOC from "../IsLoadingHOC";
 import { setFormatDate } from "../../Helper/helper";
+import Pagination from "../../Common/Pagination";
 const ViewAdmins = (props) => {
   const { setLoading, isLoading } = props;
   const [AdminList, setAdminList] = useState([]);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [postsPerPage, setPostsPerPage] = useState(5);
+  const [TotalPost, setTotalPost] = useState(0);
+  const [TotalPages, setTotalPages] = useState(0);
 
   useEffect(() => {
     FetchAdmin();
-  }, []);
+  }, [currentPage, postsPerPage]);
 
   const FetchAdmin = async () => {
     setLoading(true);
     await authAxios()
-      .get(`/auth/get-all-users?page=${1}&limit=${5}`)
+      .get(`/auth/get-all-users?page=${currentPage}&limit=${postsPerPage}`)
       .then((response) => {
         setLoading(false);
+        setTotalPages(response.data.data.totalPages);
+        setTotalPost(response.data.data.total);
 
         if (response.data.status === 1) {
-          console.log(response.data.data.users);
           setAdminList(response.data.data.users);
         } else {
           toast.error(response.data.message);
@@ -31,6 +37,12 @@ const ViewAdmins = (props) => {
         setLoading(true);
         console.log(error);
       });
+  };
+  const paginate = (pageNumber) => setCurrentPage(pageNumber);
+  
+  const handleRowChange = (e) => {
+    setPostsPerPage(e.target.value);
+    setCurrentPage(1);
   };
 
   return (
@@ -51,6 +63,13 @@ const ViewAdmins = (props) => {
         </div>
       </div>
 
+      <select onChange={handleRowChange}>
+        <option value="5">5</option>
+        <option value="2">2</option>
+        <option value="3">3</option>
+        <option value="4">4</option>
+      </select>
+
       <div className="view-company-section">
         <div className="view-company-table">
           <table className="view-table">
@@ -65,7 +84,6 @@ const ViewAdmins = (props) => {
                 <th className="table-heading" colspan="2"></th>
               </tr>
             </thead>
-
             <tbody className="table-body">
               {AdminList &&
                 AdminList.length > 0 &&
@@ -73,10 +91,10 @@ const ViewAdmins = (props) => {
                   <tr key={index}>
                     <td className="table-data">{item._id.slice(0, 9)}</td>
                     <td className="table-data">
-                      {item.first_name} {item.last_name}
+                      {item?.first_name} {item?.last_name}
                     </td>
-                    <td className="table-data">{item.email}</td>
-                    <td className="table-data">{item.company}</td>
+                    <td className="table-data">{item?.email}</td>
+                    <td className="table-data">{item?.company?.name || "-"}</td>
                     <td className="table-data">
                       {setFormatDate(item.createdAt)}
                     </td>
@@ -100,6 +118,37 @@ const ViewAdmins = (props) => {
                 ))}
             </tbody>
           </table>
+          <nav aria-label="Page navigation example">
+            <ul class="pagination">
+              <li class="page-item">
+                <button
+                  class="page-link"
+                  disabled={currentPage === 1 ? true : false}
+                  onClick={() => setCurrentPage(currentPage - 1)}
+                >
+                  Previous
+                </button>
+              </li>
+              <li class="page-item">
+                <Pagination
+                  currentPage={currentPage}
+                  postsPerPage={postsPerPage}
+                  totalPosts={TotalPost}
+                  paginate={paginate}
+                />{" "}
+              </li>
+
+              <li class="page-item">
+                <button
+                  class="page-link"
+                  disabled={currentPage === TotalPages ? true : false}
+                  onClick={() => setCurrentPage(currentPage + 1)}
+                >
+                  NEXT
+                </button>
+              </li>
+            </ul>
+          </nav>
         </div>
       </div>
     </Fragment>
