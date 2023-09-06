@@ -41,8 +41,9 @@ const Login = (props) => {
       .post("/auth/login", payload)
       .then(
         (response) => {
-          setLoading(false);
+         
           if (response.data.status === 1) {
+            setLoading(false);
             const resData = response.data.data;
             toast.success("Logged in successfully");
             dispatch(setAccessToken(resData.token));

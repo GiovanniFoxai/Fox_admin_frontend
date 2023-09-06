@@ -21,7 +21,9 @@ const ViewAdmins = (props) => {
   const FetchAdmin = async () => {
     setLoading(true);
     await authAxios()
-      .get(`/auth/get-all-users?page=${currentPage}&limit=${postsPerPage}&user_type=admin`)
+      .get(
+        `/auth/get-all-users?page=${currentPage}&limit=${postsPerPage}&user_type=admin`
+      )
       .then((response) => {
         setLoading(false);
         setTotalPages(response.data.data.totalPages);
@@ -39,30 +41,31 @@ const ViewAdmins = (props) => {
       });
   };
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
-  
+
   const handleRowChange = (e) => {
     setPostsPerPage(e.target.value);
     setCurrentPage(1);
   };
 
-  const handleDelete=async(e)=>{
-  console.log(e)
-  /*
-  const adminid=e
-  setLoading(true);
-  await authAxios()
-  .delete(`/user/delete/${adminid}`)
-  .then((response)=>{
-    setLoading(false)
-    console.log(response)
+  const handleDelete = async (e) => {
+    console.log(e);
 
-  }).catch((error)=>{
-    
-    console.log(error)
-  })
-  */
+    const adminid = e;
+    setLoading(true);
+    await authAxios()
+      .delete(`/user/${adminid}`)
+      .then((response) => {
+        setLoading(false);
+        FetchAdmin();
+        setCurrentPage(1);
+        console.log(response);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
 
-  }
+  const handleEdit = () => {};
 
   return (
     <Fragment>
@@ -82,12 +85,16 @@ const ViewAdmins = (props) => {
         </div>
       </div>
 
-      <select onChange={handleRowChange}>
+    {AdminList.length>0&&(
+   <>
+   {/*  
+    <select onChange={handleRowChange}>
         <option value="5">5</option>
         <option value="2">2</option>
         <option value="3">3</option>
         <option value="4">4</option>
       </select>
+      */}
 
       <div className="view-company-section">
         <div className="view-company-table">
@@ -120,16 +127,22 @@ const ViewAdmins = (props) => {
                     <td className="table-data">
                       {setFormatDate(item.updatedAt)}
                     </td>
-
+                    {/*
                     <td>
                       {" "}
                       <button type="button" className="btn btn-info">
                         Edit
                       </button>
+
                     </td>
+              */}
                     <td>
                       {" "}
-                      <button onClick={()=>handleDelete(item._id)}  type="button" className="btn btn-danger">
+                      <button
+                        onClick={() => handleDelete(item._id)}
+                        type="button"
+                        className="close-btn"
+                      >
                         Delete
                       </button>
                     </td>
@@ -137,6 +150,7 @@ const ViewAdmins = (props) => {
                 ))}
             </tbody>
           </table>
+
           <nav aria-label="Page navigation example">
             <ul class="pagination">
               <li class="page-item">
@@ -170,6 +184,13 @@ const ViewAdmins = (props) => {
           </nav>
         </div>
       </div>
+   
+   </>
+    )}
+
+     
+
+
     </Fragment>
   );
 };

@@ -48,6 +48,27 @@ const ViewAdmins = (props) => {
     setCurrentPage(1)
   }
 
+  const handleDelete=async(e)=>{
+      
+    const Userid=e
+   await authAxios()
+   .delete(`/user/${Userid}`)
+   .then((response)=>{
+    if(response.data.status==1){
+      setCurrentPage(1)
+      fetchUsers();
+      toast.success(response.data.message)
+    }else{
+      toast.error(response.data.error)
+    }
+    
+   }).catch((error)=>{
+    console.log(error)
+   })
+
+
+  }
+
   return (
     <>
       <div className="dash-bar">
@@ -65,7 +86,11 @@ const ViewAdmins = (props) => {
           </ul>
         </div>
       </div> 
+     
 
+      {UserList.length>0&&(
+        <>
+ {/*
       <select onChange={handleRowChange} >
         <option value="5" >5</option>
         <option value="2" >2</option>
@@ -73,8 +98,9 @@ const ViewAdmins = (props) => {
         <option value="4" >4</option>
         
       </select>
+      */}
 
-      <div className="view-company-section">
+<div className="view-company-section">
         <div className="view-company-table">
           <table className="view-table">
             <thead className="table-head">
@@ -84,10 +110,10 @@ const ViewAdmins = (props) => {
                 <th className="table-heading">Email</th>
                 <th className="table-heading">Company ID</th>
                 <th className="table-heading">Created At</th>
-                <th className="table-heading">Edit</th>
-                <th className="table-heading">Created At</th>
+                <th className="table-heading">Updated At</th>
+               
                 <th className="table-heading" colspan="2">
-                  Updated At
+                 
                 </th>
 
               </tr>
@@ -101,19 +127,26 @@ const ViewAdmins = (props) => {
                     <td className="table-data">{item?._id.slice(0, 9)}</td>
                     <td className="table-data">{item?.username}</td>
                     <td className="table-data">{item?.email}</td>
-                    <td className="table-data">{item?.company?.name}</td>
+                    <td className="table-data">{item?.company?.name ||"-" }</td>
                     <td className="table-data">
                       {setFormatDate(item?.createdAt)}
                     </td>
                     <td className="table-data">
                       {setFormatDate(item?.updatedAt)}
                     </td>
+                    <td className="close-btn-sec">
+                      <button
+                        onClick={() => handleDelete(item._id)}
+                        className="close-btn"
+                      >
+                        Delete
+                      </button>
+                    </td>
                   </tr>
                 ))}
             </tbody>
-            <br />
-
-            <nav aria-label="Page navigation example">
+          </table>
+          <nav aria-label="Page navigation example">
               <ul class="pagination">
                 <li class="page-item">
                   <button
@@ -144,11 +177,13 @@ const ViewAdmins = (props) => {
                 </li>
               </ul>
             </nav>
-
-            
-          </table>
         </div>
       </div>
+        </>
+      )}
+    
+
+
     </>
   );
 };

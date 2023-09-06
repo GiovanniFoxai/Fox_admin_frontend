@@ -15,7 +15,8 @@ const Modals = (props) => {
   useEffect(() => {
     fetchMoalList();
   }, [currentPage, postsPerPage]);
-
+ 
+  
   const fetchMoalList = async () => {
 
     setLoading(true)
@@ -23,7 +24,7 @@ const Modals = (props) => {
       .get(`/model/list?page=${currentPage}&limit=${postsPerPage}`)
       .then(
         (response) => { 
-           
+           console.log(response.data)
             setTotalPages(response.data.data.totalPages)
             setTotalPost(response.data.data.totalCount)
           if (response.data.status === 1) {
@@ -48,8 +49,20 @@ const Modals = (props) => {
   };
 
 
-  const handleDelete = (e) => {
+  const handleDelete = async(e) => {
+    const modelId=e
     console.log(e);
+    await authAxios()
+    .delete(`/model/${modelId}`)
+    .then((response)=>{
+      setCurrentPage(1)
+      toast.success(response.data.message)
+      fetchMoalList()
+  
+    }).catch((error)=>{
+      console.log(error)
+    })
+    
   };
 
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
@@ -57,7 +70,7 @@ const Modals = (props) => {
   const handleRowChange=(e)=>{ 
     setPostsPerPage(e.target.value)
     setCurrentPage(1)
-  }
+  } 
 
   return (
     <Fragment>
@@ -67,6 +80,9 @@ const Modals = (props) => {
         </div>
       </div>
 
+      {ModelList.length>0&&(
+<>
+{/*
       <select onChange={handleRowChange} >
         <option value="5" >5</option>
         <option value="2" >2</option>
@@ -74,8 +90,9 @@ const Modals = (props) => {
         <option value="4" >4</option>
         
       </select>
+      */}
 
-      <div className="view-company-section">
+<div className="view-company-section">
         <div className="view-company-table">
           <table className="view-table">
             <thead className="table-head">
@@ -86,8 +103,9 @@ const Modals = (props) => {
                 <th className="table-heading">Company Id</th>
                 <th className="table-heading">Created At</th>
                 <th className="table-heading">Updated At</th>
+                <th className="table-heading">Created By</th>
                 <th className="table-heading" colspan="2">
-                  Created By
+                  
                 </th>
                 <th></th>
               </tr>
@@ -101,10 +119,10 @@ const Modals = (props) => {
                     <td className="table-data">{item._id.slice(0, 9)}</td>
                     <td className="table-data">{item.name}</td>
                     <td className="table-data">{item.category}</td>
-                    <td className="table-data">---</td>
+                    <td className="table-data">{item?.user?.company?.name||"-"}</td>
                     <td className="table-data">{item.createdAt}</td>
                     <td className="table-data">{item.updatedAt}</td>
-                    <td className="table-data">--</td>
+                    <td className="table-data">{item?.user?.username}</td>
                     <td className="close-btn-sec">
                       <button
                         onClick={() => handleDelete(item._id)}
@@ -151,6 +169,12 @@ const Modals = (props) => {
             </nav>
         </div>
       </div>
+</>
+      )}
+   
+   
+
+
     </Fragment>
   );
 };

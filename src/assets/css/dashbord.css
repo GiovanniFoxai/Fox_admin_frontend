@@ -354,6 +354,37 @@ button.close-btn {
     border-radius: 5px;
 }
 
+ul.pagination {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    margin-top: 20px;
+}
+
+ul.pagination > li > button {
+    padding: 10px;
+    background: #f38616;
+    border: 1px solid #f38616;
+    color: #fff;
+    min-width: 120px;
+    border-radius: 50px;
+    cursor: pointer;
+}
+
+ul.pagination > li > button:disabled {
+    background: #e8e8e8;
+    border-color: #e8e8e8;
+    color: #000;
+}
+ul.pagination-list {
+    display: flex;
+    gap: 10px;
+}
+
+ul.pagination-list > li.active {
+    color: #f38616;
+}
+
 
 /* media queries */
 
@@ -387,7 +418,10 @@ button.close-btn {
         height: 0px;
         overflow: hidden;
     }
-
+    .toggle--sidebar--slide .nav-bar-section > ul > li > .active--nav ~ ul.sub-menu {
+        display: none;
+    }
+    
 
     
 }
