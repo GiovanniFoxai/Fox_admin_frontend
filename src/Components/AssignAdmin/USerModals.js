@@ -3,6 +3,7 @@ import { authAxios } from "../../config/config";
 import IsLoadingHOC from "../IsLoadingHOC";
 import { toast } from "react-toastify";
 import Pagination from "../../Common/Pagination";
+import { setFormatDate } from "../../Helper/helper";
 
 const Modals = (props) => {
   const { setLoading, isLoading } = props;
@@ -120,8 +121,8 @@ const Modals = (props) => {
                     <td className="table-data">{item.name}</td>
                     <td className="table-data">{item.category}</td>
                     <td className="table-data">{item?.user?.company?.name||"-"}</td>
-                    <td className="table-data">{item.createdAt}</td>
-                    <td className="table-data">{item.updatedAt}</td>
+                    <td className="table-data">{setFormatDate(item.createdAt)}</td>
+                    <td className="table-data">{setFormatDate(item.updatedAt)}</td>
                     <td className="table-data">{item?.user?.username}</td>
                     <td className="close-btn-sec">
                       <button

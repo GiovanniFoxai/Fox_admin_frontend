@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import AdminLogo from "../../assets/image/logo.png";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
@@ -15,14 +15,15 @@ const DashboardTopBar = () => {
         navigate("/auth/login");
         toast.success("Logout successfully");
     };
+
     return (
         <>
             <div className="content-top-bar">
                 <div className="top-bar-admin">
-                    <button onClick={logoutHandler}>Logout</button>
+                    <button onClick={logoutHandler} className="btn-custom-log">Logout</button>
 
                     <h2>
-                        Other Developer <span>( Admin )</span>
+                        <span> Admin </span>
                     </h2>
 
                     <div className="top-bar-admin-logo">

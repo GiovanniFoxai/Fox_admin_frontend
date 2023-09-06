@@ -28,6 +28,10 @@ const Home = (props) => {
         (state) => state.app
     );
 
+    const [ModelList, setModelList] = useState({
+        title:""
+    })
+
     const navigate = useNavigate();
     const dispatch = useDispatch();
 
@@ -101,7 +105,10 @@ const Home = (props) => {
         const payload = {
             prompt: newChat,
             session: chatId,
+            previous_prompt: "Hello, how can I assist you?",
         };
+        console.log(payload)
+        
         setLoading(true);
         await authAxios()
             .post("/chat/create", payload)
@@ -124,6 +131,7 @@ const Home = (props) => {
             .catch((error) => {
                 console.log("errorrrr", error);
             });
+            
     };
 
     const handleKeyDown = (e) => {
@@ -168,6 +176,8 @@ const Home = (props) => {
                 console.log("errorrrr", error);
             });
     };
+
+ console.log(token)
 
     return (
         <section className="main-section">

@@ -3,6 +3,7 @@ import DashboardIcon from "../../assets/image/dashboard.png";
 import DropDwonIcon from "../../assets/image/down-arrow.png";
 import Createcompany from "../../assets/image/create.png";
 import Logo from "../../assets/image/dashbordlogo.png";
+import Logout from "../../assets/image/logout.png";
 import { Link } from "react-router-dom";
 
 const AdminSidebar = () => {
@@ -132,6 +133,14 @@ const AdminSidebar = () => {
                 </li>
               </ul>
             </li>
+            <li>
+                  <button className="sidebar--log">
+                    <img
+                    src={Logout}
+                    alt="logout"
+                    className="icon--nav"
+                  /> Logout</button>
+                </li>
             {/*
                         <li className="dropdown--item--dashborad">
                             <Link

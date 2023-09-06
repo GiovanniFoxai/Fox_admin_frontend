@@ -111,6 +111,7 @@ const AddModal = (props) => {
 
           <input
             type="file"
+            //accept=".csv,.doc,.pdf"
             required
             className="form-input"
             name="model_file"

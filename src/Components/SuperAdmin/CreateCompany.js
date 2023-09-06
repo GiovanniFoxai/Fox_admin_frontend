@@ -1,102 +1,88 @@
-import { Fragment, useEffect } from "react";
-import { useFormik } from "formik";
-import * as Yup from "yup";
-import IsLoadingHOC from "../IsLoadingHOC";
-import { useDispatch, useSelector } from "react-redux";
+import React, { Fragment, useState, useEffect } from "react";
+import { authAxios } from "../../config/config";
 import { toast } from "react-toastify";
-import { createCompanyApi } from "../../Redux/Actions/companyAction";
-import {
-    companyCreated,
-    companyCreatedSuccessfully,
-} from "../../Redux/Reducers/companySlice";
+import IsLoadingHOC from "../IsLoadingHOC";
 
-const CreatCompany = (props) => {
-    const { setLoading } = props;
+const CreateCompany = (props) => {
+  const { setLoading, isLoading } = props;
+  const [data, setdata] = useState({
+    name: "",
+    address: "",
+  });
 
-    const dispatch = useDispatch();
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setdata((prev) => ({
+      ...prev,
+      [name]: value,
+    }));
+  };
 
-    const isCompanyCreated = useSelector(companyCreatedSuccessfully);
+  const handleSubmit = async (e) => {
+    e.preventDefault();
 
-    useEffect(() => {
-        if (!!isCompanyCreated) {
-            toast.success("Company added successfully!");
-            dispatch(companyCreated(false));
+    const payload = data;
+    setLoading(true);
+
+    await authAxios()
+      .post(`/company/create`, payload)
+      .then((response) => {
+        if (response.data.status == 1) {
+          setLoading(false);
+          toast.success(response.data.message);
+        } else {
+          setLoading(false);
+          toast.error(response.data.message);
         }
-    }, [isCompanyCreated]);
+      })
+      .catch((error) => {
+        setLoading(false);
 
-    const validateSchema = Yup.object().shape({
-        name: Yup.string().required("Company name  is required"),
-        address: Yup.string().required("Company address is required"),
-    });
+        toast.error(error.response.data.message);
+      });
+  };
+  return (
+    <Fragment>
+      <div className="dash-bar">
+        <div>
+          <h3>Add Company</h3>
+        </div>
+      </div>
+      <div className="create-company-section">
+        <div className="create-company-form">
+          <form className="form-create" onSubmit={handleSubmit}>
+            <label className="form-lable" htmlFor="name">
+              Company Name
+            </label>
+            <input
+              className="form-input"
+              type="text"
+              id="name"
+              onChange={handleChange}
+              value={data.name}
+              name="name"
+              required
+            />
 
-    const formik = useFormik({
-        initialValues: {
-            name: "",
-            address: "",
-        },
-        validationSchema: validateSchema,
-        onSubmit: async (value, { resetForm }) => {
-            setLoading(true);
-            try {
-                await dispatch(createCompanyApi({ ...value }));
-                resetForm();
-            } catch (error) {
-                toast.error(error.message);
-            } finally {
-                setLoading(false);
-            }
-        },
-    });
-    return (
-        <Fragment>
-            <div className="dash-bar">
-                <div>
-                    <h3>Add Company</h3>
-                </div>
-            </div>
-            <div className="create-company-section">
-                <div className="create-company-form">
-                    <form
-                        className="form-create"
-                        onSubmit={formik.handleSubmit}
-                    >
-                        <label className="form-lable" htmlFor="name">
-                            Company Name
-                        </label>
-                        <input
-                            className="form-input"
-                            type="text"
-                            id="name"
-                            onChange={formik.handleChange}
-                            value={formik.values.name}
-                            name="name"
-                        />
-                        {formik.touched.name && formik.errors.name ? (
-                            <div>{formik.errors.name}</div>
-                        ) : null}
-                        <label className="form-lable" htmlFor="address">
-                            Company Address
-                        </label>
-                        <textarea
-                            className="form-textarea"
-                            name="address"
-                            onChange={formik.handleChange}
-                            form="address"
-                            value={formik.values.address}
-                        ></textarea>
-                        {formik.touched.address && formik.errors.address ? (
-                            <div>{formik.errors.address}</div>
-                        ) : null}
-                        <input
-                            className="form-submit"
-                            type="submit"
-                            value="Submit"
-                        />
-                    </form>
-                </div>
-            </div>
-        </Fragment>
-    );
+            <label className="form-lable" htmlFor="name">
+              Company Address
+            </label>
+            <textarea
+              type="text"
+              required
+              className="form-textarea"
+              name="address"
+              onChange={handleChange}
+              form="address"
+              value={data.address}
+            ></textarea>
+
+            <input className="form-submit" type="submit" value="Submit" />
+          </form>
+        </div>
+      </div>
+    </Fragment>
+  );
 };
 
-export default IsLoadingHOC(CreatCompany);
+export default IsLoadingHOC(CreateCompany);

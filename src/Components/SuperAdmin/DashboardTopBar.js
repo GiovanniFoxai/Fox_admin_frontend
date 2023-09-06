@@ -21,9 +21,9 @@ const DashboardTopBar = () => {
     <>
       <div className='content-top-bar'>
         <div className='top-bar-admin'>
-        <button onClick={logoutHandler}>Logout</button>
+        <button onClick={logoutHandler} className="btn-custom-log">Logout</button>
 
-          <h2>Other Developer <span>( Admin )</span></h2>
+          <h2> <span> SuperAdmin </span></h2>
           <div className='top-bar-admin-logo'>
             <img src={AdminLogo} alt="  Admin logo" />
           </div>

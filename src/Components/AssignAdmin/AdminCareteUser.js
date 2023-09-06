@@ -53,20 +53,23 @@ const AdminCareteUser = (props) => {
           if (response.data.status === 1) {
             toast.success("User Created SucessFully");
             console.log("sds", response.data);
+
             setdata({
               user_type: "USER",
               username: "",
               email: "",
               password: "",
               mobile: "",
+              company: `${Companyid}` 
             });
+            
           } else {
             toast.error(response.data.message);
           }
-        },
+        }, 
         (error) => {
           setLoading(false);
-          
+           
           
           if (error.response.data.message==="ValidationError") {
             toast.error("Company is Deleted You cannot Assign to the user ");
@@ -79,6 +82,8 @@ const AdminCareteUser = (props) => {
         console.log("errorrrr", error);
       });
   };
+
+  console.log(data)
 
   return (
     <>
