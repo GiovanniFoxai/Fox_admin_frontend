@@ -55,14 +55,24 @@ const ViewAdmins = (props) => {
     await authAxios()
       .delete(`/user/${adminid}`)
       .then((response) => {
-        setLoading(false);
-        FetchAdmin();
-        setCurrentPage(1);
-        console.log(response);
+        
+       
+       
+        if (response.data.status === 1) {
+          setLoading(false);
+          toast.success(response.data.message);
+          FetchAdmin();
+          setCurrentPage(1);
+        } else {
+          setLoading(false)
+          toast.error(response.data.message);
+        }
       })
       .catch((error) => {
-        console.log(error);
+        setLoading(false);
+       
       });
+
   };
 
   const handleEdit = () => {};

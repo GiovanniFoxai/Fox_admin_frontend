@@ -45,7 +45,7 @@ const Login = (props) => {
           if (response.data.status === 1) {
             setLoading(false);
             const resData = response.data.data;
-            toast.success("Logged in successfully");
+            toast.success("Logged in Successfully");
             dispatch(setAccessToken(resData.token));
             dispatch(setuser(resData.user));
             navigate("/");
