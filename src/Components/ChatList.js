@@ -24,7 +24,10 @@ function ChatList({ setLoading }) {
   useEffect(() => {
     getAllChatList();
   }, []);
+   
 
+
+  console.log("Geniune User")
   const getAllChatList = async (e) => {
     setLoading(true);
     await authAxios()
@@ -138,13 +141,15 @@ function ChatList({ setLoading }) {
         </div>
       </div>
 
+      
+
       <div className="group-open-v" data-headlessui-state="open">
         <button
           onClick={() => setActiveDropdownIndex(!activeDropdownIndex)}
           className="group-ui-open dropdown--up"
           type="button"
           id="profile_btn"
-        >
+        >   
           <div className="relative flex">
             <span>{userData?.email}</span>
           </div>
