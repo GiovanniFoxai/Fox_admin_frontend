@@ -1097,6 +1097,9 @@ button#open_drop_down_btn {
 .m-text {
     width: 100%;
 }
+.error{
+    color: red;
+}
 
 .fied-p textarea {
     height: 57.6px !important;

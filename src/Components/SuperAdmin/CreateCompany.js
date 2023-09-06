@@ -5,6 +5,9 @@ import IsLoadingHOC from "../IsLoadingHOC";
 
 const CreateCompany = (props) => {
   const { setLoading, isLoading } = props;
+
+
+
   const [data, setdata] = useState({
     name: "",
     address: "",
@@ -22,12 +25,17 @@ const CreateCompany = (props) => {
     e.preventDefault();
 
     const payload = data;
-    setLoading(true);
+   
 
     await authAxios()
       .post(`/company/create`, payload)
       .then((response) => {
         if (response.data.status == 1) {
+          setdata((prev)=>({
+            ...prev,
+            name:"",
+            address:"",
+          }))
           setLoading(false);
           toast.success(response.data.message);
         } else {
@@ -40,7 +48,11 @@ const CreateCompany = (props) => {
 
         toast.error(error.response.data.message);
       });
+
+    
   };
+
+  
   return (
     <Fragment>
       <div className="dash-bar">
@@ -68,14 +80,15 @@ const CreateCompany = (props) => {
               Company Address
             </label>
             <textarea
+               
               type="text"
               required
               className="form-textarea"
               name="address"
               onChange={handleChange}
-              form="address"
               value={data.address}
-            ></textarea>
+             
+            />
 
             <input className="form-submit" type="submit" value="Submit" />
           </form>

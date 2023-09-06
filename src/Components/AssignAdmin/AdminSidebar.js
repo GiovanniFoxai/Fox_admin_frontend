@@ -3,11 +3,15 @@ import DashboardIcon from "../../assets/image/dashboard.png";
 import DropDwonIcon from "../../assets/image/down-arrow.png";
 import Createcompany from "../../assets/image/create.png";
 import Logo from "../../assets/image/dashbordlogo.png";
-import { BrowserRouter as Router, Link, Route, Routes } from "react-router-dom";
+import { BrowserRouter as Router, Link, Route, Routes, useNavigate } from "react-router-dom";
+import Logout from "../../assets/image/logout.png";
 
 import Home from "./index";
 import CareteCompany from "./CareteCompany";
 import ViewCompany from "./ViewCompany";
+import { logout } from "../../Redux/Reducers/authSlice";
+import { useDispatch } from "react-redux";
+import { toast } from "react-toastify";
 
 const AdminSidebar = () => {
   const [toggleSidebar, setToggleSidebar] = useState(false);
@@ -16,7 +20,9 @@ const AdminSidebar = () => {
   };
 
   const [activeItem, setActiveItem] = useState("home");
-
+   
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
   const handleItemClick = (item) => {
     setActiveItem(item);
   };
@@ -36,6 +42,13 @@ const AdminSidebar = () => {
       window.removeEventListener("resize", actualWidth);
     };
   });
+
+  const logoutHandler = () => {
+    dispatch({ type: "auth/logout" });
+    dispatch(logout())
+    navigate('/auth/login')
+    toast.success("Logout successfully")
+  };
 
   useEffect(() => {
     if (windowScreenWidth < 767) {
@@ -137,6 +150,12 @@ const AdminSidebar = () => {
                 </li>
               </ul>
             </li>
+            <li>
+              <button className="sidebar--log" onClick={logoutHandler}>
+                <img src={Logout}   alt="logout" className="icon--nav" /> Logout
+              </button>
+            </li>
+            
 
             {/*
                         <li>

@@ -51,7 +51,7 @@ const AdminCareteUser = (props) => {
         (response) => {
           setLoading(false);
           if (response.data.status === 1) {
-            toast.success("User Created SucessFully");
+            toast.success("User Created Successfully");
             console.log("sds", response.data);
 
             setdata({

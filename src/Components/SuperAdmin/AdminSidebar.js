@@ -4,7 +4,10 @@ import DropDwonIcon from "../../assets/image/down-arrow.png";
 import Createcompany from "../../assets/image/create.png";
 import Logo from "../../assets/image/dashbordlogo.png";
 import Logout from "../../assets/image/logout.png";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { logout } from "../../Redux/Reducers/authSlice";
+import { toast } from "react-toastify";
 
 const AdminSidebar = () => {
   const [toggleSidebar, setToggleSidebar] = useState(false);
@@ -13,6 +16,16 @@ const AdminSidebar = () => {
   };
 
   const [activeItem, setActiveItem] = useState("home");
+
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+  const logoutHandler = () => {
+    dispatch({ type: "auth/logout" });
+    dispatch(logout())
+    navigate('/auth/login')
+    toast.success("Logout successfully")
+  };
 
   const handleItemClick = (item) => {
     setActiveItem(item);
@@ -129,18 +142,15 @@ const AdminSidebar = () => {
                   <Link to="/admin/add">Add Admin</Link>
                 </li>
                 <li>
-                  <Link to="/admin">View Admins</Link>
+                  <Link to="/admin"> Admin List</Link>
                 </li>
               </ul>
             </li>
             <li>
-                  <button className="sidebar--log">
-                    <img
-                    src={Logout}
-                    alt="logout"
-                    className="icon--nav"
-                  /> Logout</button>
-                </li>
+              <button className="sidebar--log" onClick={logoutHandler} >
+                <img  src={Logout}  alt="logout" className="icon--nav" /> Logout
+              </button>
+            </li>
             {/*
                         <li className="dropdown--item--dashborad">
                             <Link
