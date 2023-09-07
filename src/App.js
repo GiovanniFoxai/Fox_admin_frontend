@@ -23,6 +23,7 @@ import Home from "./Components/Home";
 import { AuthProvide } from "./context/auth.context.provider";
 import AdminCareteUser from "./Components/AssignAdmin/AdminCareteUser";
 import AddModal from "./Components/AssignAdmin/AddModal";
+import CompanyForm from "./Components/CompanyForm";
 
 function App() {
     const user = useSelector(getUser);
@@ -111,6 +112,10 @@ function App() {
             path: "/",
             element: getLayout(user.user_type),
             children: getUserRoute(user.user_type),
+        },
+        {
+            path:"/company-form",
+            element :<CompanyForm/>
         },
         {
             path: "*",

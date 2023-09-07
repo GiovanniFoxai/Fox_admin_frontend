@@ -116,6 +116,13 @@ const Login = (props) => {
                 {" "}
                 Forgot Password?
               </Link>
+
+              <Link to="/company-form" >
+                {" "}
+                Company Form
+              </Link>
+
+
               <div className="continue-next">
                 <button
                   aria-label="Sign in"
@@ -126,6 +133,8 @@ const Login = (props) => {
                   Continue
                 </button>
               </div>
+
+             
             </div>
           </form>
         {/*  <p className="sign-up">
