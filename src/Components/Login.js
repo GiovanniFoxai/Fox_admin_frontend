@@ -6,8 +6,8 @@ import { setAccessToken, setuser } from "../Redux/Reducers/authSlice";
 import { useDispatch } from "react-redux";
 import IsLoadingHOC from "./IsLoadingHOC";
 import { minUserPasswordLength } from "../Helper/constants";
-import { useFormik } from "formik";
-import * as Yup from "yup";
+import AdminLogo from "../assets/image/logo.png";
+import company from "../assets/image/company.png";
 const Login = (props) => {
   const { setLoading, isLoading } = props;
   const token = localStorage.getItem("token");
@@ -67,7 +67,9 @@ const Login = (props) => {
     <>
       <section className="login-main">
         <div className="login-page">
-          <h1>Welcome Back</h1>
+          <h1 >Welcome Back</h1>
+          <img src={AdminLogo} style={{ width: 50,marginLeft:"120px" }} alt="  Admin logo" />
+
           <form
             onSubmit={handleSubmit}
             className=""
@@ -116,10 +118,11 @@ const Login = (props) => {
                 {" "}
                 Forgot Password?
               </Link>
-
-              <Link to="/company-form" >
+             
+            <Link to="/company-form" >
                 {" "}
-                Company Form
+                <img src={company} style={{ width: 50, marginLeft:"20px"}} alt="  Admin logo" />
+
               </Link>
 
 

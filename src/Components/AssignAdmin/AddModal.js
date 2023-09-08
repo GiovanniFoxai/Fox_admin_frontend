@@ -112,7 +112,7 @@ const AddModal = (props) => {
           <input
             type="file"
             //accept=".csv,.doc,.pdf"
-            required
+            
             className="form-input"
             name="model_file"
             onChange={handleFileChange}
@@ -125,7 +125,7 @@ const AddModal = (props) => {
             className="form-input"
             type="text"
             id="fname"
-            required
+           
             value={data.description}
             name="description"
             onChange={handleChange}
