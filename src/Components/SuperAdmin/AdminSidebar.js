@@ -109,9 +109,10 @@ const AdminSidebar = () => {
                 </span>
               </span>
               <ul className="sub-menu">
-                <li>
+               {/* <li>
                   <Link to="/compaies/create">Add Company</Link>
                 </li>
+                */}
                 <li>
                   <Link to="/compaies">View Companies</Link>
                 </li>
@@ -138,9 +139,11 @@ const AdminSidebar = () => {
                 </span>
               </span>
               <ul className="sub-menu">
+                {/*
                 <li>
                   <Link to="/admin/add">Add Admin</Link>
                 </li>
+              */}
                 <li>
                   <Link to="/admin"> Admin List</Link>
                 </li>

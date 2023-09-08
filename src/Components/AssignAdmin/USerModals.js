@@ -16,18 +16,15 @@ const Modals = (props) => {
   useEffect(() => {
     fetchMoalList();
   }, [currentPage, postsPerPage]);
- 
-  
-  const fetchMoalList = async () => {
 
-    setLoading(true)
+  const fetchMoalList = async () => {
+    setLoading(true);
     await authAxios()
       .get(`/model/list?page=${currentPage}&limit=${postsPerPage}`)
       .then(
-        (response) => { 
-           console.log(response.data)
-            setTotalPages(response.data.data.totalPages)
-            setTotalPost(response.data.data.totalCount)
+        (response) => {
+          setTotalPages(response.data.data.totalPages);
+          setTotalPost(response.data.data.totalCount);
           if (response.data.status === 1) {
             setLoading(false);
 
@@ -49,29 +46,27 @@ const Modals = (props) => {
       });
   };
 
-
-  const handleDelete = async(e) => {
-    const modelId=e
+  const handleDelete = async (e) => {
+    const modelId = e;
     console.log(e);
     await authAxios()
-    .delete(`/model/${modelId}`)
-    .then((response)=>{
-      setCurrentPage(1)
-      toast.success(response.data.message)
-      fetchMoalList()
-  
-    }).catch((error)=>{
-      console.log(error)
-    })
-    
+      .delete(`/model/${modelId}`)
+      .then((response) => {
+        setCurrentPage(1);
+        toast.success(response.data.message);
+        fetchMoalList();
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   };
 
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
-  const handleRowChange=(e)=>{ 
-    setPostsPerPage(e.target.value)
-    setCurrentPage(1)
-  } 
+  const handleRowChange = (e) => {
+    setPostsPerPage(e.target.value);
+    setCurrentPage(1);
+  };
 
   return (
     <Fragment>
@@ -81,9 +76,9 @@ const Modals = (props) => {
         </div>
       </div>
 
-      {ModelList.length>0&&(
-<>
-{/*
+      {ModelList.length > 0 && (
+        <>
+          {/*
       <select onChange={handleRowChange} >
         <option value="5" >5</option>
         <option value="2" >2</option>
@@ -93,89 +88,88 @@ const Modals = (props) => {
       </select>
       */}
 
-<div className="view-company-section">
-        <div className="view-company-table">
-          <table className="view-table">
-            <thead className="table-head">
-              <tr>
-                <th className="table-heading sr-number">ID</th>
-                <th className="table-heading">Name</th>
-                <th className="table-heading">Cateogary</th>
-                <th className="table-heading">Company Id</th>
-                <th className="table-heading">Created At</th>
-                <th className="table-heading">Updated At</th>
-                <th className="table-heading">Created By</th>
-                <th className="table-heading" colspan="2">
-                  
-                </th>
-                <th></th>
-              </tr>
-            </thead>
-
-            <tbody className="table-body">
-              {ModelList &&
-                ModelList.length > 0 &&
-                ModelList.map((item) => (
+          <div className="view-company-section">
+            <div className="view-company-table">
+              <table className="view-table">
+                <thead className="table-head">
                   <tr>
-                    <td className="table-data">{item._id.slice(0, 9)}</td>
-                    <td className="table-data">{item.name}</td>
-                    <td className="table-data">{item.category}</td>
-                    <td className="table-data">{item?.user?.company?.name||"-"}</td>
-                    <td className="table-data">{setFormatDate(item.createdAt)}</td>
-                    <td className="table-data">{setFormatDate(item.updatedAt)}</td>
-                    <td className="table-data">{item?.user?.username}</td>
-                    <td className="close-btn-sec">
-                      <button
-                        onClick={() => handleDelete(item._id)}
-                        className="close-btn"
-                      >
-                        Delete
-                      </button>
-                    </td>
+                    <th className="table-heading sr-number">ID</th>
+                    <th className="table-heading">Name</th>
+                    <th className="table-heading">Cateogary</th>
+                    <th className="table-heading">Company Id</th>
+                    <th className="table-heading">Created At</th>
+                    <th className="table-heading">Updated At</th>
+
+                    <th className="table-heading" colspan="2"></th>
                   </tr>
-                ))}
-            </tbody>
-          </table>
+                </thead>
 
-          <nav aria-label="Page navigation example">
-              <ul class="pagination">
-                <li class="page-item">
-                  <button
-                    class="page-link"
-                    disabled={currentPage === 1 ? true : false}
-                    onClick={()=> setCurrentPage(currentPage - 1)}
-                  >
-                    Previous
-                  </button>
-                </li>
-                <li class="page-item">
-                  <Pagination
-                    currentPage={currentPage}
-                    postsPerPage={postsPerPage}
-                    totalPosts={TotalPost}
-                    paginate={paginate}
-                  />{" "}
-                </li>
+                <tbody className="table-body">
+                  {ModelList &&
+                    ModelList.length > 0 &&
+                    ModelList.map((item) => (
+                      <tr>
+                        <td className="table-data">{item._id.slice(0, 9)}</td>
+                        <td className="table-data">{item.name}</td>
+                        <td className="table-data">{item.category}</td>
+                        <td className="table-data">
+                          {item?.user?.company?.name || "-"}
+                        </td>
+                        <td className="table-data">
+                          {setFormatDate(item.createdAt)}
+                        </td>
+                        <td className="table-data">
+                          {setFormatDate(item.updatedAt)}
+                        </td>
+                        <td className="table-data">{item?.user?.username}</td>
+                        <td className="close-btn-sec">
+                          <button
+                            onClick={() => handleDelete(item._id)}
+                            className="close-btn"
+                          >
+                            Delete
+                          </button>
+                        </td>
+                      </tr>
+                    ))}
+                </tbody>
+              </table>
 
-                <li class="page-item">
-                  <button
-                    class="page-link"
-                    disabled={currentPage === TotalPages ? true : false}
-                    onClick={()=> setCurrentPage(currentPage + 1)}
-                  >
-                    NEXT
-                  </button>
-                </li>
-              </ul>
-            </nav>
-        </div>
-      </div>
-</>
+              <nav aria-label="Page navigation example">
+                <ul class="pagination">
+                  <li class="page-item">
+                    <button
+                      class="page-link"
+                      disabled={currentPage === 1 ? true : false}
+                      onClick={() => setCurrentPage(currentPage - 1)}
+                    >
+                      Previous
+                    </button>
+                  </li>
+                  <li class="page-item">
+                    <Pagination
+                      currentPage={currentPage}
+                      postsPerPage={postsPerPage}
+                      totalPosts={TotalPost}
+                      paginate={paginate}
+                    />{" "}
+                  </li>
+
+                  <li class="page-item">
+                    <button
+                      class="page-link"
+                      disabled={currentPage === TotalPages ? true : false}
+                      onClick={() => setCurrentPage(currentPage + 1)}
+                    >
+                      NEXT
+                    </button>
+                  </li>
+                </ul>
+              </nav>
+            </div>
+          </div>
+        </>
       )}
-   
-   
-
-
     </Fragment>
   );
 };

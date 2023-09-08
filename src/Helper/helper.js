@@ -332,5 +332,27 @@ export const countryList = [
   "Zambia",
   "Zimbabwe"
 ];
+export const Modelcategory=[
+  "Technology",
+  "Healthcare",
+  "Finance",
+  "Retail",
+  "Education",
+  "Entertainment",
+  "Real Estate",
+  "Travel and Tourism",
+  "Automotive",
+  "Hospitality",
+  "Food and Beverage",
+  "Marketing and Advertising",
+  "Manufacturing",
+  "Legal",
+  "NonProfit",
+  "Sports and Fitness",
+  "Environmental",
+  "Government and Public Services",
+  "Fashion",
+  "Beauty and Personal Care",
+]
 
   

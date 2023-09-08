@@ -100,8 +100,8 @@ const ViewCompany = (props) => {
                 <th className="table-heading">Number Of Admins</th>
                 <th className="table-heading">Created At</th>
                 <th className="table-heading">Updated At</th>
-                <th className="table-heading" >
-               
+                <th className="table-heading" colSpan="2" >
+                
                 </th>
               </tr>
             </thead>
@@ -116,6 +116,18 @@ const ViewCompany = (props) => {
                     <td className="table-data">{item?.adminCount}</td>
                     <td className="table-data">{setFormatDate(item?.createdAt)}</td>
                     <td className="table-data">{setFormatDate(item?.updatedAt)}</td>
+                    
+                 {/*}   <td className="close-btn-sec">
+                      <button
+                        type="button"
+                        //onClick={() => handleDelete(item._id)}
+                        
+                      >
+                        Edit
+                      </button>
+                    </td>
+                */ }
+
                     <td className="close-btn-sec">
                       <button
                         type="button"

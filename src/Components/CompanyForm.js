@@ -170,7 +170,7 @@ function App(props) {
           <br />
 
           <label className="form-lable" for="fname">
-            Comapny Name
+            Company Name
           </label>
           <input
             className="form-input"
@@ -182,7 +182,7 @@ function App(props) {
           />
 
           <label className="form-lable" for="fname">
-            Comapny Address
+          Company Address
           </label>
           <input
             className="form-input"

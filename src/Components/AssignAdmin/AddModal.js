@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { authAxios } from "../../config/config";
 import { toast } from "react-toastify";
 import IsLoadingHOC from "../IsLoadingHOC";
+import { Modelcategory } from "../../Helper/helper";
 
 const AddModal = (props) => {
   const { setLoading, isLoading } = props;
@@ -95,15 +96,16 @@ const AddModal = (props) => {
           <label className="form-lable" for="fname">
             Category
           </label>
-          <input
-            className="form-input"
-            type="text"
-            id="fname"
-            required
-            value={data.category}
-            name="category"
-            onChange={handleChange}
-          />
+          <select className="form-input" name="category"  onChange={handleChange} >
+            <option value="">Select</option>
+
+             {
+              Modelcategory&&Modelcategory.length>0&&Modelcategory.map((item)=>(
+                <option >{item}</option>
+              ))
+             }
+
+          </select>
 
           <label className="form-lable" for="fname">
             Modal

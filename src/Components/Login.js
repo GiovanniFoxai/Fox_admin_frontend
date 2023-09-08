@@ -67,8 +67,9 @@ const Login = (props) => {
     <>
       <section className="login-main">
         <div className="login-page">
+        <img src={AdminLogo} style={{ width: 50,marginLeft:"120px" }} alt="  Admin logo" />
           <h1 >Welcome Back</h1>
-          <img src={AdminLogo} style={{ width: 50,marginLeft:"120px" }} alt="  Admin logo" />
+         
 
           <form
             onSubmit={handleSubmit}
@@ -119,11 +120,7 @@ const Login = (props) => {
                 Forgot Password?
               </Link>
              
-            <Link to="/company-form" >
-                {" "}
-                <img src={company} style={{ width: 50, marginLeft:"20px"}} alt="  Admin logo" />
-
-              </Link>
+          
 
 
               <div className="continue-next">
@@ -135,7 +132,17 @@ const Login = (props) => {
                 >
                   Continue
                 </button>
-              </div>
+              </div> 
+
+              <br/>
+
+              
+              <Link to="/company-form" >
+                {" "}
+                
+                <img src={company} style={{ width: 50, marginLeft:"120px"}} alt="  Admin logo" />
+
+              </Link>
 
              
             </div>

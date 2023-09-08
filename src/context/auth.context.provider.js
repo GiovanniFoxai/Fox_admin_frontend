@@ -8,7 +8,7 @@ export const AuthContext = createContext({});
 
 export const AuthProvide = ({children}) => {
   const accessToken = useSelector(getAccessToken);
-  console.log("Debugger", accessToken);
+  //console.log("Debugger", accessToken);
 
   const value = useMemo(() => ({}), []);
   if (!accessToken) {
