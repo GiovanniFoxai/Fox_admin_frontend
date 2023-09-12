@@ -21,25 +21,29 @@ const ViewAdmins = (props) => {
   const fetchUsers = async () => {
     setLoading(true);
     await authAxios()
-      .get(`/auth/get-all-users?page=${currentPage}&limit=${postsPerPage}`)
+      .get(`/auth/get-all-us34ers?page=${currentPage}&limit=${postsPerPage}`)
       .then((response) => {
-        console.log(response)
-        setLoading(false);
-        setTotalPost(response.data.data.total);
         if (response.data.status === 1) {
+          setLoading(false);
+          setTotalPost(response.data.data.total);
           setTotalPages(response.data.data.totalPages);
           setUserList(response.data.data.users);
         } else {
+          
+          setLoading(false)
           toast.error(response.data.message);
         }
+      },(error) => {
+        
+        setLoading(false);
+        toast.error(error.response.data.message);
       })
       .catch((error) => {
-        setLoading(true);
-        console.log(error);
+        setLoading(false);
+        toast.error(error.response.data.message)
       });
   };
 
-  console.log("Check Deployment",)
 
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
 

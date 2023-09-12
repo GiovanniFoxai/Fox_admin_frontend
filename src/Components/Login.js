@@ -10,7 +10,6 @@ import AdminLogo from "../assets/image/logo.png";
 import company from "../assets/image/company.png";
 const Login = (props) => {
   const { setLoading, isLoading } = props;
-  const token = localStorage.getItem("token");
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
@@ -19,11 +18,7 @@ const Login = (props) => {
     password: "",
   });
 
-  useEffect(() => {
-    if (token) {
-      navigate("/");
-    }
-  }, []);
+ 
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -50,6 +45,7 @@ const Login = (props) => {
             dispatch(setuser(resData.user));
             navigate("/");
           } else {
+             setLoading(false);
             toast.error(response.data.message);
           }
         },
@@ -59,7 +55,8 @@ const Login = (props) => {
         }
       )
       .catch((error) => {
-        console.log("errorrrr", error);
+         setLoading(false);
+        toast.error(error.response.data.message)
       });
   };
 

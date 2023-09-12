@@ -23,26 +23,25 @@ const Modals = (props) => {
       .get(`/model/list?page=${currentPage}&limit=${postsPerPage}`)
       .then(
         (response) => {
-          setTotalPages(response.data.data.totalPages);
-          setTotalPost(response.data.data.totalCount);
           if (response.data.status === 1) {
             setLoading(false);
+            setTotalPages(response.data.data.totalPages);
+            setTotalPost(response.data.data.totalCount);
 
             setModelList(response.data.data.models);
-            // toast.success(response.data.message);
           } else {
+            setLoading(false);
             toast.error(response.data.message);
           }
         },
         (error) => {
-          setLoading(true);
+          setLoading(false);
           toast.error(error.response.data.message);
-          console.log(error.response.data.message);
         }
       )
       .catch((error) => {
-        setLoading(true);
-        console.log("errorr", error);
+        setLoading(false);
+        toast.error(error.response.data.message);
       });
   };
 
