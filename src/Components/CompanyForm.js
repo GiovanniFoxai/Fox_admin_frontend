@@ -73,8 +73,7 @@ function App(props) {
 
       const payload = data;
       console.log(payload);
-      
-      
+
       setLoading(true);
       await withoutAuthAxios()
         .post("/user/amin-registration", payload)
@@ -108,9 +107,18 @@ function App(props) {
           setLoading(false);
           toast.error(error.response.data.message);
         });
-        
     },
   });
+
+  const personalForm = () => {
+    sethideCompanyForm(false);
+    formik.resetForm();
+  };
+
+  const companyForm = () => {
+    sethideCompanyForm(true);
+    formik.resetForm();
+  };
 
   return (
     <div className="create-company-section">
@@ -130,7 +138,8 @@ function App(props) {
               value="Company"
               id="company"
               checked={hideCompanyForm == true}
-              onClick={() => sethideCompanyForm(true)}
+              onClick={companyForm}
+              //onClick={() => {sethideCompanyForm(true)}}
             />{" "}
             Company
             <input
@@ -139,7 +148,8 @@ function App(props) {
               value="Personal"
               id="personal"
               checked={hideCompanyForm == false}
-              onClick={() => sethideCompanyForm(false)}
+              onClick={personalForm}
+              // onClick={() => sethideCompanyForm(false)}
             />{" "}
             Personal
           </div>
@@ -207,7 +217,7 @@ function App(props) {
                     <label className="form-lable" for="fname">
                       State
                     </label>
-                   {/*   <input
+                    {/*   <input
                       className="form-input"
                       type="text"
                       id="fname"
@@ -216,18 +226,18 @@ function App(props) {
                       onChange={formik.handleChange}
                     />
           */}
-                  <select
-                  onChange={formik.handleChange}
-                  name="company_state"
-                  value={formik.values.company_state}
-                  className="form-input"
-                >
-                  <option value="">Select</option>
+                    <select
+                      onChange={formik.handleChange}
+                      name="company_state"
+                      value={formik.values.company_state}
+                      className="form-input"
+                    >
+                      <option value="">Select</option>
 
-                  {UsaStateList &&
-                    UsaStateList.length > 0 &&
-                    UsaStateList.map((item) => <option>{item}</option>)}
-                </select>
+                      {UsaStateList &&
+                        UsaStateList.length > 0 &&
+                        UsaStateList.map((item) => <option>{item}</option>)}
+                    </select>
                   </div>
                   <div>
                     <label className="form-lable" for="fname">
@@ -276,7 +286,7 @@ function App(props) {
                     name="first_name"
                   />
                   {formik.errors.first_name && formik.touched.first_name && (
-                    <p className="error">{formik.errors.first_name}</p>
+                    <p style={{ color: "black" }}>{formik.errors.first_name}</p>
                   )}
                 </div>
                 <div>
@@ -293,7 +303,7 @@ function App(props) {
                   />
 
                   {formik.errors.last_name && formik.touched.last_name && (
-                    <p className="error">{formik.errors.last_name}</p>
+                    <p style={{ color: "black" }}>{formik.errors.last_name}</p>
                   )}
                 </div>
                 <div>
@@ -315,7 +325,7 @@ function App(props) {
                   />
 
                   {formik.errors.email && formik.touched.email && (
-                    <p className="error">{formik.errors.email}</p>
+                    <p style={{ color: "black" }}>{formik.errors.email}</p>
                   )}
                 </div>
                 <div>
@@ -335,7 +345,7 @@ function App(props) {
                     fdprocessedid="ugqpqh"
                   />
                   {formik.errors.password && formik.touched.password && (
-                    <p className="error">{formik.errors.password}</p>
+                    <p style={{ color: "black" }}>{formik.errors.password}</p>
                   )}
                 </div>
                 <div>
@@ -356,7 +366,9 @@ function App(props) {
                   />
                   {formik.errors.confirm_password &&
                     formik.touched.confirm_password && (
-                      <p className="error">{formik.errors.confirm_password}</p>
+                      <p style={{ color: "black" }}>
+                        {formik.errors.confirm_password}
+                      </p>
                     )}
                 </div>
                 <div>
@@ -372,7 +384,7 @@ function App(props) {
                     onChange={formik.handleChange}
                   />
                   {formik.errors.mobile && formik.touched.mobile && (
-                    <p className="error">{formik.errors.mobile}</p>
+                    <p style={{ color: "black" }}>{formik.errors.mobile}</p>
                   )}
                 </div>
               </div>

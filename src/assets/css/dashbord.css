@@ -526,7 +526,7 @@ ul.pagination-list > li.active {
   flex-direction: column;
 }
 .admin--sec span {
-  color: red;
+  color: black;
 }
 .create-company-form--sec .form-create .form-submit {
   width: fit-content;
