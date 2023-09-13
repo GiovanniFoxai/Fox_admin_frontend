@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { withoutAuthAxios } from "../config/config";
 import { toast } from "react-toastify";
-import { setAccessToken, setuser } from "../Redux/Reducers/authSlice";
+import { setAccessToken, setcompany, setuser } from "../Redux/Reducers/authSlice";
 import { useDispatch } from "react-redux";
 import IsLoadingHOC from "./IsLoadingHOC";
 import { minUserPasswordLength } from "../Helper/constants";
@@ -40,9 +40,11 @@ const Login = (props) => {
           if (response.data.status === 1) {
             setLoading(false);
             const resData = response.data.data;
+            
             toast.success("Logged in Successfully");
             dispatch(setAccessToken(resData.token));
-            dispatch(setuser(resData.user));
+            dispatch(setuser(resData.user.user_type));
+            dispatch(setcompany(resData.user?.company?._id))
             navigate("/");
           } else {
              setLoading(false);

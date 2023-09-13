@@ -2,15 +2,23 @@ import React, { useState, useEffect } from "react";
 import { withoutAuthAxios } from "../config/config";
 import { toast } from "react-toastify";
 import IsLoadingHOC from "./IsLoadingHOC";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useFormik } from "formik";
 import AdminLogo from "../assets/image/logo.png";
 
 import * as Yup from "yup";
-import { countryList } from "../Helper/helper";
+import { UsaStateList, countryList } from "../Helper/helper";
+import {
+  setAccessToken,
+  setcompany,
+  setuser,
+} from "../Redux/Reducers/authSlice";
+import { useDispatch } from "react-redux";
 function App(props) {
   const { setLoading, isLoading } = props;
   const [hideCompanyForm, sethideCompanyForm] = useState(false);
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const formik = useFormik({
     initialValues: {
@@ -25,7 +33,7 @@ function App(props) {
       company_city: "",
       company_zip: "",
       company_state: "",
-      country: "",
+      country: "USA",
     },
     validationSchema: Yup.object({
       first_name: Yup.string()
@@ -49,8 +57,6 @@ function App(props) {
         .required("Required!"),
     }),
     onSubmit: async (values, e) => {
-     
-
       const data = {
         first_name: values.first_name,
         last_name: values.last_name,
@@ -67,7 +73,8 @@ function App(props) {
 
       const payload = data;
       console.log(payload);
-     /*
+      
+      
       setLoading(true);
       await withoutAuthAxios()
         .post("/user/amin-registration", payload)
@@ -75,8 +82,22 @@ function App(props) {
         .then((response) => {
           if (response.data.status === 1) {
             setLoading(false);
-            toast.success(response.data.message);
-            formik.resetForm();
+            const resData = response.data.data;
+            console.log(
+              resData.token,
+              "--",
+              resData.user_type,
+              "---",
+              resData?.company
+            );
+
+            dispatch(setAccessToken(resData.token));
+            dispatch(setuser(resData.user_type));
+            dispatch(setcompany(resData.company));
+
+            navigate("/");
+            // toast.success(response.data.message);
+            //formik.resetForm();
           } else {
             setLoading(false);
             toast.error(response.data.message);
@@ -87,12 +108,9 @@ function App(props) {
           setLoading(false);
           toast.error(error.response.data.message);
         });
-
-        */
+        
     },
   });
-
- 
 
   return (
     <div className="create-company-section">
@@ -128,43 +146,50 @@ function App(props) {
         </div>
         <form onSubmit={formik.handleSubmit} className="form-create">
           <div className="company--create--sec">
-            
-           {
-            hideCompanyForm?<div className="company--form--sec w--50">
-            <h2>Company Form</h2>
-            <div className="form--filds">
-              <div>
-                <label className="form-lable" for="fname">
-                  Company Name
-                </label>
-                <input
-                  className="form-input"
-                  type="text"
-                  id="fname"
-                  value={formik.values.company_name}
-                  name="company_name"
-                  onChange={formik.handleChange}
-                />
-              </div>
-              <div>
-                <label className="form-lable" for="fname">
-                  Company Address
-                </label>
-                <input
-                  className="form-input"
-                  type="text"
-                  id="fname"
-                  value={formik.values.company_address}
-                  name="company_address"
-                  onChange={formik.handleChange}
-                />
-              </div>
-              <div>
-                <label className="form-lable" for="fname">
-                  Select Country
-                </label>
+            {hideCompanyForm ? (
+              <div className="company--form--sec w--50">
+                <div className="form--filds">
+                  <div>
+                    <label className="form-lable" for="fname">
+                      Company Name
+                    </label>
+                    <input
+                      className="form-input"
+                      type="text"
+                      id="fname"
+                      value={formik.values.company_name}
+                      name="company_name"
+                      onChange={formik.handleChange}
+                    />
+                  </div>
+                  <div>
+                    <label className="form-lable" for="fname">
+                      Company Address
+                    </label>
+                    <input
+                      className="form-input"
+                      type="text"
+                      id="fname"
+                      value={formik.values.company_address}
+                      name="company_address"
+                      onChange={formik.handleChange}
+                    />
+                  </div>
+                  <div>
+                    <label className="form-lable" for="fname">
+                      Select Country
+                    </label>
 
-                <select
+                    <select
+                      onChange={formik.handleChange}
+                      name="country"
+                      value={formik.values.country}
+                      className="form-input"
+                    >
+                      <option value="USA">USA</option>
+                    </select>
+
+                    {/*    <select
                   onChange={formik.handleChange}
                   name="country"
                   value={formik.values.country}
@@ -176,52 +201,67 @@ function App(props) {
                     countryList.length > 0 &&
                     countryList.map((item) => <option>{item}</option>)}
                 </select>
-              </div>
-              <div>
-                <label className="form-lable" for="fname">
-                  State
-                </label>
-                <input
-                  className="form-input"
-                  type="text"
-                  id="fname"
-                  value={formik.values.company_state}
+           */}
+                  </div>
+                  <div>
+                    <label className="form-lable" for="fname">
+                      State
+                    </label>
+                   {/*   <input
+                      className="form-input"
+                      type="text"
+                      id="fname"
+                      value={formik.values.company_state}
+                      name="company_state"
+                      onChange={formik.handleChange}
+                    />
+          */}
+                  <select
+                  onChange={formik.handleChange}
                   name="company_state"
-                  onChange={formik.handleChange}
-                />
-              </div>
-              <div>
-                <label className="form-lable" for="fname">
-                  City
-                </label>
-                <input
+                  value={formik.values.company_state}
                   className="form-input"
-                  type="text"
-                  id="fname"
-                  value={formik.values.company_city}
-                  name="company_city"
-                  onChange={formik.handleChange}
-                />
+                >
+                  <option value="">Select</option>
+
+                  {UsaStateList &&
+                    UsaStateList.length > 0 &&
+                    UsaStateList.map((item) => <option>{item}</option>)}
+                </select>
+                  </div>
+                  <div>
+                    <label className="form-lable" for="fname">
+                      City
+                    </label>
+                    <input
+                      className="form-input"
+                      type="text"
+                      id="fname"
+                      value={formik.values.company_city}
+                      name="company_city"
+                      onChange={formik.handleChange}
+                    />
+                  </div>
+                  <div>
+                    <label className="form-lable" for="fname">
+                      Zip Code
+                    </label>
+                    <input
+                      className="form-input"
+                      type="text"
+                      id="fname"
+                      value={formik.values.company_zip}
+                      name="company_zip"
+                      onChange={formik.handleChange}
+                    />
+                  </div>
+                </div>
               </div>
-              <div>
-                <label className="form-lable" for="fname">
-                  Zip Code
-                </label>
-                <input
-                  className="form-input"
-                  type="number"
-                  id="fname"
-                  value={formik.values.company_zip}
-                  name="company_zip"
-                  onChange={formik.handleChange}
-                />
-              </div>
-            </div>
-          </div>:<></>
-           } 
+            ) : (
+              <></>
+            )}
 
             <div className="admin--detals--sec w--50">
-              <h2>Admin Details </h2>
               <div className="admin--sec">
                 <div>
                   <label className="form-lable" for="fname">

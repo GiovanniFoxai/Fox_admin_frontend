@@ -110,8 +110,8 @@ function App() {
         },
         {
             path: "/",
-            element: getLayout(user.user_type),
-            children: getUserRoute(user.user_type),
+            element: getLayout(user),
+            children: getUserRoute(user),
         },
         {
             path:"/company-form",

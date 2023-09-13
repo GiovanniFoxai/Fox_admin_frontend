@@ -10,10 +10,12 @@ import Home from "./index";
 import CareteCompany from "./CareteCompany";
 import ViewCompany from "./ViewCompany";
 import { logout } from "../../Redux/Reducers/authSlice";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { toast } from "react-toastify";
 
 const AdminSidebar = () => {
+
+  const Companyid = useSelector((state) => state.auth?.company);
   const [toggleSidebar, setToggleSidebar] = useState(false);
   const toggleBar = () => {
     setToggleSidebar(!toggleSidebar);
@@ -92,8 +94,8 @@ const AdminSidebar = () => {
               </Link>
               {/* <a href="/" className={activeItem === 'home' ? 'active--nav' : ''} onClick={() => handleItemClick('home')}><img src={DashboardIcon} alt="Hamburger" className='icon--nav' />  <span className='hide--toggle--slide'>Dashboard</span></a> */}
             </li>
-
-            <li className="dropdown--item--dashborad">
+          
+          {Companyid? <li className="dropdown--item--dashborad">
               <span
                 className={`drop--link ${
                   activeItem === "createcompany" ? "active--nav" : ""
@@ -120,7 +122,8 @@ const AdminSidebar = () => {
                   <Link to="/view-users">View User</Link>
                 </li>
               </ul>
-            </li>
+            </li>  : <></> }
+           
 
             <li className="dropdown--item--dashborad">
               <span

@@ -19,11 +19,13 @@ const ViewAdmins = (props) => {
   }, [currentPage, postsPerPage]);
 
   const fetchUsers = async () => {
+   
     setLoading(true);
     await authAxios()
-      .get(`/auth/get-all-us34ers?page=${currentPage}&limit=${postsPerPage}`)
+      .get(`/auth/get-all-users?page=${currentPage}&limit=${postsPerPage}`)
       .then((response) => {
         if (response.data.status === 1) {
+          
           setLoading(false);
           setTotalPost(response.data.data.total);
           setTotalPages(response.data.data.totalPages);
@@ -34,11 +36,12 @@ const ViewAdmins = (props) => {
           toast.error(response.data.message);
         }
       },(error) => {
-        
+        console.log(error)
         setLoading(false);
         toast.error(error.response.data.message);
       })
       .catch((error) => {
+        console.log(error)
         setLoading(false);
         toast.error(error.response.data.message)
       });
@@ -129,7 +132,7 @@ const ViewAdmins = (props) => {
                 UserList.map((item, index) => (
                   <tr key={index}>
                     <td className="table-data">{item?._id.slice(0, 9)}</td>
-                    <td className="table-data">{item?.username}</td>
+                    <td className="table-data">{item?.first_name} {item?.last_name}</td>
                     <td className="table-data">{item?.email}</td>
                     <td className="table-data">{item?.company?.name ||"-" }</td>
                     <td className="table-data">

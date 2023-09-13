@@ -9,67 +9,8 @@ import { useFormik } from "formik";
 
 const AdminCareteUser = (props) => {
   const { setLoading, isLoading } = props;
-  const Companyid = useSelector((state) => state.auth.user?.company?._id);
-  const [data, setdata] = useState({
-    user_type: "USER",
-    username: "",
-    email: "",
-    password: "",
-    mobile: "",
-    company: `${Companyid}`,
-  });
-  /*
+  const Companyid = useSelector((state) => state.auth?.company);
 
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setdata((prev) => ({
-      ...prev,
-      [name]: value,
-    }));
-  };
-  const handleChangePhone = (e) => {
-    const { name, value } = e.target;
-    const sanitizedValue = value.replace(/[^0-9-+]/g, ""); // Remove non-numeric, non-hyphen, and non-plus characters
-    if (sanitizedValue.match(/^\+?[0-9-]*$/)) {
-      setdata((prev) => ({
-        ...prev,
-        [name]: sanitizedValue,
-      }));
-    }
-  };
-
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-
-    const payload = data;
-
-    setLoading(true);
-    await authAxios()
-      .post("/user/create", payload)
-
-      .then(
-        (response) => {
-          setLoading(false);
-          if (response.data.status === 1) {
-            toast.success("User Created Successfully");
-          } else {
-            toast.error(response.data.message);
-          }
-        },
-        (error) => {
-          setLoading(false);
-
-          if (error.response.data.message === "ValidationError") {
-            toast.error("Company is Deleted You cannot Assign to the user ");
-          } else {
-            toast.error(error.response.data.message);
-          }
-        }
-      )
-      .catch((error) => {
-        console.log("errorrrr", error);
-      });
-  };*/
 
   const formik = useFormik({
     initialValues: {
@@ -79,7 +20,8 @@ const AdminCareteUser = (props) => {
       password: "",
       confirm_password: "",
       mobile: "",
-      company: `${Companyid}`,
+      company: "",
+     // user_type: "USER",
     },
     validationSchema: Yup.object({
       first_name: Yup.string()
@@ -109,11 +51,18 @@ const AdminCareteUser = (props) => {
         email: values.email,
         password: values.password,
         mobile: values.mobile,
-        company: values.company,
+        company: Companyid,
+       // user_type:values.user_type
+        
+       
       };
 
       const payload = data;
+      
       console.log(payload);
+
+    
+
       setLoading(true);
       await authAxios()
         .post("/user/create", payload)
@@ -123,7 +72,9 @@ const AdminCareteUser = (props) => {
             if (response.data.status === 1) {
               setLoading(false);
               toast.success(response.data.message);
+              formik.resetForm()
             } else {
+              setLoading(false);
               toast.error(response.data.message);
             }
           },
@@ -133,6 +84,7 @@ const AdminCareteUser = (props) => {
           }
         )
         .catch((error) => {
+          setLoading(false);
           console.log("errorrrr", error);
         });
       /*
