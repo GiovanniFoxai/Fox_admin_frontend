@@ -538,7 +538,13 @@ ul.pagination-list > li.active {
   font-weight: 600;
   color: #000;
 }
+@media(max-width:1250px){
+  .view-company-table {
+    padding: clamp(15px,4vw,50px);
+    overflow-x: scroll;
 
+}
+}
 @media (min-width: 768px) {
   .sidebar--log {
     display: none;
