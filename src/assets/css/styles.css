@@ -10,7 +10,9 @@
 body {
     font-family: 'Inter', sans-serif;
 }
-
+.Toastify__toast{
+    z-index: 9999;
+}
 .login-main {
     padding: 20px;
     /* display: flex;
