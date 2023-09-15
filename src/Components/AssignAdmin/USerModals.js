@@ -71,7 +71,7 @@ const Modals = (props) => {
     <Fragment>
       <div className="dash-bar">
         <div>
-          <h3>Models</h3>
+          <h3>Modals</h3>
         </div>
       </div>
 

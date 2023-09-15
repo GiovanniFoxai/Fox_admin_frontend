@@ -24,7 +24,6 @@ a {
 .dashbord-section {
   display: flex;
   flex-wrap: nowrap;
-  height: 100vh;
 }
 
 .sidebar--section {
@@ -33,6 +32,8 @@ a {
   max-width: 320px;
   transition: var(--transiction);
   box-shadow: 0px 0px 5px 0px rgb(0 0 0 / 11%);
+  height: 100vh;
+  /* height: -webkit-fill-available; */
 }
 
 .nav-bar-section {
@@ -600,23 +601,28 @@ ul.pagination-list > li.active {
   }
 
   .sidebar--section.toggle--sidebar {
+    transform: translateX(0px);
+    
+  }
+
+  .sidebar--section.toggle--sidebar > .nav-bar-section {
+    display: block;
+  }
+  .sidebar--section.toggle--sidebar > .side-menu > .toggle-menu > img {
+    transform: rotate(90deg);
+  }
+  .sidebar--section.toggle--sidebar--slide {
     transform: translateX(-260px);
     background-color: transparent;
     box-shadow: none;
   }
-
-  .sidebar--section.toggle--sidebar > .nav-bar-section {
+  .sidebar--section.toggle--sidebar--slide > .nav-bar-section {
     display: none;
   }
-  .sidebar--section.toggle--sidebar > .side-menu > .toggle-menu > img {
+  .toggle-menu > img{
     transform: rotate(-90deg);
   }
-  .sidebar--section.toggle--sidebar--slide {
-    transform: translateX(0px);
-  }
-  .sidebar--section.toggle--sidebar--slide > .nav-bar-section {
-    display: block;
-  }
+ 
   .company--create--sec {
     flex-direction: column;
     gap: 20px;

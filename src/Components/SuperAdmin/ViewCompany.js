@@ -75,7 +75,7 @@ const ViewCompany = (props) => {
     <Fragment>
       <div className="dash-bar">
         <div>
-          <h3>View Company</h3>
+          <h3>View Companies</h3>
         </div>
       </div>
 
@@ -97,7 +97,7 @@ const ViewCompany = (props) => {
                 <th className="table-heading sr-number">ID</th>
                 <th className="table-heading">Company Name</th>
                 <th className="table-heading">Number Of Users</th>
-                <th className="table-heading">Number Of Admins</th>
+                <th className="table-heading">Number Of Admin</th>
                 <th className="table-heading">Created At</th>
                 <th className="table-heading">Updated At</th>
                 <th className="table-heading" colSpan="2" >

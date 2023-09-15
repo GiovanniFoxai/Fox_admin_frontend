@@ -39,6 +39,11 @@ const AdminSidebar = () => {
     setWindowScreenWidth(window.innerWidth);
   };
 
+  const sideBarFalse = () => {
+    setToggleSidebar(!toggleSidebar)
+
+  }
+
   useEffect(() => {
     window.addEventListener("resize", actualWidth);
 
@@ -78,7 +83,10 @@ const AdminSidebar = () => {
               <Link
                 to="/"
                 className={activeItem === "home" ? "active--nav" : ""}
-                onClick={() => handleItemClick("home")}
+                onClick={() => {
+                  handleItemClick("home");
+                  sideBarFalse();
+                }}
               >
                 <img
                   src={DashboardIcon}
@@ -114,7 +122,7 @@ const AdminSidebar = () => {
                 </li>
                 */}
                 <li>
-                  <Link to="/compaies">View Companies</Link>
+                  <Link to="/compaies" onClick={sideBarFalse}>Company List</Link>
                 </li>
               </ul>
             </li>
@@ -145,7 +153,7 @@ const AdminSidebar = () => {
                 </li>
               */}
                 <li>
-                  <Link to="/admin"> Admin List</Link>
+                  <Link to="/admin" onClick={sideBarFalse}> Admin List</Link>
                 </li>
               </ul>
             </li>

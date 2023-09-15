@@ -33,6 +33,11 @@ const AdminSidebar = () => {
     window.screen.width
   );
 
+
+  const sideBarFalse = () => {
+    setToggleSidebar(!toggleSidebar)
+  }
+
   const actualWidth = () => {
     setWindowScreenWidth(window.innerWidth);
   };
@@ -83,7 +88,10 @@ const AdminSidebar = () => {
               <Link
                 to="/"
                 className={activeItem === "home" ? "active--nav" : ""}
-                onClick={() => handleItemClick("home")}
+                onClick={() => {
+                  handleItemClick("home");
+                  sideBarFalse();
+                }}
               >
                 <img
                   src={DashboardIcon}
@@ -116,10 +124,10 @@ const AdminSidebar = () => {
               </span>
               <ul className="sub-menu">
                 <li>
-                  <Link to="/add-user">Add User</Link>
+                  <Link to="/add-user" onClick={sideBarFalse}>Add User</Link>
                 </li>
                 <li>
-                  <Link to="/view-users">View User</Link>
+                  <Link to="/view-users" onClick={sideBarFalse}>View User</Link>
                 </li>
               </ul>
             </li>  : <></> }
@@ -146,10 +154,10 @@ const AdminSidebar = () => {
               </span>
               <ul className="sub-menu">
                 <li>
-                  <Link to="/add-modal">Add Modal</Link>
+                  <Link to="/add-modal" onClick={sideBarFalse}>Add Modal</Link>
                 </li>
                 <li>
-                  <Link to="/view-modal">View Modal</Link>
+                  <Link to="/view-modal" onClick={sideBarFalse}>View Modal</Link>
                 </li>
               </ul>
             </li>

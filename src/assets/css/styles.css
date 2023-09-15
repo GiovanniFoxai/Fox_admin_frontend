@@ -13,11 +13,16 @@ body {
 
 .login-main {
     padding: 20px;
-    display: flex;
+    /* display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     height: 100vh;
+    height: -webkit-fill-available; */
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
 }
 
 .brand--logo>img {
