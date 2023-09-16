@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import { authAxios } from "../../config/config";
 import { toast } from "react-toastify";
 import IsLoadingHOC from "../IsLoadingHOC";
@@ -6,6 +6,8 @@ import { Modelcategory } from "../../Helper/helper";
 
 const AddModal = (props) => {
   const { setLoading, isLoading } = props;
+  const fileInputRef = useRef(null);
+
   const [data, setdata] = useState({
     name: "",
     description: "",
@@ -53,13 +55,16 @@ const AddModal = (props) => {
           if (response.data.status === 1) {
             setLoading(false);
             toast.success(response.data.message);
-            setdata((prev)=>({
+            if (fileInputRef.current) {
+              fileInputRef.current.value = null;
+            }
+            setdata((prev) => ({
               ...prev,
-              name:"",
-              model_file:"",
-              category:"",
-              description:"",
-            }))
+              name: "",
+              model_file: null,
+              category: "",
+              description: "",
+            }));
           } else {
             toast.error(response.data.message);
           }
@@ -96,15 +101,17 @@ const AddModal = (props) => {
           <label className="form-lable" for="fname">
             Category
           </label>
-          <select className="form-input" name="category"  onChange={handleChange} >
+          <select
+            className="form-input"
+            name="category"
+            onChange={handleChange}
+            value={data.category}
+          >
             <option value="">Select</option>
 
-             {
-              Modelcategory&&Modelcategory.length>0&&Modelcategory.map((item)=>(
-                <option >{item}</option>
-              ))
-             }
-
+            {Modelcategory &&
+              Modelcategory.length > 0 &&
+              Modelcategory.map((item) => <option>{item}</option>)}
           </select>
 
           <label className="form-lable" for="fname">
@@ -113,8 +120,8 @@ const AddModal = (props) => {
 
           <input
             type="file"
-            //accept=".csv,.doc,.pdf"
-            
+            accept=".csv,.doc,.pdf,.xls,.docx,.xlsx"
+            ref={fileInputRef}
             className="form-input"
             name="model_file"
             onChange={handleFileChange}
@@ -127,7 +134,6 @@ const AddModal = (props) => {
             className="form-input"
             type="text"
             id="fname"
-           
             value={data.description}
             name="description"
             onChange={handleChange}
