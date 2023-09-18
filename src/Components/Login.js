@@ -123,10 +123,11 @@ const Login = (props) => {
                   {/* <label for="password" className=" ">Password</label> */}
                 </div>
               </div>
+              {/*  
               <Link to="/auth/forget_password" className="forget-s">
                 {" "}
                 Forgot Password?
-              </Link>
+              </Link>*/}
 
               <div className="continue-next">
                 <button
