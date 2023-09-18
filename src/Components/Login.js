@@ -2,7 +2,11 @@ import React, { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { withoutAuthAxios } from "../config/config";
 import { toast } from "react-toastify";
-import { setAccessToken, setcompany, setuser } from "../Redux/Reducers/authSlice";
+import {
+  setAccessToken,
+  setcompany,
+  setuser,
+} from "../Redux/Reducers/authSlice";
 import { useDispatch } from "react-redux";
 import IsLoadingHOC from "./IsLoadingHOC";
 import { minUserPasswordLength } from "../Helper/constants";
@@ -17,8 +21,6 @@ const Login = (props) => {
     email: "",
     password: "",
   });
-
- 
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -36,29 +38,33 @@ const Login = (props) => {
       .post("/auth/login", payload)
       .then(
         (response) => {
-         
           if (response.data.status === 1) {
             setLoading(false);
             const resData = response.data.data;
-            
-            toast.success("Logged in Successfully");
-            dispatch(setAccessToken(resData.token));
-            dispatch(setuser(resData.user.user_type));
-            dispatch(setcompany(resData.user?.company?._id))
-            navigate("/");
+            if (resData.user.user_type == "USER") {
+              toast.error("You don't have authorization access");
+            } else {
+              toast.success("Logged in Successfully");
+              dispatch(setAccessToken(resData.token));
+              dispatch(setuser(resData.user.user_type));
+              dispatch(setcompany(resData.user?.company?._id));
+              navigate("/");
+            }
           } else {
-             setLoading(false);
+            console.log(response);
+            setLoading(false);
             toast.error(response.data.message);
           }
         },
         (error) => {
           setLoading(false);
+          console.log(error);
           toast.error(error.response.data.message);
         }
       )
       .catch((error) => {
-         setLoading(false);
-        toast.error(error.response.data.message)
+        setLoading(false);
+        toast.error(error.response.data.message);
       });
   };
 
@@ -66,9 +72,12 @@ const Login = (props) => {
     <>
       <section className="login-main">
         <div className="login-page">
-        <img src={AdminLogo} style={{ width: 50,marginLeft:"120px" }} alt="  Admin logo" />
-          <h1 >Welcome Back</h1>
-         
+          <img
+            src={AdminLogo}
+            style={{ width: 50, marginLeft: "120px" }}
+            alt="  Admin logo"
+          />
+          <h1>Welcome Back</h1>
 
           <form
             onSubmit={handleSubmit}
@@ -118,9 +127,6 @@ const Login = (props) => {
                 {" "}
                 Forgot Password?
               </Link>
-             
-          
-
 
               <div className="continue-next">
                 <button
@@ -131,22 +137,21 @@ const Login = (props) => {
                 >
                   Continue
                 </button>
-              </div> 
+              </div>
 
-              <br/>
+              <br />
 
-              
-              <Link to="/company-form" >
+              <Link to="/company-form">
                 {" "}
-                
-                <img src={company} style={{ width: 50, marginLeft:"120px"}} alt="  Admin logo" />
-
+                <img
+                  src={company}
+                  style={{ width: 50, marginLeft: "120px" }}
+                  alt="  Admin logo"
+                />
               </Link>
-
-             
             </div>
           </form>
-        {/*  <p className="sign-up">
+          {/*  <p className="sign-up">
             {" "}
             Don't have an account?<Link to="/auth/signup">Signup</Link>
           </p>
