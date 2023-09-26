@@ -383,8 +383,18 @@ td.table-data {
 
 .close-btn-sec {
   text-align: center;
+  gap: 10px;
+  justify-content: center;
+  display: flex;
 }
-
+.Edit--btn{
+  background: green;
+  border: none;
+   padding: 5px 10px;
+  color: #fff;
+  border-radius: 5px;
+  }
+  
 button.close-btn {
   background: red;
   border: none;

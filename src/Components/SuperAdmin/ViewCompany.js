@@ -64,12 +64,15 @@ const ViewCompany = (props) => {
       });
   };
 
+  const handleEdit=async(e)=>{
+console.log(e)
+  }
+
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
   const handleRowChange = (e) => {
     setPostsPerPage(e.target.value);
     setCurrentPage(1);
   };
-  console.log(companies)
 
   return (
     <Fragment>
@@ -117,18 +120,14 @@ const ViewCompany = (props) => {
                     <td className="table-data">{setFormatDate(item?.createdAt)}</td>
                     <td className="table-data">{setFormatDate(item?.updatedAt)}</td>
                     
-                 {/*}   <td className="close-btn-sec">
+                    <td className="close-btn-sec">
                       <button
                         type="button"
-                        //onClick={() => handleDelete(item._id)}
-                        
+                        onClick={() => handleEdit(item._id)}
+                        className="Edit--btn"
                       >
                         Edit
                       </button>
-                    </td>
-                */ }
-
-                    <td className="close-btn-sec">
                       <button
                         type="button"
                         onClick={() => handleDelete(item._id)}
@@ -137,6 +136,9 @@ const ViewCompany = (props) => {
                         Delete
                       </button>
                     </td>
+                
+
+                    
                   </tr>
                 ))}
             </tbody>

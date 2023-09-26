@@ -25,7 +25,6 @@ const ViewAdmins = (props) => {
       .get(`/auth/get-all-users?page=${currentPage}&limit=${postsPerPage}&user_type=USER`)
       .then((response) => {
         if (response.data.status === 1) {
-           console.log(response)
           setLoading(false);
           setTotalPost(response.data.data.total);
           setTotalPages(response.data.data.totalPages);
@@ -83,6 +82,7 @@ const ViewAdmins = (props) => {
           <h3>View User</h3>
         </div>
         <div className="bradcrum-section">
+          {/* 
           <ul>
             <li>
               <a href="#"> Dashboard</a>{" "}
@@ -91,6 +91,7 @@ const ViewAdmins = (props) => {
               <a href="#">Users</a>{" "}
             </li>
           </ul>
+ */}
         </div>
       </div> 
      

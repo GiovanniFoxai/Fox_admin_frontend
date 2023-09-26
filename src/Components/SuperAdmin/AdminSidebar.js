@@ -110,7 +110,7 @@ const AdminSidebar = () => {
                     alt="careate company logo"
                     className="icon--nav"
                   />
-                  <span className="hide--toggle--slide">Create Company</span>
+                  <span className="hide--toggle--slide">Manage Company</span>
                 </span>
                 <span className="nav-section-arrow hide--toggle--slide">
                   <img src={DropDwonIcon} alt="DropDwonIcon" />
@@ -140,7 +140,7 @@ const AdminSidebar = () => {
                     alt="careate company logo"
                     className="icon--nav"
                   />
-                  <span className="hide--toggle--slide">Admin</span>
+                  <span className="hide--toggle--slide">Manage Admin</span>
                 </span>
                 <span className="nav-section-arrow hide--toggle--slide">
                   <img src={DropDwonIcon} alt="DropDwonIcon" />

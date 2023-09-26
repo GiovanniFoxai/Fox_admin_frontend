@@ -116,7 +116,7 @@ const AdminSidebar = () => {
                     alt="careate company logo"
                     className="icon--nav"
                   />
-                  <span className="hide--toggle--slide">Create User</span>
+                  <span className="hide--toggle--slide">Manage User</span>
                 </span>
                 <span className="nav-section-arrow hide--toggle--slide">
                   <img src={DropDwonIcon} alt="DropDwonIcon" />
@@ -146,7 +146,7 @@ const AdminSidebar = () => {
                     alt="Hamburger"
                     className="icon--nav"
                   />{" "}
-                  <span className="hide--toggle--slide">Create Modal</span>
+                  <span className="hide--toggle--slide">Manage Model</span>
                 </span>
                 <span className="nav-section-arrow hide--toggle--slide">
                   <img src={DashboardIcon} alt="DashboardIcon" />
@@ -154,10 +154,10 @@ const AdminSidebar = () => {
               </span>
               <ul className="sub-menu">
                 <li>
-                  <Link to="/add-modal" onClick={sideBarFalse}>Add Modal</Link>
+                  <Link to="/add-modal" onClick={sideBarFalse}>Add Model</Link>
                 </li>
                 <li>
-                  <Link to="/view-modal" onClick={sideBarFalse}>View Modal</Link>
+                  <Link to="/view-modal" onClick={sideBarFalse}>View Model</Link>
                 </li>
               </ul>
             </li>

@@ -84,7 +84,7 @@ const ViewAdmins = (props) => {
           <h3>View Admins</h3>
         </div>
         <div className="bradcrum-section">
-          <ul>
+        {/*  <ul>
             <li>
               <Link to="/"> Dashboard</Link>{" "}
             </li>
@@ -92,6 +92,7 @@ const ViewAdmins = (props) => {
               <Link href="/">Users</Link>{" "}
             </li>
           </ul>
+          */}
         </div>
       </div>
 
