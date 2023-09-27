@@ -53,7 +53,7 @@ const ViewCompany = (props) => {
         console.log(response.data);
         setLoading(false);
         if (response.data.status === 1) {
-          toast.success("Compnay Deleted Successfully");
+          toast.success("Company Deleted Successfully");
           FetchCompany();
           setCurrentPage(1);
         } else {

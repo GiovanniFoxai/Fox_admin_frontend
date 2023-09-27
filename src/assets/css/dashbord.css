@@ -433,6 +433,7 @@ td.table-data {
   gap: 10px;
   justify-content: center;
   display: flex;
+  padding: 10px 15px;
 }
 .Edit--btn{
   background: green;
@@ -440,6 +441,7 @@ td.table-data {
    padding: 5px 10px;
   color: #fff;
   border-radius: 5px;
+  
   }
   
 button.close-btn {

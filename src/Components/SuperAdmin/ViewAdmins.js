@@ -147,7 +147,7 @@ const ViewAdmins = (props) => {
 
                     </td>
               */}
-                    <td>
+                    <td className="close-btn-sec">
                       {" "}
                       <button
                         onClick={() => handleDelete(item._id)}
