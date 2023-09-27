@@ -110,7 +110,7 @@ const AdminSidebar = () => {
                     alt="careate company logo"
                     className="icon--nav"
                   />
-                  <span className="hide--toggle--slide">Manage Company</span>
+                  <span className="hide--toggle--slide">Manage Companies</span>
                 </span>
                 <span className="nav-section-arrow hide--toggle--slide">
                   <img src={DropDwonIcon} alt="DropDwonIcon" />

@@ -7,19 +7,21 @@ import IsLoadingHOC from "../IsLoadingHOC";
 import { authAxios } from "../../config/config";
 import Pagination from "../../Common/Pagination";
 import { setFormatDate } from "../../Helper/helper";
+import CompanyPop from "./CompanyPop";
 
 const ViewCompany = (props) => {
   const { setLoading } = props;
-
+  const [show, setShow] = useState(false);
   const [companies, setcompanies] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [postsPerPage, setPostsPerPage] = useState(5);
   const [TotalPost, setTotalPost] = useState(0);
   const [TotalPages, setTotalPages] = useState(0);
+  const [testDetails, settestDetails] = useState([])
 
   useEffect(() => {
     FetchCompany();
-  }, [currentPage, postsPerPage]);
+  }, [currentPage, postsPerPage,show]);
 
   const FetchCompany = async (e) => {
     setLoading(true);
@@ -65,7 +67,9 @@ const ViewCompany = (props) => {
   };
 
   const handleEdit=async(e)=>{
-console.log(e)
+
+    setShow(true);
+    settestDetails(e)
   }
 
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
@@ -123,7 +127,7 @@ console.log(e)
                     <td className="close-btn-sec">
                       <button
                         type="button"
-                        onClick={() => handleEdit(item._id)}
+                        onClick={() => handleEdit(item)}
                         className="Edit--btn"
                       >
                         Edit
@@ -136,11 +140,15 @@ console.log(e)
                         Delete
                       </button>
                     </td>
+
+                   
                 
 
                     
                   </tr>
                 ))}
+
+<CompanyPop   props={testDetails}  onClose={() => setShow(false)} show={show} />
             </tbody>
           </table>
         </div>

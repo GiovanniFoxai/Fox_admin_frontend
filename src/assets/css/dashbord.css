@@ -68,6 +68,53 @@ img.unactive--logo {
   width: 8px;
 }
 
+.modal-wrapper {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1050;
+  width: 100%;
+  height: 100%;
+  overflow-x: hidden;
+  overflow-y: auto;
+  outline: 0;
+}
+
+.modal {
+  z-index: 100;
+  background: rgba(0,0,0,0.5);
+  position: fixed;
+
+  border-radius: 3px;
+  padding: 2rem;
+  height: 100vh;
+  width: 100vw;
+}
+.modal form.form-create {
+  box-shadow: none;
+}
+.modal-header {
+  display: flex;
+  justify-content: flex-end;
+}
+.modal .create-company-form {
+  position: relative;
+}
+.modal-close-button {
+  font-size: 25px;
+  color: #fff;
+  cursor: pointer;
+  border: none;
+  background: red;
+  height: 30px;
+  width: 30px;
+  position: absolute;
+  right: -10px;
+  top: 39px;
+  border-radius: 50%;
+}
+
+
 .toggle-menu {
   width: 40px;
   aspect-ratio: 1;

@@ -127,7 +127,7 @@ const AdminSidebar = () => {
                   <Link to="/add-user" onClick={sideBarFalse}>Add User</Link>
                 </li>
                 <li>
-                  <Link to="/view-users" onClick={sideBarFalse}>View User</Link>
+                  <Link to="/view-users" onClick={sideBarFalse}>View Users</Link>
                 </li>
               </ul>
             </li>  : <></> }
