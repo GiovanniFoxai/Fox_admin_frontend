@@ -30,9 +30,9 @@ const CompanyPop = ({ props, onClose, show }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     const payload = data;
-    if(name==name&&address==address){
-      onClose()     
-    }else{
+    if(name==data.name&&address==data.address){
+      onClose();
+    }else{    
     await authAxios()
       .post("/company/update", payload)
       .then(
@@ -53,6 +53,7 @@ const CompanyPop = ({ props, onClose, show }) => {
       });
 
     }
+    
   };
 
   if (!show) {
