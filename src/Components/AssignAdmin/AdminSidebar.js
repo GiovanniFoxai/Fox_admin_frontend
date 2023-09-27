@@ -3,7 +3,13 @@ import DashboardIcon from "../../assets/image/dashboard.png";
 import DropDwonIcon from "../../assets/image/down-arrow.png";
 import Createcompany from "../../assets/image/create.png";
 import Logo from "../../assets/image/dashbordlogo.png";
-import { BrowserRouter as Router, Link, Route, Routes, useNavigate } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Link,
+  Route,
+  Routes,
+  useNavigate,
+} from "react-router-dom";
 import Logout from "../../assets/image/logout.png";
 
 import Home from "./index";
@@ -14,7 +20,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { toast } from "react-toastify";
 
 const AdminSidebar = () => {
-
   const Companyid = useSelector((state) => state.auth?.company);
   const [toggleSidebar, setToggleSidebar] = useState(false);
   const toggleBar = () => {
@@ -22,7 +27,7 @@ const AdminSidebar = () => {
   };
 
   const [activeItem, setActiveItem] = useState("home");
-   
+
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const handleItemClick = (item) => {
@@ -33,10 +38,9 @@ const AdminSidebar = () => {
     window.screen.width
   );
 
-
   const sideBarFalse = () => {
-    setToggleSidebar(!toggleSidebar)
-  }
+    setToggleSidebar(!toggleSidebar);
+  };
 
   const actualWidth = () => {
     setWindowScreenWidth(window.innerWidth);
@@ -52,9 +56,9 @@ const AdminSidebar = () => {
 
   const logoutHandler = () => {
     dispatch({ type: "auth/logout" });
-    dispatch(logout())
-    navigate('/auth/login')
-    toast.success("Logout successfully")
+    dispatch(logout());
+    navigate("/auth/login");
+    toast.success("Logout successfully");
   };
 
   useEffect(() => {
@@ -102,36 +106,43 @@ const AdminSidebar = () => {
               </Link>
               {/* <a href="/" className={activeItem === 'home' ? 'active--nav' : ''} onClick={() => handleItemClick('home')}><img src={DashboardIcon} alt="Hamburger" className='icon--nav' />  <span className='hide--toggle--slide'>Dashboard</span></a> */}
             </li>
-          
-          {Companyid? <li className="dropdown--item--dashborad">
-              <span
-                className={`drop--link ${
-                  activeItem === "createcompany" ? "active--nav" : ""
-                }`}
-                onClick={() => handleItemClick("createcompany")}
-              >
-                <span className="drop--list">
-                  <img
-                    src={Createcompany}
-                    alt="careate company logo"
-                    className="icon--nav"
-                  />
-                  <span className="hide--toggle--slide">Manage User</span>
+
+            {Companyid ? (
+              <li className="dropdown--item--dashborad">
+                <span
+                  className={`drop--link ${
+                    activeItem === "createcompany" ? "active--nav" : ""
+                  }`}
+                  onClick={() => handleItemClick("createcompany")}
+                >
+                  <span className="drop--list">
+                    <img
+                      src={Createcompany}
+                      alt="careate company logo"
+                      className="icon--nav"
+                    />
+                    <span className="hide--toggle--slide">Manage User</span>
+                  </span>
+                  <span className="nav-section-arrow hide--toggle--slide">
+                    <img src={DropDwonIcon} alt="DropDwonIcon" />
+                  </span>
                 </span>
-                <span className="nav-section-arrow hide--toggle--slide">
-                  <img src={DropDwonIcon} alt="DropDwonIcon" />
-                </span>
-              </span>
-              <ul className="sub-menu">
-                <li>
-                  <Link to="/add-user" onClick={sideBarFalse}>Add User</Link>
-                </li>
-                <li>
-                  <Link to="/view-users" onClick={sideBarFalse}>View Users</Link>
-                </li>
-              </ul>
-            </li>  : <></> }
-           
+                <ul className="sub-menu">
+                  <li>
+                    <Link to="/add-user" onClick={sideBarFalse}>
+                      Add User
+                    </Link>
+                  </li>
+                  <li>
+                    <Link to="/view-users" onClick={sideBarFalse}>
+                      View Users
+                    </Link>
+                  </li>
+                </ul>
+              </li>
+            ) : (
+              <></>
+            )}
 
             <li className="dropdown--item--dashborad">
               <span
@@ -146,7 +157,7 @@ const AdminSidebar = () => {
                     alt="Hamburger"
                     className="icon--nav"
                   />{" "}
-                  <span className="hide--toggle--slide">Manage Model</span>
+                  <span className="hide--toggle--slide">Manage Models</span>
                 </span>
                 <span className="nav-section-arrow hide--toggle--slide">
                   <img src={DashboardIcon} alt="DashboardIcon" />
@@ -154,19 +165,22 @@ const AdminSidebar = () => {
               </span>
               <ul className="sub-menu">
                 <li>
-                  <Link to="/add-modal" onClick={sideBarFalse}>Add Model</Link>
+                  <Link to="/add-modal" onClick={sideBarFalse}>
+                    Add Models
+                  </Link>
                 </li>
                 <li>
-                  <Link to="/view-modal" onClick={sideBarFalse}>View Model</Link>
+                  <Link to="/view-modal" onClick={sideBarFalse}>
+                    View Models
+                  </Link>
                 </li>
               </ul>
             </li>
             <li>
               <button className="sidebar--log" onClick={logoutHandler}>
-                <img src={Logout}   alt="logout" className="icon--nav" /> Logout
+                <img src={Logout} alt="logout" className="icon--nav" /> Logout
               </button>
             </li>
-            
 
             {/*
                         <li>

@@ -30,6 +30,9 @@ const CompanyPop = ({ props, onClose, show }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     const payload = data;
+    if(name==name&&address==address){
+      onClose()     
+    }else{
     await authAxios()
       .post("/company/update", payload)
       .then(
@@ -48,6 +51,8 @@ const CompanyPop = ({ props, onClose, show }) => {
       .catch((error) => {
         toast.error(error.response.data.message);
       });
+
+    }
   };
 
   if (!show) {
