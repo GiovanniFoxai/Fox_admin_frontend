@@ -10,6 +10,7 @@ import { useFormik } from "formik";
 const AdminCareteUser = (props) => {
   const { setLoading, isLoading } = props;
   const Companyid = useSelector((state) => state.auth?.company);
+  console.log(Companyid)
 
 
   const formik = useFormik({

@@ -5,6 +5,7 @@ import { toast } from "react-toastify";
 import {
   setAccessToken,
   setcompany,
+  setemail,
   setuser,
 } from "../Redux/Reducers/authSlice";
 import { useDispatch } from "react-redux";
@@ -41,8 +42,17 @@ const Login = (props) => {
           if (response.data.status === 1) {
             setLoading(false);
             const resData = response.data.data;
+            console.log(resData)
+            
             if (resData.user.user_type == "USER") {
-              toast.error("You don't have authorization access");
+             toast.success("Logged in Successfully");
+              dispatch(setAccessToken(resData.token));
+              dispatch(setuser(resData.user.user_type));
+              dispatch(setemail(resData.user?.email));
+              dispatch(setcompany(resData.user?.company?.name));
+              
+              navigate("/");
+
             } else {
               toast.success("Logged in Successfully");
               dispatch(setAccessToken(resData.token));
@@ -50,6 +60,7 @@ const Login = (props) => {
               dispatch(setcompany(resData.user?.company?._id));
               navigate("/");
             }
+            
           } else {
             console.log(response);
             setLoading(false);

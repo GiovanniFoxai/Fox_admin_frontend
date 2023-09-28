@@ -5,7 +5,8 @@ const initialState = {
     company:'',
     user_type: '',
     isResetPassword: false,
-    forgotPassEmail : ''
+    forgotPassEmail : '',
+    email: ''
 };
 
 export const authSlice = createSlice({
@@ -27,6 +28,9 @@ export const authSlice = createSlice({
         saveForgotPassEmail: (state, action) => {
             state.forgotPassEmail = action.payload;
         },
+        setemail:(state,action)=>{
+              state.email=action.payload;
+        },
         logout: () => {
             return {...initialState}
         }
@@ -36,6 +40,6 @@ export const authSlice = createSlice({
 export const getAccessToken = (state) => state.auth.token
 export const getUser = (state) => state.auth.user_type
 
-export const { setAccessToken, setResetPassword, setcompany,setuser, logout , saveForgotPassEmail } = authSlice.actions;
+export const { setAccessToken, setResetPassword, setcompany,setuser, logout , saveForgotPassEmail,setemail } = authSlice.actions;
 
 export default authSlice.reducer;
