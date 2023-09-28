@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 
 import { authAxios } from "../../config/config";
-import IsLoadingHOC from "../IsLoadingHOC";
+import IsLoadingHOC from "../../Common/IsLoadingHOC";
 import { toast } from "react-toastify";
 import { setFormatDate } from "../../Helper/helper";
 import Pagination from "../../Common/Pagination";

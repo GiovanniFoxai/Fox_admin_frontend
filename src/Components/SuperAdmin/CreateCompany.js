@@ -1,7 +1,7 @@
 import React, { Fragment, useState, useEffect } from "react";
 import { authAxios } from "../../config/config";
 import { toast } from "react-toastify";
-import IsLoadingHOC from "../IsLoadingHOC";
+import IsLoadingHOC from "../../Common/IsLoadingHOC";
 
 const CreateCompany = (props) => {
   const { setLoading, isLoading } = props;

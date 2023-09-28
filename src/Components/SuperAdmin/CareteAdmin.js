@@ -1,7 +1,7 @@
 import { Fragment, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchCompanyList } from "../../Redux/Actions/companyAction";
-import IsLoadingHOC from "../IsLoadingHOC";
+import IsLoadingHOC from "../../Common/IsLoadingHOC";
 import { toast } from "react-toastify";
 import { companiesList } from "../../Redux/Reducers/companySlice";
 import { useFormik } from "formik";

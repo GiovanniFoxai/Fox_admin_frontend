@@ -1,7 +1,7 @@
 import React, { useState, useRef, useEffect } from "react";
 import { authAxios } from "../../config/config";
 import { toast } from "react-toastify";
-import IsLoadingHOC from "../IsLoadingHOC";
+import IsLoadingHOC from "../../Common/IsLoadingHOC";
 import { Modelcategory } from "../../Helper/helper";
 
 const AddModal = (props) => {

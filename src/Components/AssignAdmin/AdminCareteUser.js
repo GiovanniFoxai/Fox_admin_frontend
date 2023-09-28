@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { minUserPasswordLength } from "../../Helper/constants";
 import { authAxios } from "../../config/config";
 import { toast } from "react-toastify";
-import IsLoadingHOC from "../IsLoadingHOC";
+import IsLoadingHOC from "../../Common/IsLoadingHOC";
 import { useSelector } from "react-redux";
 import * as Yup from "yup";
 import { useFormik } from "formik";
@@ -21,7 +21,7 @@ const AdminCareteUser = (props) => {
       confirm_password: "",
       mobile: "",
       company: "",
-     // user_type: "USER",
+     
     },
     validationSchema: Yup.object({
       first_name: Yup.string()

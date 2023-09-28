@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { fetchCompanyList } from "../../Redux/Actions/companyAction";
 import { companiesList } from "../../Redux/Reducers/companySlice";
 import { toast } from "react-toastify";
-import IsLoadingHOC from "../IsLoadingHOC";
+import IsLoadingHOC from "../../Common/IsLoadingHOC";
 import { authAxios } from "../../config/config";
 import Pagination from "../../Common/Pagination";
 import { setFormatDate } from "../../Helper/helper";
