@@ -72,7 +72,6 @@ function App(props) {
       };
 
       const payload = data;
-      console.log(payload);
 
       setLoading(true);
       await withoutAuthAxios()
@@ -82,14 +81,6 @@ function App(props) {
           if (response.data.status === 1) {
             setLoading(false);
             const resData = response.data.data;
-            console.log(
-              resData.token,
-              "--",
-              resData.user_type,
-              "---",
-              resData?.company
-            );
-
             dispatch(setAccessToken(resData.token));
             dispatch(setuser(resData.user_type));
             dispatch(setcompany(resData.company));
@@ -103,7 +94,6 @@ function App(props) {
           }
         })
         .catch((error) => {
-          console.log(error.response.data.message);
           setLoading(false);
           toast.error(error.response.data.message);
         });
@@ -142,6 +132,7 @@ function App(props) {
               //onClick={() => {sethideCompanyForm(true)}}
             />{" "}
             Company
+            
             <input
               type="radio"
               name="hideCompanyForm"

@@ -66,18 +66,17 @@ const AddModal = (props) => {
               description: "",
             }));
           } else {
+            setLoading(false);
             toast.error(response.data.message);
           }
         },
         (error) => {
           setLoading(false);
           toast.error(error.response.data.message);
-          console.log(error.response.data.message);
         }
       )
       .catch((error) => {
         setLoading(false);
-        console.log("errorr", error);
       });
   };
 

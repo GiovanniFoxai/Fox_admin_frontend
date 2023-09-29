@@ -17,29 +17,29 @@ const ViewCompany = (props) => {
   const [postsPerPage, setPostsPerPage] = useState(5);
   const [TotalPost, setTotalPost] = useState(0);
   const [TotalPages, setTotalPages] = useState(0);
-  const [testDetails, settestDetails] = useState([])
+  const [testDetails, settestDetails] = useState([]);
 
   useEffect(() => {
     FetchCompany();
-  }, [currentPage, postsPerPage,show]);
+  }, [currentPage, postsPerPage, show]);
 
   const FetchCompany = async (e) => {
     setLoading(true);
     await authAxios()
       .get(`/company/list?page=${currentPage}&limit=${postsPerPage}`)
       .then((response) => {
-        setLoading(false);
         setTotalPost(response.data.data.pagination.totalCompanies);
         setTotalPages(response.data.data.pagination.totalPages);
         if (response.data.status === 1) {
+          setLoading(false);
           setcompanies(response.data.data.companies);
         } else {
+          setLoading(false);
           toast.error(response.data.message);
         }
       })
       .catch((error) => {
-        setLoading(true);
-        console.log(error);
+        setLoading(false);
       });
   };
 
@@ -49,28 +49,26 @@ const ViewCompany = (props) => {
     await authAxios()
       .delete(`/company/delete/${CompanyId}`)
       .then((response) => {
-        
-        console.log(response.data);
-        setLoading(false);
         if (response.data.status === 1) {
+          setLoading(false);
           toast.success("Company Deleted Successfully");
           FetchCompany();
           setCurrentPage(1);
         } else {
+          setLoading(false);
           toast.error(response.data.message);
         }
       })
       .catch((error) => {
         setLoading(true);
-        console.log(error);
+        toast.error(error.response.data.message);
       });
   };
 
-  const handleEdit=async(e)=>{
-
+  const handleEdit = async (e) => {
     setShow(true);
-    settestDetails(e)
-  }
+    settestDetails(e);
+  };
 
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
   const handleRowChange = (e) => {
@@ -86,111 +84,106 @@ const ViewCompany = (props) => {
         </div>
       </div>
 
-    {/*   <select onChange={handleRowChange}>
+      {/*   <select onChange={handleRowChange}>
         <option value="5">5</option>
         <option value="2">2</option>
         <option value="3">3</option>
         <option value="4">4</option>
       </select>*/}
-      {
-        companies.length>0&&(
+      {companies.length > 0 && (
         <>
-           
-             <div className="view-company-section">
-        <div className="view-company-table">
-          <table className="view-table">
-            <thead className="table-head">
-              <tr>
-                <th className="table-heading sr-number">ID</th>
-                <th className="table-heading">Company Name</th>
-                <th className="table-heading">Number Of Users</th>
-                <th className="table-heading">Number Of Admin</th>
-                <th className="table-heading">Created At</th>
-                <th className="table-heading">Updated At</th>
-                <th className="table-heading" colSpan="2" >
-                
-                </th>
-              </tr>
-            </thead>
-            <tbody className="table-body">
-              {companies &&
-                companies.length > 0 &&
-                companies.map((item, index) => (
-                  <tr key={"compnay_" + index}>
-                    <td className="table-data">{item?._id}</td>
-                    <td className="table-data">{item?.name}</td>
-                    <td className="table-data">{item?.userCount}</td>
-                    <td className="table-data">{item?.adminCount}</td>
-                    <td className="table-data">{setFormatDate(item?.createdAt)}</td>
-                    <td className="table-data">{setFormatDate(item?.updatedAt)}</td>
-                    
-                    <td className="close-btn-sec">
-                      <button
-                        type="button"
-                        onClick={() => handleEdit(item)}
-                        className="Edit--btn"
-                      >
-                        Edit
-                      </button>
-                      <button
-                        type="button"
-                        onClick={() => handleDelete(item._id)}
-                        className="close-btn"
-                      >
-                        Delete
-                      </button>
-                    </td>
-
-                   
-                
-
-                    
+          <div className="view-company-section">
+            <div className="view-company-table">
+              <table className="view-table">
+                <thead className="table-head">
+                  <tr>
+                    <th className="table-heading sr-number">ID</th>
+                    <th className="table-heading">Company Name</th>
+                    <th className="table-heading">Number Of Users</th>
+                    <th className="table-heading">Number Of Admin</th>
+                    <th className="table-heading">Created At</th>
+                    <th className="table-heading">Updated At</th>
+                    <th className="table-heading" colSpan="2"></th>
                   </tr>
-                ))}
+                </thead>
+                <tbody className="table-body">
+                  {companies &&
+                    companies.length > 0 &&
+                    companies.map((item, index) => (
+                      <tr key={"compnay_" + index}>
+                        <td className="table-data">{item?._id}</td>
+                        <td className="table-data">{item?.name}</td>
+                        <td className="table-data">{item?.userCount}</td>
+                        <td className="table-data">{item?.adminCount}</td>
+                        <td className="table-data">
+                          {setFormatDate(item?.createdAt)}
+                        </td>
+                        <td className="table-data">
+                          {setFormatDate(item?.updatedAt)}
+                        </td>
 
-<CompanyPop   props={testDetails}  onClose={() => setShow(false)} show={show} />
-            </tbody>
-          </table>
-        </div>
-      </div>
+                        <td className="close-btn-sec">
+                          <button
+                            type="button"
+                            onClick={() => handleEdit(item)}
+                            className="Edit--btn"
+                          >
+                            Edit
+                          </button>
+                          <button
+                            type="button"
+                            onClick={() => handleDelete(item._id)}
+                            className="close-btn"
+                          >
+                            Delete
+                          </button>
+                        </td>
+                      </tr>
+                    ))}
 
-  
-    
-      <nav aria-label="Page navigation example">
-        <ul class="pagination">
-          <li class="page-item">
-            <button
-              class="page-link"
-              disabled={currentPage === 1 ? true : false}
-              onClick={() => setCurrentPage(currentPage - 1)}
-            >
-              Previous
-            </button>
-          </li>
-          <li class="page-item">
-            <Pagination
-              currentPage={currentPage}
-              postsPerPage={postsPerPage}
-              totalPosts={TotalPost}
-              paginate={paginate}
-            />{" "}
-          </li>
+                  <CompanyPop
+                    props={testDetails}
+                    onClose={() => setShow(false)}
+                    show={show}
+                  />
+                </tbody>
+              </table>
+            </div>
+          </div>
 
-          <li class="page-item">
-            <button
-              class="page-link"
-              disabled={currentPage === TotalPages ? true : false}
-              onClick={() => setCurrentPage(currentPage + 1)}
-            >
-              NEXT
-            </button>
-          </li>
-        </ul>
-      </nav>
+          <nav aria-label="Page navigation example">
+            <ul class="pagination">
+              <li class="page-item">
+                <button
+                  class="page-link"
+                  disabled={currentPage === 1 ? true : false}
+                  onClick={() => setCurrentPage(currentPage - 1)}
+                >
+                  Previous
+                </button>
+              </li>
+              <li class="page-item">
+                <Pagination
+                  currentPage={currentPage}
+                  postsPerPage={postsPerPage}
+                  totalPosts={TotalPost}
+                  paginate={paginate}
+                />{" "}
+              </li>
 
+              <li class="page-item">
+                <button
+                  class="page-link"
+                  disabled={currentPage === TotalPages ? true : false}
+                  onClick={() => setCurrentPage(currentPage + 1)}
+                >
+                  NEXT
+                </button>
+              </li>
+            </ul>
+          </nav>
         </>
-        )}
-   
+      )}
     </Fragment>
   );
 };

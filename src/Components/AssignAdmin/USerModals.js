@@ -47,16 +47,18 @@ const Modals = (props) => {
 
   const handleDelete = async (e) => {
     const modelId = e;
-    console.log(e);
+    setLoading(true);
     await authAxios()
       .delete(`/model/${modelId}`)
       .then((response) => {
+        setLoading(false)
         setCurrentPage(1);
         toast.success(response.data.message);
         fetchMoalList();
       })
       .catch((error) => {
-        console.log(error);
+        setLoading(false)
+        toast.error(error.response.data.message)
       });
   };
 
@@ -106,8 +108,8 @@ const Modals = (props) => {
                 <tbody className="table-body">
                   {ModelList &&
                     ModelList.length > 0 &&
-                    ModelList.map((item) => (
-                      <tr>
+                    ModelList.map((item,index) => (
+                      <tr key={index} >
                         <td className="table-data">{item._id.slice(0, 9)}</td>
                         <td className="table-data">{item.name}</td>
                         <td className="table-data">{item.category}</td>
@@ -120,7 +122,7 @@ const Modals = (props) => {
                         <td className="table-data">
                           {setFormatDate(item.updatedAt)}
                         </td>
-                        <td className="table-data">{item?.user?.username}</td>
+                        <td >{item?.user?.username}</td>
                         <td className="close-btn-sec">
                           <button
                             onClick={() => handleDelete(item._id)}

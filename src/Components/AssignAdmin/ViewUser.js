@@ -35,12 +35,12 @@ const ViewAdmins = (props) => {
           toast.error(response.data.message);
         }
       },(error) => {
-        console.log(error)
+       
         setLoading(false);
         toast.error(error.response.data.message);
       })
       .catch((error) => {
-        console.log(error)
+      
         setLoading(false);
         toast.error(error.response.data.message)
       });
@@ -57,19 +57,24 @@ const ViewAdmins = (props) => {
   const handleDelete=async(e)=>{
       
     const Userid=e
+    setLoading(true)
    await authAxios()
    .delete(`/user/${Userid}`)
    .then((response)=>{
     if(response.data.status==1){
+      setLoading(false)
       setCurrentPage(1)
       fetchUsers();
       toast.success(response.data.message)
     }else{
-      toast.error(response.data.error)
+      setLoading(false)
+      toast.error(response.data.error.message)
     }
     
    }).catch((error)=>{
-    console.log(error)
+    setLoading(false)
+    toast.error(error.response.data.message)
+   
    })
 
 

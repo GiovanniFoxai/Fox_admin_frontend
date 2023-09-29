@@ -10,8 +10,6 @@ import { useFormik } from "formik";
 const AdminCareteUser = (props) => {
   const { setLoading, isLoading } = props;
   const Companyid = useSelector((state) => state.auth?.company);
-  console.log(Companyid)
-
 
   const formik = useFormik({
     initialValues: {
@@ -22,7 +20,6 @@ const AdminCareteUser = (props) => {
       confirm_password: "",
       mobile: "",
       company: "",
-     
     },
     validationSchema: Yup.object({
       first_name: Yup.string()
@@ -53,16 +50,10 @@ const AdminCareteUser = (props) => {
         password: values.password,
         mobile: values.mobile,
         company: Companyid,
-       // user_type:values.user_type
-        
-       
+        // user_type:values.user_type
       };
 
       const payload = data;
-      
-      console.log(payload);
-
-    
 
       setLoading(true);
       await authAxios()
@@ -73,7 +64,7 @@ const AdminCareteUser = (props) => {
             if (response.data.status === 1) {
               setLoading(false);
               toast.success(response.data.message);
-              formik.resetForm()
+              formik.resetForm();
             } else {
               setLoading(false);
               toast.error(response.data.message);
@@ -86,33 +77,7 @@ const AdminCareteUser = (props) => {
         )
         .catch((error) => {
           setLoading(false);
-          console.log("errorrrr", error);
         });
-      /*
-        .then(
-          (response) => {
-            setLoading(false);
-            if (response.data.status === 1) {
-              toast.success("User Created Successfully");
-              console.log("sds", response.data);
-            } else {
-              toast.error(response.data.message);
-            }
-          },
-          (error) => {
-            setLoading(false);
-
-            if (error.response.data.message === "ValidationError") {
-              toast.error("Company is Deleted You cannot Assign to the user ");
-            } else {
-              toast.error(error.response.data.message);
-            }
-          }
-        )
-        .catch((error) => {
-          console.log("errorrrr", error);
-        });
-        */
     },
   });
 

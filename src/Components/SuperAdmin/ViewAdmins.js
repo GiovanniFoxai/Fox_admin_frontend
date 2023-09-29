@@ -55,24 +55,20 @@ const ViewAdmins = (props) => {
     await authAxios()
       .delete(`/user/${adminid}`)
       .then((response) => {
-        
-       
-       
         if (response.data.status === 1) {
           setLoading(false);
           toast.success(response.data.message);
           FetchAdmin();
           setCurrentPage(1);
         } else {
-          setLoading(false)
+          setLoading(false);
           toast.error(response.data.message);
         }
       })
       .catch((error) => {
         setLoading(false);
-       
+        toast.error(error.response.data.message);
       });
-
   };
 
   const handleEdit = () => {};
@@ -84,7 +80,7 @@ const ViewAdmins = (props) => {
           <h3>View Admins</h3>
         </div>
         <div className="bradcrum-section">
-        {/*  <ul>
+          {/*  <ul>
             <li>
               <Link to="/"> Dashboard</Link>{" "}
             </li>
@@ -96,9 +92,9 @@ const ViewAdmins = (props) => {
         </div>
       </div>
 
-    {AdminList.length>0&&(
-   <>
-   {/*  
+      {AdminList.length > 0 && (
+        <>
+          {/*  
     <select onChange={handleRowChange}>
         <option value="5">5</option>
         <option value="2">2</option>
@@ -107,38 +103,40 @@ const ViewAdmins = (props) => {
       </select>
       */}
 
-      <div className="view-company-section">
-        <div className="view-company-table">
-          <table className="view-table">
-            <thead className="table-head">
-              <tr>
-                <th className="table-heading sr-number">ID</th>
-                <th className="table-heading">Name</th>
-                <th className="table-heading">Email Id</th>
-                <th className="table-heading">Company Id</th>
-                <th className="table-heading">Created At</th>
-                <th className="table-heading">Updated At</th>
-                <th className="table-heading" colspan="2"></th>
-              </tr>
-            </thead>
-            <tbody className="table-body">
-              {AdminList &&
-                AdminList.length > 0 &&
-                AdminList.map((item, index) => (
-                  <tr key={index}>
-                    <td className="table-data">{item._id.slice(0, 9)}</td>
-                    <td className="table-data">
-                      {item?.first_name} {item?.last_name}
-                    </td>
-                    <td className="table-data">{item?.email}</td>
-                    <td className="table-data">{item?.company?.name || "-"}</td>
-                    <td className="table-data">
-                      {setFormatDate(item.createdAt)}
-                    </td>
-                    <td className="table-data">
-                      {setFormatDate(item.updatedAt)}
-                    </td>
-                    {/*
+          <div className="view-company-section">
+            <div className="view-company-table">
+              <table className="view-table">
+                <thead className="table-head">
+                  <tr>
+                    <th className="table-heading sr-number">ID</th>
+                    <th className="table-heading">Name</th>
+                    <th className="table-heading">Email Id</th>
+                    <th className="table-heading">Company Id</th>
+                    <th className="table-heading">Created At</th>
+                    <th className="table-heading">Updated At</th>
+                    <th className="table-heading" colspan="2"></th>
+                  </tr>
+                </thead>
+                <tbody className="table-body">
+                  {AdminList &&
+                    AdminList.length > 0 &&
+                    AdminList.map((item, index) => (
+                      <tr key={index}>
+                        <td className="table-data">{item._id.slice(0, 9)}</td>
+                        <td className="table-data">
+                          {item?.first_name} {item?.last_name}
+                        </td>
+                        <td className="table-data">{item?.email}</td>
+                        <td className="table-data">
+                          {item?.company?.name || "-"}
+                        </td>
+                        <td className="table-data">
+                          {setFormatDate(item.createdAt)}
+                        </td>
+                        <td className="table-data">
+                          {setFormatDate(item.updatedAt)}
+                        </td>
+                        {/*
                     <td>
                       {" "}
                       <button type="button" className="btn btn-info">
@@ -147,61 +145,56 @@ const ViewAdmins = (props) => {
 
                     </td>
               */}
-                    <td className="close-btn-sec">
-                      {" "}
-                      <button
-                        onClick={() => handleDelete(item._id)}
-                        type="button"
-                        className="close-btn"
-                      >
-                        Delete
-                      </button>
-                    </td>
-                  </tr>
-                ))}
-            </tbody>
-          </table>
+                        <td className="close-btn-sec">
+                          {" "}
+                          <button
+                            onClick={() => handleDelete(item._id)}
+                            type="button"
+                            className="close-btn"
+                          >
+                            Delete
+                          </button>
+                        </td>
+                      </tr>
+                    ))}
+                </tbody>
+              </table>
 
-          <nav aria-label="Page navigation example">
-            <ul class="pagination">
-              <li class="page-item">
-                <button
-                  class="page-link"
-                  disabled={currentPage === 1 ? true : false}
-                  onClick={() => setCurrentPage(currentPage - 1)}
-                >
-                  Previous
-                </button>
-              </li>
-              <li class="page-item">
-                <Pagination
-                  currentPage={currentPage}
-                  postsPerPage={postsPerPage}
-                  totalPosts={TotalPost}
-                  paginate={paginate}
-                />{" "}
-              </li>
+              <nav aria-label="Page navigation example">
+                <ul class="pagination">
+                  <li class="page-item">
+                    <button
+                      class="page-link"
+                      disabled={currentPage === 1 ? true : false}
+                      onClick={() => setCurrentPage(currentPage - 1)}
+                    >
+                      Previous
+                    </button>
+                  </li>
+                  <li class="page-item">
+                    <Pagination
+                      currentPage={currentPage}
+                      postsPerPage={postsPerPage}
+                      totalPosts={TotalPost}
+                      paginate={paginate}
+                    />{" "}
+                  </li>
 
-              <li class="page-item">
-                <button
-                  class="page-link"
-                  disabled={currentPage === TotalPages ? true : false}
-                  onClick={() => setCurrentPage(currentPage + 1)}
-                >
-                  NEXT
-                </button>
-              </li>
-            </ul>
-          </nav>
-        </div>
-      </div>
-   
-   </>
-    )}
-
-     
-
-
+                  <li class="page-item">
+                    <button
+                      class="page-link"
+                      disabled={currentPage === TotalPages ? true : false}
+                      onClick={() => setCurrentPage(currentPage + 1)}
+                    >
+                      NEXT
+                    </button>
+                  </li>
+                </ul>
+              </nav>
+            </div>
+          </div>
+        </>
+      )}
     </Fragment>
   );
 };

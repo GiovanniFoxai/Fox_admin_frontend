@@ -41,16 +41,13 @@ const Login = (props) => {
         (response) => {
           if (response.data.status === 1) {
             setLoading(false);
-            const resData = response.data.data;
-            console.log(resData)
-            
+            const resData = response.data.data;  
             if (resData.user.user_type == "USER") {
              toast.success("Logged in Successfully");
               dispatch(setAccessToken(resData.token));
               dispatch(setuser(resData.user.user_type));
               dispatch(setemail(resData.user?.email));
-              dispatch(setcompany(resData.user?.company?.name));
-              
+              dispatch(setcompany(resData.user?.company?.name));  
               navigate("/");
 
             } else {
@@ -62,14 +59,12 @@ const Login = (props) => {
             }
             
           } else {
-            console.log(response);
             setLoading(false);
             toast.error(response.data.message);
           }
         },
         (error) => {
           setLoading(false);
-          console.log(error);
           toast.error(error.response.data.message);
         }
       )
