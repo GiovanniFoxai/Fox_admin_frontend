@@ -69,6 +69,8 @@ const Modals = (props) => {
     setCurrentPage(1);
   };
 
+  console.log(ModelList)
+
   return (
     <Fragment>
       <div className="dash-bar">
@@ -98,8 +100,9 @@ const Modals = (props) => {
                     <th className="table-heading">Name</th>
                     <th className="table-heading">Cateogary</th>
                     <th className="table-heading">Company Id</th>
-                    <th className="table-heading">Created At</th>
+                    {/*<th className="table-heading">Created At</th>
                     <th className="table-heading">Updated At</th>
+    */}
 
                     <th className="table-heading" colspan="2"></th>
                   </tr>
@@ -116,12 +119,13 @@ const Modals = (props) => {
                         <td className="table-data">
                           {item?.user?.company?.name || "-"}
                         </td>
-                        <td className="table-data">
+                      {/*  <td className="table-data">
                           {setFormatDate(item.createdAt)}
                         </td>
                         <td className="table-data">
-                          {setFormatDate(item.updatedAt)}
+                          {setFormatDate(item.updatedAt )}
                         </td>
+                  */}
                         <td >{item?.user?.username}</td>
                         <td className="close-btn-sec">
                           <button
