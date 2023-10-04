@@ -15,13 +15,13 @@ const AddModal = (props) => {
     model_file: "",
     category: "",
     //new fields
-    projectinfo: "",
+    projectInfo: "",
     about: "",
-    particpant: "",
+    participant: "",
     profile: "",
     firstperson: "",
     resume: "", //file Upload
-    socialmedia: "",
+    socialMedia: "",
   });
 
   const handleChange = (e) => {
@@ -68,13 +68,13 @@ const AddModal = (props) => {
     formData.append("model_file", payload.model_file);
     formData.append("category", payload.category);
 
-    formData.append("projectinfo", payload.projectinfo);
+    formData.append("projectInfo", payload.projectInfo);
     formData.append("about", payload.about);
-    formData.append("particpant", payload.particpant);
+    formData.append("participant", payload.participant);
     formData.append("profile", payload.profile);
     formData.append("firstperson", payload.firstperson);
     formData.append("resume", payload.resume);
-    formData.append("socialmedia", payload.socialmedia);
+    formData.append("socialMedia", payload.socialMedia);
     
 
 
@@ -97,13 +97,13 @@ const AddModal = (props) => {
               model_file: null,
               category: "",
               description: "",
-              projectinfo: "",
+              projectInfo: "",
               about: "",
-              particpant: "",
+              participant: "",
               profile: "",
               firstperson: "",
               resume: null, //file Upload
-              socialmedia: "",
+              socialMedia: "",
             }));
           } else {
             setLoading(false);
@@ -187,8 +187,8 @@ const AddModal = (props) => {
             className="form-input"
             type="text"
             id="fname"
-            value={data.projectinfo}
-            name="projectinfo"
+            value={data.projectInfo}
+            name="projectInfo"
             onChange={handleChange}
           />
 
@@ -211,8 +211,8 @@ const AddModal = (props) => {
             className="form-input"
             type="text"
             id="fname"
-            value={data.particpant}
-            name="particpant"
+            value={data.participant}
+            name="participant"
             onChange={handleChange}
           />
 
@@ -239,7 +239,7 @@ const AddModal = (props) => {
             name="firstperson"
             onChange={handleChange}
           />
-
+     {/*  
           <label className="form-lable" for="fname">
             Resume
           </label>
@@ -252,6 +252,7 @@ const AddModal = (props) => {
             name="resume"
             onChange={handleResumeFile}
           />
+     
 
           <label className="form-lable" for="fname">
             Social Networks
@@ -260,11 +261,11 @@ const AddModal = (props) => {
             className="form-input"
             type="text"
             id="fname"
-            value={data.socialmedia}
-            name="socialmedia"
+            value={data.socialMedia}
+            name="socialMedia"
             onChange={handleChange}
           />
-
+ */}
           <button className="form-submit" type="submit" value="Submit">
             Submit
           </button>

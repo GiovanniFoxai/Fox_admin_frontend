@@ -513,7 +513,7 @@ ul#openbox_data {
     position: absolute;
     top: 0.5rem;
     z-index: 2;
-    color: powderblue;
+   /* color: powderblue;*/
     left: 0.5rem;
 }
 

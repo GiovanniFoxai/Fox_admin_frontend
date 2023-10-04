@@ -27,8 +27,8 @@ function App(props) {
   const handleTabClick = (tabNumber) => {
     setActiveTab(tabNumber);
   };
-  console.log(activeTab, 'check index')
-
+ 
+/*
   const formik = useFormik({
     initialValues: {
       first_name: "",
@@ -118,7 +118,7 @@ function App(props) {
     sethideCompanyForm(true);
     formik.resetForm();
   };
-
+*/
   return (
     <div className="create-company-section">
       <div className="create-company-form--sec">
@@ -129,14 +129,15 @@ function App(props) {
             alt="  Admin logo"
           />
 
-          <h2>Create Your AI Fox Account</h2>
-          {/*
+          <h2 style={{marginBottom:"10px"}} >Create Your AI Fox Account</h2>
+          
           <div className="radio--btn">
             <input
               type="radio"
               name="hideCompanyForm"
               value="Company"
               id="company"
+              
               checked = {activeTab === 1}
               // checked={hideCompanyForm == true}
               className={activeTab === 1 ? 'active' : ''}
@@ -144,13 +145,16 @@ function App(props) {
              // onClick={companyForm}
               //onClick={() => {sethideCompanyForm(true)}}
             />{" "}
-            Company
+            <span style={{marginRight:"20px"}}>Company</span>
+            
+
             
             <input
               type="radio"
               name="hideCompanyForm"
               value="Personal"
               id="personal"
+              style={{marginLeft:"20px"}}
               checked = {activeTab === 2}
               // checked={hideCompanyForm == false}
               className={activeTab === 2 ? 'active' : ''}
@@ -158,15 +162,16 @@ function App(props) {
              // onClick={personalForm}
               // onClick={() => sethideCompanyForm(false)}
             />{" "}
-            Personal
+            <span >Personal</span>
+            
           </div>
-          */}
+          
 
 
         </div>
 
         {activeTab === 1 && <AdminForm /> }
-      {/*   {activeTab === 2 && <UserForm /> }*/}
+        {activeTab === 2 && <UserForm /> }
 
       </div>
     </div>

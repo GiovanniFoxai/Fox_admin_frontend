@@ -155,6 +155,9 @@ const AdminSidebar = () => {
                 <li>
                   <Link to="/admin" onClick={sideBarFalse}> Admin List</Link>
                 </li>
+                <li>
+                  <Link to="/view-users" onClick={sideBarFalse}> Users List</Link>
+                </li>
               </ul>
             </li>
             <li>

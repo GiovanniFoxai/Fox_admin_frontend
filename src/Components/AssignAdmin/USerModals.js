@@ -98,8 +98,8 @@ const Modals = (props) => {
                   <tr>
                     <th className="table-heading sr-number">ID</th>
                     <th className="table-heading">Name</th>
-                    <th className="table-heading">Cateogary</th>
-                    <th className="table-heading">Company Id</th>
+                    <th className="table-heading">Category</th>
+                    <th className="table-heading">Company</th>
                     {/*<th className="table-heading">Created At</th>
                     <th className="table-heading">Updated At</th>
     */}

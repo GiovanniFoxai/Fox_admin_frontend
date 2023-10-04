@@ -30,8 +30,7 @@ const User = (props) => {
   );
 
   const { company } = useSelector((state) => state.auth);
-  console.log(company);
-
+  
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
@@ -476,7 +475,7 @@ const User = (props) => {
                                     </label>
                                     <span className="inline-flex w-full truncate">
                                       <span className="flex h-6 items-center gap-1 truncate text-sm text-gray-900 dark:text-white">
-                                        {company}
+                                        {company||"none"}
                                       </span>
                                     </span>
                                   </button>

@@ -29,6 +29,7 @@ import AdminCareteUser from "./Components/AssignAdmin/AdminCareteUser";
 import AddModal from "./Components/AssignAdmin/AddModal";
 import CompanyForm from "./Common/CompanyForm";
 import User from "./Components/Users";
+import ViewUsers from "./Components/SuperAdmin/ViewUsers";
 
 function App() {
   const user = useSelector(getUser);
@@ -47,6 +48,7 @@ function App() {
       element: <CreatCompany />,
     },
     { path: "/admin", element: <ViewAdmins /> },
+    { path: "/view-users", element: <ViewUsers /> },
     { path: "/admin/add", element: <CreateAdmin /> },
     { path: "/modals", element: <Modals /> },
   ];
