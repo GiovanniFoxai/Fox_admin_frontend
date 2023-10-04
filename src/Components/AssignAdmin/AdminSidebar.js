@@ -160,7 +160,7 @@ const AdminSidebar = () => {
                   <span className="hide--toggle--slide">Manage Models</span>
                 </span>
                 <span className="nav-section-arrow hide--toggle--slide">
-                  <img src={DashboardIcon} alt="DashboardIcon" />
+                  <img src={DropDwonIcon} alt="DropDwonIcon" />
                 </span>
               </span>
               <ul className="sub-menu">

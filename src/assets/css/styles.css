@@ -277,6 +277,11 @@ h2.cab--heading {
     margin-top: 3px;
 
 }
+.btn--full {
+    cursor: pointer;
+    width: 100%;
+    box-sizing: border-box;
+}
 
 .create--model--div input {
     min-height: 50px;
@@ -514,7 +519,7 @@ ul#openbox_data {
     position: absolute;
     top: 0.5rem;
     z-index: 2;
-   /* color: powderblue;*/
+   color: powderblue;
     left: 0.5rem;
 }
 

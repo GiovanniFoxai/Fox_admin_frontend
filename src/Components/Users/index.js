@@ -665,7 +665,7 @@ const User = (props) => {
                               <input placeholder="Model Category" />
                               <textarea placeholder="Model Description" />
                             </div>
-                            <button className="custom--btn">Create</button>
+                            <button className="custom--btn btn--full">Create</button>
                           </div>
                           {/* <div className="col-s"><a data-state="closed" className="grid w-full items-center gap-2">
                           <div className="flex justify-between"><label
