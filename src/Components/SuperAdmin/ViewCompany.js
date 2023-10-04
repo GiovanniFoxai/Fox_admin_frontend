@@ -90,7 +90,7 @@ const ViewCompany = (props) => {
         <option value="3">3</option>
         <option value="4">4</option>
       </select>*/}
-      {companies.length > 0 && (
+     
         <>
           <div className="view-company-section">
             <div className="view-company-table">
@@ -150,7 +150,7 @@ const ViewCompany = (props) => {
               </table>
             </div>
           </div>
-
+          {companies.length > 0 && (
           <nav aria-label="Page navigation example">
             <ul class="pagination">
               <li class="page-item">
@@ -182,8 +182,9 @@ const ViewCompany = (props) => {
               </li>
             </ul>
           </nav>
+           )}
         </>
-      )}
+     
     </Fragment>
   );
 };

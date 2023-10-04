@@ -79,7 +79,7 @@ const Modals = (props) => {
         </div>
       </div>
 
-      {ModelList.length > 0 && (
+    
         <>
           {/*
       <select onChange={handleRowChange} >
@@ -139,7 +139,7 @@ const Modals = (props) => {
                     ))}
                 </tbody>
               </table>
-
+              {ModelList.length > 0 && (
               <nav aria-label="Page navigation example">
                 <ul class="pagination">
                   <li class="page-item">
@@ -171,10 +171,11 @@ const Modals = (props) => {
                   </li>
                 </ul>
               </nav>
+               )}
             </div>
           </div>
         </>
-      )}
+     
     </Fragment>
   );
 };

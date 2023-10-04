@@ -90,7 +90,7 @@ const ViewUsers = (props) => {
         </div>
       </div>
 
-      {UserList.length > 0 && (
+    
         <>
           {/*  
     <select onChange={handleRowChange}>
@@ -158,6 +158,8 @@ const ViewUsers = (props) => {
                 </tbody>
               </table>
 
+              {UserList.length > 0 && (
+
               <nav aria-label="Page navigation example">
                 <ul class="pagination">
                   <li class="page-item">
@@ -189,10 +191,12 @@ const ViewUsers = (props) => {
                   </li>
                 </ul>
               </nav>
+
+)}
             </div>
           </div>
         </>
-      )}
+    
     </Fragment>
   );
 };

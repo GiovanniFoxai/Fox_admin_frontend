@@ -92,7 +92,7 @@ const ViewAdmins = (props) => {
         </div>
       </div>
 
-      {AdminList.length > 0 && (
+      
         <>
           {/*  
     <select onChange={handleRowChange}>
@@ -160,6 +160,8 @@ const ViewAdmins = (props) => {
                 </tbody>
               </table>
 
+              {AdminList.length > 0 && (
+
               <nav aria-label="Page navigation example">
                 <ul class="pagination">
                   <li class="page-item">
@@ -191,10 +193,11 @@ const ViewAdmins = (props) => {
                   </li>
                 </ul>
               </nav>
+              )}
             </div>
           </div>
         </>
-      )}
+      
     </Fragment>
   );
 };

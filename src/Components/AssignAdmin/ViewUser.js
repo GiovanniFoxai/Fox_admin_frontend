@@ -117,23 +117,13 @@ const ViewAdmins = (props) => {
         <div>
           <h3>View User</h3>
         </div>
-        <div className="bradcrum-section">
-          {/* 
-          <ul>
-            <li>
-              <a href="#"> Dashboard</a>{" "}
-            </li>
-            <li>
-              <a href="#">Users</a>{" "}
-            </li>
-          </ul>
- */}
-        </div>
+       
       </div>
 
-      {UserList.length > 0 && (
+     
         <>
           {/*
+          
       <select onChange={handleRowChange} >
         <option value="5" >5</option>
         <option value="2" >2</option>
@@ -146,6 +136,7 @@ const ViewAdmins = (props) => {
           <div className="view-company-section">
             <div className="view-company-table">
               <table className="view-table">
+
                 <thead className="table-head">
                   <tr>
                     <th className="table-heading sr-number">ID</th>
@@ -196,7 +187,9 @@ const ViewAdmins = (props) => {
                       </tr>
                     ))}
                 </tbody>
+
               </table>
+              {UserList.length > 0 && (
               <nav aria-label="Page navigation example">
                 <ul class="pagination">
                   <li class="page-item">
@@ -228,10 +221,13 @@ const ViewAdmins = (props) => {
                   </li>
                 </ul>
               </nav>
+              )}
             </div>
           </div>
+
+
         </>
-      )}
+      
     </>
   );
 };
