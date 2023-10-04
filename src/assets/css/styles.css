@@ -275,6 +275,7 @@ h2.cab--heading {
     box-sizing: content-box;
     min-height: 30px;
     margin-top: 3px;
+
 }
 
 .create--model--div input {
@@ -1060,6 +1061,7 @@ button#headlessui-listbox-button-\:ra\: {
     flex-direction: column;
     padding: 10px;
     gap: 5px;
+    color: #000;
 }
 
 button#open_drop_down_btn {
@@ -1069,6 +1071,7 @@ button#open_drop_down_btn {
     align-items: center;
     padding: 10px;
     gap: 10px;
+    color: #000;
 }
 
 .drop-li li {
