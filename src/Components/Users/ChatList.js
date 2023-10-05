@@ -48,7 +48,9 @@ function ChatList({ setLoading }) {
   const handleLogout = () => {
     localStorage.removeItem("token");
     localStorage.removeItem("user");
+    
     dispatch(logout());
+    toast.success("Logout Successfully")
     navigate("/auth/login");
   };
 
